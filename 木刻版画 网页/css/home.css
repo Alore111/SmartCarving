@@ -207,7 +207,7 @@ body {
 
 /* 主视觉区优化 */
 .hero {
-    height: 95vh;
+    height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://source.unsplash.com/random/1600x900/?chongqing,woodcut') center/cover no-repeat;
     display: flex;
     align-items: center;
@@ -328,7 +328,7 @@ body {
 }
 
 .chat-body {
-    height: calc(100% - 120px);
+    height: calc(100% - 125px);
     padding: 1rem;
     overflow-y: auto;
 }
@@ -442,6 +442,12 @@ footer {
     justify-content: center;
     font-size: 1.2rem;
     transition: all 0.3s;
+}
+
+.icon-xhs {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
 }
 
 .social-icon:hover {
