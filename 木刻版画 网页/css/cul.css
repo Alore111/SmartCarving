@@ -1,0 +1,70 @@
+ul#album div{
+    margin-bottom: 10px;
+}
+
+ul#album li a:link,ul#album li a:visited,ul#album li a:hover{
+    display: block;
+    color: #dd9b4b;
+    text-decoration: none;
+}  
+
+ul#album li:nth-of-type(odd):hover{
+    transform: rotate(3deg);
+    transform: all .3s ease-in-out;
+}
+
+ul#album li:nth-of-type(even):hover{
+    transform: rotate(-3deg);
+    transform: all .3s ease-in-out;
+}
+
+ul#album {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* 新增：整体居中排列 */
+    padding: 20px;
+    gap: 50px;
+    text-align: center;
+}
+
+ul#album li {
+    flex: 1 1 00px;
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+    display: flex; /* 新增：启用内部flex布局 */
+    flex-direction: column; /* 纵向排列 */
+    align-items: center; /* 新增：水平居中 */
+}
+
+ul#album img {
+    width: 100%; /* 缩小图片宽度 */
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: 10px 0; /* 新增：上下留白 */
+    border-radius: 5px;
+}
+
+ul#album h2 {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 120%;
+    color: #31251e;
+}
+
+/* 如果需要图片+文字整体居中 */
+ul#album li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px; /* 新增：内边距 */
+}
+
+.ha h2{
+    font-family: '华文楷体', serif;
+    color:black;
+    font-weight: bold;
+    font-size: 190%;
+    text-align: center;
+}

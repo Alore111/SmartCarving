@@ -1,0 +1,295 @@
+@charset "utf-8";
+
+.home4 {
+    background-color: #ededed;
+    background-size: cover;
+    position: relative;
+    /* 新增 */
+    min-height: 100vh;
+    /* 可选：确保容器有足够高度 */
+}
+
+.home4 .row {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    text-align: center;
+    color: #333;
+}
+
+.home4 .col {
+    display: inline-block;
+    width: 27%;
+    vertical-align: top;
+}
+
+.home4 .box {
+    margin: 0 8%;
+}
+
+.home4 .title {
+    margin-bottom: 14%;
+    overflow: hidden;
+}
+
+.home4 .title .h30 {
+    position: relative;
+    float: left;
+    padding: 0 32px;
+}
+
+.home4 .title .h30:before,
+.home4 .title .h30:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 22px;
+    background: url(../image/temp/png7.png) no-repeat;/* 标题花纹 */
+}
+
+.home4 .title .h30:before {
+    left: 0;
+    background-position: left;
+}
+
+.home4 .title .h30:after {
+    right: 0;
+    background-position: right;
+}
+
+.home4 .title .t_more {
+    float: right;
+    margin-top: 14px;
+}
+
+.home4 .img {
+    position: relative;
+    height: 248px;
+    background: center no-repeat;
+    background-size: cover;
+}
+
+.home4 .img .link {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    font-family: "微软雅黑";
+    color: #fff;
+}
+
+.home4 .img .link:hover {
+    color: #fff !important;
+    ;
+}
+
+.home4 .img .h16 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    background: url(../image/opacity-b60.png);/* 文字底图 */
+    text-align: left;
+}
+
+.home4 .h16 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.home4 .li {
+    font-family: "微软雅黑";
+    text-align: left;
+}
+
+.home4 .li:hover {
+    color: #9a2929;
+}
+
+.home4 .date {
+    font-family: Arial;
+    color: #333;
+}
+
+.home4 .ul1 {
+    padding: 37px 0 21px;
+}
+
+.home4 .ul1 .li {
+    overflow: hidden;
+}
+
+.home4 .ul1 .li+.li {
+    margin-top: 11px;
+}
+
+.home4 .ul1 .date {
+    float: right;
+    margin-left: 20px;
+}
+
+.home4 .ul1 .h16 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.home4 .ul2 .li {
+    padding-bottom: 25px;
+    border-bottom: 1px dashed #b5b5b5;
+}
+
+.home4 .ul2 .li+.li {
+    margin-top: 28px;
+}
+
+.home4 .ul2 .h16 {
+    margin-bottom: 10px;
+}
+
+.home4 .ul2 .p {
+    margin-bottom: 15px;
+    height: 42px;
+    overflow: hidden;
+}
+
+.home4 .ul3 {
+    margin-bottom: 27px;
+}
+
+.home4 .ul3 .li {
+    padding-top: 0.3rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed #b5b5b5;
+}
+
+.home4 .ul3 .li+.li {
+    margin-top: 15px;
+}
+
+.home4 .ul3 .h16 {
+    margin-bottom: 10px;
+}
+
+/* 调整主标题字体 */
+.home4 .title .h30>div {
+    font-size: 27px;
+    /* 原无字号设置 */
+    font-weight: 600;
+    color: var(--ink);
+    /* 使用主色变量 */
+}
+
+/* 调整"更多"链接字号 */
+.home4 .t_more a {
+    font-size: 16px;
+    color: var(--mountain);
+}
+
+/* 可选：增加标题装饰线间距 */
+.home4 .title .h30:before,
+.home4 .title .h30:after {
+    width: 32px;
+    /* 原22px */
+}
+
+/* 控制多行显示（优雅截断） */
+.home4 .ul2 .p {
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.4;
+    /* 调整行高匹配设计 */
+    max-height: 4.2em;
+    /* 3行 x 1.4行高 ≈ 4.2em */
+}
+
+/* 清除.home4区域内所有链接的默认样式 */
+.home4 a {
+    color: inherit !important;       /* 继承父级文字颜色 */
+    text-decoration: none !important; /* 清除下划线 */
+}
+
+/* 清除悬停状态样式 */
+.home4 a:hover {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+/* 字号 */
+.home4 .h16 a {  /* 专题报道标题 */
+    font-size: 17px;   /* 基础字号 */
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.home4 .date {    /* 专题报道日期 */
+    font-size: 13px;
+    color: #666;
+    margin-top: 8px;
+    display: block;
+}
+
+/* 标题图标样式 */
+.home4 .title .h30 {
+    position: relative;
+    padding-left: 45px; /* 为图标预留空间 */
+}
+
+.tb{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/tb.jpg);
+    background-size: 30px 30px; /* 合并图标的雪碧图尺寸 */
+}
+
+/* 不同标题的图标定位 */
+.col:nth-child(1) .title-icon { background-position: 0 0; }    /* 新闻动态图标 */
+.col:nth-child(2) .title-icon { background-position: -30px 0; }/* 论坛图标 */
+.col:nth-child(3) .title-icon { background-position: -60px 0; }/* 专题报道图标 */
+
+
+.home4 .row {
+    position: relative;
+    top: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 4rem 5%;
+}
+
+.home4 .col {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.home4 .box {
+    margin: 0;
+    background: rgba(255,255,255,0.9);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .home4 .row {
+        grid-template-columns: 1fr;
+    }
+    .home4 .img {
+        height: 200px;
+    }
+    .column-intro {
+        font-size: 0.9rem;
+        margin: -15px 0 20px;
+    }
+}

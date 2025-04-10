@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二十四节气</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/pic/dh.css">
+    <link rel="stylesheet" href="css/video.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+            background-color: #f9f5e9;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 5rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid #8b4513;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #8b4513;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            position: relative;
+        }
+
+        .nav-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #8b4513;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .sidebar {
+            width: 150px;
+            background-color: #f0e6d2;
+            padding: 20px 10px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 90;
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
+            border: 2px solid #d9c7a7;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar h3 {
+            font-size: 18px;
+            color: #8b4513;
+            margin-bottom: 15px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #d9c7a7;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 6px 10px;
+            color: #555;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .sidebar a:hover {
+            background-color: #d9c7a7;
+            color: #8b4513;
+            transform: scale(1.05);
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 40px);
+        }
+
+        .solar-term {
+            display: flex;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #d9c7a7;
+        }
+
+        .solar-term:last-child {
+            border-bottom: none;
+        }
+
+        .solar-term-info {
+            flex: 2;
+            padding-right: 20px;
+        }
+
+        .solar-term-image {
+            flex: 1;
+            height: 250px;
+            background-color: #e9e1d1;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .solar-term-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .solar-term h2 {
+            font-size: 28px;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+
+        .solar-term-date {
+            font-size: 14px;
+            color: #8b4513;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .solar-term p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-radius: 10px 10px 0 0;
+                transform: translateY(0);
+                max-height: 200px;
+            }
+
+            .sidebar.hidden {
+                transform: translateY(-100%);
+            }
+
+            .solar-term {
+                flex-direction: column;
+            }
+
+            .solar-term-info {
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+   <!-- 导航栏 -->
+   <nav class="nav-bar">
+    <div class="logo">
+        <img src="img/tb.jpg" alt="Logo">
+        <span class="logo-text">山城智刻·印迹渝州<br>
+            <span class="logo-en">SmartCarving·Imprint Chongqing</span>
+        </span>
+    </div>
+
+
+    <div class="social-links">
+        <a class="nav-link" href="index.html">首页</a>
+
+        <div class="dropdown">
+            <a class="nav-link">资源</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="video.html">视频</a></li>
+                <li><a class="nav-link" href="pic/pic.html">图片</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <a class="nav-link">百科</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="lishi.html">版画艺境</a></li>
+                <li><a class="nav-link" href="">传统文化拾遗</a></li>
+                <li><a class="nav-link" href="">重庆地名寻踪</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <a class="nav-link">服务</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="">🛠️ 工具包下载</a></li>
+                <li><a class="nav-link" href="fw/map.html">🗺️ 重庆文旅地图</a></li>
+                <li><a class="nav-link" href="">📚 学习资料库</a></li>
+                <li><a class="nav-link" href="">🎨 模板与素材 </a></li>
+                <li><a class="nav-link" href="">🎉 活动资源 </a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <a class="nav-link">文创</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="wc/wccp.html">文创产品</a></li>
+                <li><a class="nav-link" href="wc/cyzj.html">创意征集</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+
+     <!-- 新增智能导航 -->
+     <nav class="smart-nav">
+        <div class="nav-trigger">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="nav-list">
+            <div class="nav-item" data-target="24"><a class="nav-link" href="24 solar terms.html">二十四节气</a></div>
+            <div class="nav-item" data-target="traditional"><a class="nav-link" href="traditional festival.html">传统节日</a></div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>二十四节气</h1>
+            <p>探索中国传统智慧，感受自然节律之美</p>
+        </div>
+        <div class="main-content">
+            <button class="nav-toggle">☰</button>
+            <div class="sidebar" id="sidebar">
+                <h3>节气导航</h3>
+                <ul>
+                    <li><a href="#spring-beginning">立春</a></li>
+                    <li><a href="#rain-water">雨水</a></li>
+                    <li><a href="#insects-awaken">惊蛰</a></li>
+                    <li><a href="#spring-equinox">春分</a></li>
+                    <li><a href="#clear-and-bright">清明</a></li>
+                    <li><a href="#grain-rain">谷雨</a></li>
+                    <li><a href="#summer-beginning">立夏</a></li>
+                    <li><a href="#grain-full">小满</a></li>
+                    <li><a href="#grain-in-ear">芒种</a></li>
+                    <li><a href="#summer-solstice">夏至</a></li>
+                    <li><a href="#minor-heat">小暑</a></li>
+                    <li><a href="#major-heat">大暑</a></li>
+                    <li><a href="#autumn-beginning">立秋</a></li>
+                    <li><a href="#limit-of-heat">处暑</a></li>
+                    <li><a href="#white-dew">白露</a></li>
+                    <li><a href="#autumn-equinox">秋分</a></li>
+                    <li><a href="#cold-dew">寒露</a></li>
+                    <li><a href="#frost-descent">霜降</a></li>
+                    <li><a href="#winter-beginning">立冬</a></li>
+                    <li><a href="#light-snow">小雪</a></li>
+                    <li><a href="#heavy-snow">大雪</a></li>
+                    <li><a href="#winter-solstice">冬至</a></li>
+                    <li><a href="#minor-cold">小寒</a></li>
+                    <li><a href="#major-cold">大寒</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <div class="solar-term" id="spring-beginning">
+                    <div class="solar-term-info">
+                        <h2>立春</h2>
+                        <div class="solar-term-date">2月3-5日</div>
+                        <p>立春，是二十四节气中的第一个节气，标志着春季的开始。立春时节，大地开始解冻，气温逐渐回升，万物复苏。古代人们会举行迎春仪式，祈求新的一年风调雨顺，五谷丰登。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="立春">
+                    </div>
+                </div>
+                <div class="solar-term" id="rain-water">
+                    <div class="solar-term-info">
+                        <h2>雨水</h2>
+                        <div class="solar-term-date">2月18-20日</div>
+                        <p>雨水，是二十四节气中的第二个节气，表示气温回升，冰雪融化，降水增多。雨水时节，春雨滋润大地，万物开始生长。古代农谚有云：“雨水时节，雨水贵如油”，强调了雨水对农业生产的重要性。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="雨水">
+                    </div>
+                </div>
+                <div class="solar-term" id="insects-awaken">
+                    <div class="solar-term-info">
+                        <h2>惊蛰</h2>
+                        <div class="solar-term-date">3月5-7日</div>
+                        <p>惊蛰，是二十四节气中的第三个节气，意味着春雷初响，惊醒了冬眠的昆虫。惊蛰时节，气温明显回升，春耕开始。古代人们认为惊蛰是万物复苏的象征，农事活动逐渐繁忙起来。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="惊蛰">
+                    </div>
+                </div>
+                <div class="solar-term" id="spring-equinox">
+                    <div class="solar-term-info">
+                        <h2>春分</h2>
+                        <div class="solar-term-date">3月20-22日</div>
+                        <p>春分，是二十四节气中的第四个节气，表示昼夜平分，春分过后，白天逐渐变长。春分时节，气温适宜，百花盛开，是踏青赏花的好时节。古代人们会在春分时节祭拜太阳神，祈求丰收。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="春分">
+                    </div>
+                </div>
+                <div class="solar-term" id="clear-and-bright">
+                    <div class="solar-term-info">
+                        <h2>清明</h2>
+                        <div class="solar-term-date">4月4-6日</div>
+                        <p>清明，是二十四节气中的第五个节气，也是中国传统的重要节日之一。清明时节，天气晴朗，草木茂盛，是扫墓祭祖、踏青郊游的好时节。古代人们会在清明时节放风筝、荡秋千，表达对逝去亲人的思念。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="清明">
+                    </div>
+                </div>
+                <div class="solar-term" id="grain-rain">
+                    <div class="solar-term-info">
+                        <h2>谷雨</h2>
+                        <div class="solar-term-date">4月19-21日</div>
+                        <p>谷雨，是二十四节气中的第六个节气，表示雨水增多，有利于谷物生长。谷雨时节，气温适宜，降水充沛，是春耕的关键时期。古代农谚有云：“谷雨前后，种瓜种豆”，强调了谷雨对农业生产的重要性。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="谷雨">
+                    </div>
+                </div>
+                <div class="solar-term" id="summer-beginning">
+                    <div class="solar-term-info">
+                        <h2>立夏</h2>
+                        <div class="solar-term-date">5月5-7日</div>
+                        <p>立夏，是二十四节气中的第七个节气，标志着夏季的开始。立夏时节，气温升高，万物繁茂。古代人们会举行迎夏仪式，祈求夏季丰收。立夏还有称体重、吃立夏蛋等传统习俗。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="立夏">
+                    </div>
+                </div>
+                <div class="solar-term" id="grain-full">
+                    <div class="solar-term-info">
+                        <h2>小满</h2>
+                        <div class="solar-term-date">5月20-22日</div>
+                        <p>小满，是二十四节气中的第八个节气，表示夏熟作物的籽粒开始灌浆饱满，但尚未成熟。小满时节，气温升高，降水增多，是农作物生长的关键时期。古代农谚有云：“小满不满，干断田坎”，强调了小满时节降水的重要性。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="小满">
+                    </div>
+                </div>
+                <div class="solar-term" id="grain-in-ear">
+                    <div class="solar-term-info">
+                        <h2>芒种</h2>
+                        <div class="solar-term-date">6月5-7日</div>
+                        <p>芒种，是二十四节气中的第九个节气，表示夏熟作物的籽粒开始成熟，进入收割期。芒种时节，气温升高，降水增多，是农作物生长的关键时期。古代农谚有云：“芒种不种，过后难种”，强调了芒种时节播种的重要性。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="芒种">
+                    </div>
+                </div>
+                <div class="solar-term" id="summer-solstice">
+                    <div class="solar-term-info">
+                        <h2>夏至</h2>
+                        <div class="solar-term-date">6月21-22日</div>
+                        <p>夏至，是二十四节气中的第十个节气，表示一年中白昼最长、黑夜最短的一天。夏至时节，气温升高，降水增多，是农作物生长的关键时期。古代人们会在夏至时节祭拜天地，祈求丰收。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="夏至">
+                    </div>
+                </div>
+                <div class="solar-term" id="minor-heat">
+                    <div class="solar-term-info">
+                        <h2>小暑</h2>
+                        <div class="solar-term-date">7月6-8日</div>
+                        <p>小暑，是二十四节气中的第十一个节气，表示夏季的炎热开始加剧。小暑时节，气温升高，降水增多，是农作物生长的关键时期。古代农谚有云：“小暑大暑，上蒸下煮”，形容小暑时节的炎热天气。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="小暑">
+                    </div>
+                </div>
+                <div class="solar-term" id="major-heat">
+                    <div class="solar-term-info">
+                        <h2>大暑</h2>
+                        <div class="solar-term-date">7月22-24日</div>
+                        <p>大暑，是二十四节气中的第十二个节气，表示一年中最炎热的时期。大暑时节，气温升高，降水增多，是农作物生长的关键时期。古代农谚有云：“大暑不暑，五谷不鼓”，强调了大暑时节高温对农作物的重要性。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="大暑">
+                    </div>
+                </div>
+                <div class="solar-term" id="autumn-beginning">
+                    <div class="solar-term-info">
+                        <h2>立秋</h2>
+                        <div class="solar-term-date">8月7-9日</div>
+                        <p>立秋，是二十四节气中的第十三个节气，标志着秋季的开始。立秋时节，气温逐渐下降，农作物开始成熟。古代人们会举行迎秋仪式，祈求秋季丰收。立秋还有贴秋膘、吃立秋面等传统习俗。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="立秋">
+                    </div>
+                </div>
+                <div class="solar-term" id="limit-of-heat">
+                    <div class="solar-term-info">
+                        <h2>处暑</h2>
+                        <div class="solar-term-date">8月22-24日</div>
+                        <p>处暑，是二十四节气中的第十四个节气，表示炎热的夏季即将结束，气温逐渐下降。处暑时节，农作物开始成熟，是收获的季节。古代农谚有云：“处暑不出头，割谷喂老牛”，强调了处暑时节农作物成熟的紧迫性。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="处暑">
+                    </div>
+                </div>
+                <div class="solar-term" id="white-dew">
+                    <div class="solar-term-info">
+                        <h2>白露</h2>
+                        <div class="solar-term-date">9月7-9日</div>
+                        <p>白露，是二十四节气中的第十五个节气，表示天气转凉，露水增多。白露时节，气温下降，昼夜温差加大，是农作物收获的季节。古代农谚有云：“白露白茫茫，谷子满粮仓”，形容白露时节的丰收景象。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="白露">
+                    </div>
+                </div>
+                <div class="solar-term" id="autumn-equinox">
+                    <div class="solar-term-info">
+                        <h2>秋分</h2>
+                        <div class="solar-term-date">9月22-24日</div>
+                        <p>秋分，是二十四节气中的第十六个节气，表示昼夜平分，秋分过后，白天逐渐变短。秋分时节，气温适宜，是农作物收获的季节。古代人们会在秋分时节祭拜月神，祈求丰收。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="秋分">
+                    </div>
+                </div>
+                <div class="solar-term" id="cold-dew">
+                    <div class="solar-term-info">
+                        <h2>寒露</h2>
+                        <div class="solar-term-date">10月8-9日</div>
+                        <p>寒露，是二十四节气中的第十七个节气，表示天气转凉，露水增多且带有寒意。寒露时节，气温下降，昼夜温差加大，是农作物收获的季节。古代农谚有云：“寒露寒露，遍地冷露”，形容寒露时节的寒冷天气。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="寒露">
+                    </div>
+                </div>
+                <div class="solar-term" id="frost-descent">
+                    <div class="solar-term-info">
+                        <h2>霜降</h2>
+                        <div class="solar-term-date">10月23-24日</div>
+                        <p>霜降，是二十四节气中的第十八个节气，表示天气转寒，开始有霜。霜降时节，气温下降，昼夜温差加大，是农作物收获的最后时期。古代农谚有云：“霜降不起霜，来年谷不长”，强调了霜降时节霜冻对农作物的重要性。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="霜降">
+                    </div>
+                </div>
+                <div class="solar-term" id="winter-beginning">
+                    <div class="solar-term-info">
+                        <h2>立冬</h2>
+                        <div class="solar-term-date">11月7-8日</div>
+                        <p>立冬，是二十四节气中的第十九个节气，标志着冬季的开始。立冬时节，气温下降，开始进入寒冷的冬季。古代人们会举行迎冬仪式，祈求冬季平安。立冬还有吃饺子、喝羊肉汤等传统习俗。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="立冬">
+                    </div>
+                </div>
+                <div class="solar-term" id="light-snow">
+                    <div class="solar-term-info">
+                        <h2>小雪</h2>
+                        <div class="solar-term-date">11月22-23日</div>
+                        <p>小雪，是二十四节气中的第二十个节气，表示开始降雪，但雪量不大。小雪时节，气温下降，开始进入寒冷的冬季。古代农谚有云：“小雪小雪，满地冷雪”，形容小雪时节的降雪景象。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="小雪">
+                    </div>
+                </div>
+                <div class="solar-term" id="heavy-snow">
+                    <div class="solar-term-info">
+                        <h2>大雪</h2>
+                        <div class="solar-term-date">12月6-8日</div>
+                        <p>大雪，是二十四节气中的第二十一个节气，表示降雪量增大，天气更加寒冷。大雪时节，气温下降，开始进入严寒的冬季。古代农谚有云：“大雪大雪，满地白雪”，形容大雪时节的降雪景象。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="大雪">
+                    </div>
+                </div>
+                <div class="solar-term" id="winter-solstice">
+                    <div class="solar-term-info">
+                        <h2>冬至</h2>
+                        <div class="solar-term-date">12月21-23日</div>
+                        <p>冬至，是二十四节气中的第二十二个节气，表示一年中白昼最短、黑夜最长的一天。冬至时节，气温下降，开始进入严寒的冬季。古代人们会在冬至时节祭拜祖先，祈求平安。冬至还有吃饺子、喝羊肉汤等传统习俗。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="冬至">
+                    </div>
+                </div>
+                <div class="solar-term" id="minor-cold">
+                    <div class="solar-term-info">
+                        <h2>小寒</h2>
+                        <div class="solar-term-date">1月5-7日</div>
+                        <p>小寒，是二十四节气中的第二十三个节气，表示冬季的寒冷开始加剧。小寒时节，气温下降，开始进入严寒的冬季。古代农谚有云：“小寒大寒，冻成一团”，形容小寒时节的寒冷天气。</p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="小寒">
+                    </div>
+                </div>
+                <div class="solar-term" id="major-cold">
+                    <div class="solar-term-info">
+                        <h2>大寒</h2>
+                        <div class="solar-term-date">1月20-21日</div>
+                        <p>大寒，是二十四节气中的第二十四个节气，表示一年中最寒冷的时期。大寒时节，气温下降，开始进入严寒的冬季。古代农谚有云：“大寒大寒，冷成冰团”，形容大寒时节的寒冷天气。大寒过后，立春将至，新一轮的节气循环即将开始。
+                        </p>
+                    </div>
+                    <div class="solar-term-image">
+                        <img src="https://via.placeholder.com/400x250" alt="大寒">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 导航栏显示/隐藏
+        const navToggle = document.querySelector('.nav-toggle');
+        const sidebar = document.getElementById('sidebar');
+        let isSidebarVisible = true;
+
+        navToggle.addEventListener('click', function () {
+            if (isSidebarVisible) {
+                sidebar.classList.add('hidden');
+            } else {
+                sidebar.classList.remove('hidden');
+            }
+            isSidebarVisible = !isSidebarVisible;
+        });
+
+        // 平滑滚动到节气位置
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <script src="js/submenu.js"></script>
+
+</body>
+
+</html>

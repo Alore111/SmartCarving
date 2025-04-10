@@ -1,0 +1,81 @@
+
+.tutorial-container {
+    font-family: '华文楷体', serif;
+    width: 80%;
+    margin: 0 auto; /* 关键修改：添加水平居中 */
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: justify;
+    margin-top: 8rem;
+}
+
+h1 {
+    color: #282727;
+    font-size: 200%;
+    font-weight: bold;
+    border-bottom: 2px solid #7e5e4b;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.step-box {
+    margin: 25px 0;
+    padding: 20px;
+    border-left: 5px solid #634c3e;
+    background: #fffaf0;
+    position: relative;
+}
+
+.step-box p{
+    color: #8a643e;
+}
+
+.step-number {
+    position: absolute;
+    left: -30px;
+    top: -15px;
+    background: #7e5e4b;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 150%;
+    color: #3f3f3f;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.image-placeholder {
+    display: flex; /* 父级成为 flex 容器 */
+    justify-content: center; /* 主轴居中 */
+    margin: 15px 0;
+}
+
+.image-placeholder img{
+    width: 60%;
+    height: auto;
+    max-width: 600px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 15px 0;
+}
+
+.highlight {
+    color: #b22222;
+    font-weight: bold;
+}
+
+/* 视频居中样式 */
+.video video {
+    display: block;
+    margin: 0 auto;
+}

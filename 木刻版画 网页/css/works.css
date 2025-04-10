@@ -1,0 +1,80 @@
+/* ************ 
+名称：关键词样式
+作者：咯咯
+日期：2025-01-05
+************ */
+body{
+    background: linear-gradient(to bottom right, #fff, #f8f8f8);
+}
+
+h1 {
+    font-family: '华文楷体', serif;
+    margin-bottom: 50px;
+    padding: 5px;
+    text-align: center;
+    color: black;
+}
+
+main {
+    padding: 20px;
+}
+
+h2{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 120%;
+    font-weight: bolder;
+    color: rgba(33, 33, 33, 0.897);
+    text-shadow: 1px 1px 2px rgba(165, 165, 165, 0.846);
+    text-align:justify;
+    margin-top: 10px;
+    padding: 20px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    padding: 0 30px;
+    width: 100%;
+}
+
+
+.image-item {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    width: 80%; /* 调整图片宽度，使其变小 */
+    margin: 0 auto; /* 水平居中图片 */
+}
+
+.image-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.image-item:hover {
+    transform: translateY(-10px);
+}
+
+.image-item:hover img {
+    transform: scale(1.05);
+}
+
+.image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.image-item:hover .image-caption {
+    transform: translateY(0);
+}

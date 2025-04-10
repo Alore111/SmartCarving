@@ -1,0 +1,211 @@
+<!-- 在网站目录下新建chuangyi.html文件 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刀木留痕·创意征集</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/pic/dh.css">
+
+    <style>
+        /* 新增创意征集页面专属样式 */
+        .subpage-hero {
+            background: linear-gradient(rgba(58, 46, 40, 0.9), rgba(58, 46, 40, 0.9)),
+                url('../img/woodcut-bg.jpg') center/cover;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 5% 60px;
+        }
+
+        .call-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(245, 241, 232, 0.95);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .woodcut-title {
+            font-family: "华文中宋", serif;
+            font-size: 2.5rem;
+            color: #3A2E28;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .woodcut-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #D4A373;
+        }
+
+        .call-content {
+            line-height: 1.8;
+            color: #5A4C42;
+            margin-bottom: 2rem;
+        }
+
+        .wechat-transfer {
+            text-align: center;
+            padding: 2rem;
+            background: #F5F1E8;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .wechat-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #09BE4F;
+            color: white !important;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: transform 0.3s;
+            margin-top: 1rem;
+        }
+
+        .wechat-btn i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .wechat-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(9, 190, 79, 0.3);
+        }
+
+        .rules-list {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .rules-list li {
+            position: relative;
+            margin-bottom: 1rem;
+            padding-left: 30px;
+        }
+
+        .rules-list li::before {
+            content: "✸";
+            position: absolute;
+            left: 0;
+            color: #D4A373;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 共用导航栏 -->
+    <!-- 导航栏 -->
+    <nav class="nav-bar">
+        <div class="logo">
+            <img src="../img/tb.jpg" alt="Logo">
+            <span class="logo-text">山城智刻·印迹渝州<br>
+                <span class="logo-en">SmartCarving·Imprint Chongqing</span>
+            </span>
+        </div>
+
+
+        <div class="social-links">
+            <a class="nav-link" href="../index.html">首页</a>
+
+            <div class="dropdown">
+                <a class="nav-link">资源</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="../video.html">视频</a></li>
+                    <li><a class="nav-link" href="../pic/pic.html">图片</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">百科</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="../lishi.html">版画艺境</a></li>
+                    <li><a class="nav-link" href="">传统文化拾遗</a></li>
+                    <li><a class="nav-link" href="">重庆地名寻踪</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">服务</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="">🛠️ 工具包下载</a></li>
+                    <li><a class="nav-link" href="../fw/map.html">🗺️ 重庆文旅地图</a></li>
+                    <li><a class="nav-link" href="">📚 学习资料库</a></li>
+                    <li><a class="nav-link" href="">🎨 模板与素材 </a></li>
+                    <li><a class="nav-link" href="">🎉 活动资源 </a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">文创</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="../wc/wccp.html">文创产品</a></li>
+                    <li><a class="nav-link" href="#">创意征集</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- 创意征集主内容 -->
+    <section class="subpage-hero">
+        <div class="call-container">
+            <h2 class="woodcut-title">刀木留痕创意征集令</h2>
+
+            <div class="call-content">
+                <p>以刀为笔，以木为纸，我们寻找最具山城气质的木刻创意。无论是洪崖洞的璀璨夜景，还是长江索道的城市穿越，用你的刻刀讲述重庆故事。</p>
+
+                <div class="wechat-transfer">
+                    <h3>参与方式</h3>
+                    <p>扫描二维码关注公众号，发送"创意征集"获取投稿通道</p>
+                    <!-- 替换为实际公众号二维码 -->
+                    <div class="wx">
+                        <img src="../img/wx.jpg" alt="公众号二维码" style="width: 150px; margin: 1rem 0;">
+                    </div>
+                    <!-- 跳转链接替换为实际公众号URL -->
+                    <a href="https://mp.weixin.qq.com/s/oalT6taH_kjn6CbONfzISA"
+                        class="wechat-btn" target="_blank">
+                        <i class="fab fa-weixin"></i>
+                        点击查看详情
+                    </a>
+                </div>
+
+                <h4>征集要求：</h4>
+                <ul class="rules-list">
+                    <li>作品需体现重庆地域文化特色</li>
+                    <li>尺寸要求：A4幅面（210mm×297mm）</li>
+                    <li>文件格式：高清扫描件（300dpi以上）</li>
+                    <li>截止日期：2025年12月31日</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 共用底部 -->
+    <footer>
+        <!-- 底部内容与主页一致 -->
+    </footer>
+
+    <script src="../js/submenu.js"></script>
+
+</body>
+
+</html>

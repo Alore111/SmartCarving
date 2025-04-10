@@ -1,0 +1,173 @@
+main {
+    background-color: #fdf5f619;
+    font-size: 105%;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+p{
+    color: #6f6f6f;
+    text-align: center;
+    font-size: small;
+    margin-top: 20px;
+}
+
+h2 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 120%;
+    color: #4d4d4d;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+h3 {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(76, 120, 75);
+    font-size: 150%;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #6f6f6f;
+    text-shadow: 1px;
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.yishu {
+    padding-top: 60px;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.hobby-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 20px;
+}
+
+.hobby-card {
+    background: rgba(255, 255, 255, 0.95);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.hobby-card-2 {
+    background: rgba(255, 255, 255, 0.95);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.hobby-card::before {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+.hobby-card-2::before {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+.hobby-card:hover {
+    transform: translateY(-10px);
+}
+
+.hobby-card-2:hover {
+    transform: translateY(-10px);
+}
+
+.hobby-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.hobby-card-2 img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+    margin: auto;
+}
+
+.hobby-card:hover img {
+    transform: scale(1.05);
+}
+
+.hobby-card p {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0 1.5rem 0;
+    color: #262726;
+    text-align: justify;
+    text-indent: 2em;
+}
+
+.hobby-card-2:hover img {
+    transform: scale(1.05);
+}
+
+.hobby-card-2 p {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0 1.5rem 0;
+    color: #262726;
+    text-align: justify;
+}
+
+.highlight {
+    color: #000000; /* 黑色 */
+    font-weight: bold; /* 加粗 */
+    background-color: #ffd146; /* 可选：添加背景色 */
+    padding: 2px 5px; /* 可选：增加内边距 */
+    border-radius: 3px; /* 可选：圆角 */
+}
+
+/* 新增购买联系区块样式 */
+.contact-purchase {
+    text-align: center;
+    padding: 2rem;
+    margin: 4rem auto;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(76, 120, 75, 0.1);
+}
+
+.contact-purchase h3 {
+    font-family: 'Courier New', Courier, monospace;
+    color: #4d4d4d;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.contact-purchase p {
+    color: #6f6f6f;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.contact-icon {
+    font-size: 1.8rem;
+    color: rgb(76, 120, 75);
+    margin-bottom: 1rem;
+}

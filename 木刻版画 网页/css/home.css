@@ -1,0 +1,680 @@
+:root {
+    --wood: #6E5B4C;
+    /* 木刻主色 */
+    --ink: #3A2E28;
+    /* 版画墨色 */
+    --paper: #F5F1E8;
+    /* 宣纸底色 */
+    --mountain: #7A9D96;
+    /* 重庆山色 */
+    --accent: #D4A373;
+    /* 点缀色 */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "华文宋体", "SimSun", serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.8;
+    background-image: url(../img/背景/4.png);
+    background-size: 100%;
+    /* 大图 */
+}
+
+/* 导航栏优化 */
+.nav-bar,
+.nav-bar1 {
+    background: rgba(142, 140, 140, 0.5);
+    /* 透明黑背景 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* 底部细边框 */
+    padding: 0.95rem 5%;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar {
+    top: 0;
+    justify-content: space-between;
+}
+
+.nav-bar1 {
+    top: 77px;
+    justify-content: center;
+    justify-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--paper);
+    line-height: 1.3;
+    /* 调整整体行高 */
+}
+
+.logo-en {
+    font-size: 0.9rem;
+    /* 英文缩小到原字号的75% */
+    font-weight: normal;
+    /* 去除加粗 */
+    display: block;
+    /* 确保换行生效 */
+    margin-top: 0.2rem;
+    /* 增加中英文间距 */
+    letter-spacing: 0.5px;
+    /* 适当字母间距 */
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: all 0.3s;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: var(--accent);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+.nav-link2 {
+    color: var(--paper);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: absolute;
+    display: none;
+}
+
+.nav-link2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: all 0.3s;
+    transform: translateX(-50%);
+}
+
+.nav-link2:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.nav-link2:hover::after {
+    width: 80%;
+}
+
+.nav-link3 {
+    color: var(--paper);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.nav-link3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: all 0.3s;
+    transform: translateX(-50%);
+}
+
+.nav-link3:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.nav-link3:hover::after {
+    width: 80%;
+}
+
+.nav-link3:hover .nav-link2 {
+    display: block;
+}
+
+.menu-toggle {
+    display: none;
+    color: var(--paper);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* 统一导航链接颜色 */
+.nav-bar .nav-link,
+.nav-bar1 .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    /* 强制统一颜色 */
+    opacity: 0.9;
+    /* 统一透明度 */
+}
+
+/* 主视觉区优化 */
+.hero {
+    height: 95vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://source.unsplash.com/random/1600x900/?chongqing,woodcut') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+    z-index: 1;
+}
+
+/* 下拉菜单适配 */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin-left: 5%;
+    color: var(--paper);
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+
+    height: 3rem;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: var(--accent);
+    color: var(--ink);
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3);
+}
+
+.hero-btn:hover {
+    background: #c2946a;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(212, 163, 115, 0.4);
+}
+
+
+/* 智能助手优化 */
+.chatbot {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.chat-icon {
+    background: var(--wood);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.chat-icon:hover {
+    transform: scale(1.1);
+    background: var(--ink);
+}
+
+.chat-window {
+    display: none;
+    background: white;
+    width: 350px;
+    height: 50vh;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: var(--wood);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h3 {
+    font-size: 1.2rem;
+}
+
+.close-chat {
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.chat-body {
+    height: calc(100% - 120px);
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.message-content {
+    max-width: 70%;
+    padding: 0.8rem;
+    border-radius: 15px;
+    font-size: 0.95rem;
+}
+
+.user-message .message-content {
+    background: #e9ecef;
+    border-bottom-right-radius: 0;
+}
+
+.bot-message .message-content {
+    background: var(--paper);
+    border-bottom-left-radius: 0;
+}
+
+.chat-input {
+    display: flex;
+    padding: 0.5rem;
+    border-top: 1px solid #eee;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.send-btn {
+    background: var(--wood);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.send-btn:hover {
+    background: var(--ink);
+    transform: scale(1.1);
+}
+
+/* 底部社交优化 */
+footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 5% 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 5rem;
+    margin-bottom: 2rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.footer-logo img {
+    height: 30px;
+    margin-right: 10px;
+    opacity: .7;
+}
+
+.footer-about p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    gap: 3rem;
+    /* 第一栏图标间隔 */
+}
+
+.social-icon {
+    /* 新增以下两行 */
+    color: inherit;
+    /* 继承父元素颜色 */
+    text-decoration: none;
+    /* 去除下划线 */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.social-icon:hover {
+    background: var(--accent);
+    transform: translateY(-5px);
+}
+
+.footer-links h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-links h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+}
+
+.footer-links a i {
+    margin-right: 8px;
+    font-size: 0.8rem;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+    transform: translateX(5px);
+}
+
+.footer-contact p {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.footer-contact i {
+    margin-right: 10px;
+    color: var(--accent);
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--wood);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        gap: 1.5rem;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: all 0.4s;
+    }
+
+    .nav-links.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .hero-content {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        height: 70vh;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .quick-access {
+        grid-template-columns: 1fr;
+    }
+
+    .chat-window {
+        width: 300px;
+        height: 40vh;
+    }
+}
+
+/* 下拉菜单样式 */
+.submenu {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(94, 93, 93, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 5%;
+    top: 100%;
+    /* 紧贴父菜单底部 */
+    z-index: 1001;
+    /* 确保高于其他元素 */
+}
+
+/* 显示逻辑改为JS控制 */
+.submenu.active {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* 在home.css中添加 */
+.column-intro {
+    font-size: 50%;
+    text-align: justify;
+    margin-top: -30px;
+    margin-bottom: 30px;
+}
+
+
+
+/* 在home.css中添加 */
+.hero-text {
+    margin: 1.5rem 0;
+}
+
+.classic-text {
+    font-family: "华文宋体", "SimSun", "方正书宋", serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    line-height: 1.4;
+    margin: 0.5rem 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* 首段首字装饰 */
+.classic-text:first-child::first-letter {
+    font-size: 2.2rem;
+    color: var(--accent);
+    float: left;
+    line-height: 0.8;
+    margin-right: 4px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .classic-text {
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+/* 在home.css中修改 */
+.hero-text {
+    margin: 1.2rem 0;
+}
+
+.classic-text {
+    font-family: "华文中宋", "STZhongsong", "SimSun", serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem); /* 流体字号 */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* 禁止换行 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 超出显示省略号 */
+    margin: 0.3rem 0;
+    color: rgba(255, 255, 255, 0.96);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+    display: inline-block;
+    max-width: 90%;
+}
+
+/* 小屏幕自动缩放 */
+@media (max-width: 1200px) {
+    .classic-text {
+        white-space: normal; /* 允许换行 */
+        line-height: 1.3;
+        max-width: 100%;
+        font-size: clamp(0.9rem, 3vw, 1.2rem);
+    }
+    .classic-text::after {
+        content: "";
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+/* 超大屏幕保证单行 */
+@media (min-width: 1600px) {
+    .classic-text {
+        font-size: 1.3rem;
+    }
+}

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山城视界·渝州映像</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/video.css">
+    <link rel="stylesheet" href="../css/pic/pic.css">
+
+</head>
+
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-bar">
+        <div class="logo">
+            <img src="../img/tb.jpg" alt="Logo">
+            <span class="logo-text">山城智刻·印迹渝州<br>
+                <span class="logo-en">SmartCarving·Imprint Chongqing</span>
+            </span>
+        </div>
+
+
+        <div class="social-links">
+            <a class="nav-link" href="../index.html">首页</a>
+
+            <div class="dropdown">
+                <a class="nav-link">资源</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="../video.html">视频</a></li>
+                    <li><a class="nav-link" href="#">图片</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">百科</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="../lishi.html">版画艺境</a></li>
+                    <li><a class="nav-link" href="">传统文化拾遗</a></li>
+                    <li><a class="nav-link" href="">重庆地名寻踪</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">服务</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="">🛠️ 工具包下载</a></li>
+                    <li><a class="nav-link" href="../fw/map.html">🗺️ 重庆文旅地图</a></li>
+                    <li><a class="nav-link" href="">📚 学习资料库</a></li>
+                    <li><a class="nav-link" href="">🎨 模板与素材 </a></li>
+                    <li><a class="nav-link" href="">🎉 活动资源 </a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">文创</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="../wc/wccp.html">文创产品</a></li>
+                    <li><a class="nav-link" href="../wc/cyzj.html">创意征集</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+
+    <!-- 新增智能导航 -->
+    <nav class="smart-nav">
+        <div class="nav-trigger">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="nav-list">
+            <div class="nav-item" data-target="jiefangbei">解放碑时空</div>
+            <div class="nav-item" data-target="hongya">洪崖幻境</div>
+            <div class="nav-item" data-target="dazu">大足石刻</div>
+            <div class="nav-item" data-target="ciqikou">磁器口记忆</div>
+            <div class="nav-item" data-target="yangtze">两江夜色</div>
+        </div>
+    </nav>
+
+    <!-- 智能导航调整为图片分类 -->
+    <nav class="smart-nav">
+        <div class="nav-trigger">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="nav-list">
+            <div class="nav-item" data-target="landscape">山水重庆</div>
+            <div class="nav-item" data-target="night">不夜城</div>
+            <div class="nav-item" data-target="culture">巴渝文化</div>
+            <div class="nav-item" data-target="architecture">魔幻建筑</div>
+            <div class="nav-item" data-target="life">市井生活</div>
+        </div>
+    </nav>
+
+    <div class="gallery-container">
+        <!-- 过滤栏 -->
+        <div class="filter-bar">
+            <button class="filter-btn active">全部</button>
+            <button class="filter-btn">重庆印象</button>
+            <button class="filter-btn">二十四节气</button>
+            <button class="filter-btn">中国传统节日</button>
+            <a href="hdjj.html"><button class="filter-btn">活动锦集</button></a>
+        </div>
+
+        <!-- 瀑布流图片墙 -->
+        <div class="masonry-grid">
+            <!-- 山水重庆 -->
+
+            <!-- 在瀑布流图片墙部分，将重庆印象相关的图片卡片添加data-category="chongqing" -->
+            <div class="photo-card" data-category="chongqing">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/版画景点/解放碑\ \(1\).png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="chongqing">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/版画景点/来福士\ \(2\).png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="chongqing">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/版画景点/洪崖洞\ \(2\).png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="chongqing">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/版画景点/白公馆.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="chongqing">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/版画景点/下浩里.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="chongqing">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/版画景点/大足石刻.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+
+
+            <!-- 在瀑布流图片墙部分，将二十四节气相关的图片卡片添加 -->
+            <div class="photo-card" data-category="solarterm">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/二十四节气/春分.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="solarterm">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/二十四节气/立春.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="solarterm">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/二十四节气/清明.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="solarterm">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/二十四节气/惊蛰.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="solarterm">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/二十四节气/大暑.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="solarterm">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/二十四节气/惊蛰.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="solarterm">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/二十四节气/雨水.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="solarterm">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/二十四节气/立冬.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+
+            <div class="photo-card" data-category="solarterm">
+                <div class="photo-thumb" style="background-image: url(../img/cqyx/二十四节气/冬至.png);">
+                    <div class="zoom-overlay">
+                        <i class="fas fa-search-plus zoom-icon"></i>
+                    </div>
+                </div>
+                <div class="photo-meta">
+                    <div class="photo-tags">
+                        <span class="photo-tag">长江索道</span>
+                        <span class="photo-tag">航拍</span>
+                    </div>
+                    <h3 class="photo-title">云中走廊</h3>
+                    <p class="photo-desc">飞跃长江的空中公交车，串联两岸的民生脉络，晨雾中的索道宛如云端穿梭的方舟</p>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            // 替换原有的筛选功能代码为以下内容
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelector('.filter-btn.active')?.classList.remove('active');
+                    btn.classList.add('active');
+                    const categoryMap = {
+                        '全部': 'all',
+                        '重庆印象': 'chongqing',
+                        '二十四节气': 'solarterm',
+                        '中国传统节日': 'festival',
+                    };
+                    const category = categoryMap[btn.textContent];
+
+                    document.querySelectorAll('.photo-card').forEach(card => {
+                        card.style.display = category === 'all' ? 'block' :
+                            card.dataset.category === category ? 'block' : 'none';
+                    });
+                });
+            });
+
+
+
+            function openLightbox(url) {
+                // 创建灯箱DOM元素并显示
+                const lightbox = document.createElement('div');
+                lightbox.innerHTML = `
+                <div class="lightbox-overlay">
+                    <img src="${url}" class="lightbox-image">
+                    <button class="lightbox-close">&times;</button>
+                </div>
+            `;
+                document.body.appendChild(lightbox);
+            }
+        </script>
+
+
+        <script src="../js/submenu.js"></script>
+
+</body>
+
+</html>

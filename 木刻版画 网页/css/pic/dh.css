@@ -1,0 +1,234 @@
+:root {
+    --wood: #6E5B4C;      /* 木刻主色 */
+    --ink: #3A2E28;       /* 版画墨色 */
+    --paper: #F5F1E8;     /* 宣纸底色 */
+    --mountain: #7A9D96;  /* 重庆山色 */
+    --accent: #D4A373;    /* 点缀色 */
+}
+
+
+/* 导航栏优化 */
+.nav-bar,
+.nav-bar1 {
+    background: rgba(142, 140, 140, 0.5); /* 透明黑背景 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 底部细边框 */
+    padding: 0.95rem 5%;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar {
+    top: 0;
+    justify-content: space-between;
+}
+
+.nav-bar1 {
+    top:77px;
+    justify-content: center;
+    justify-items: center; 
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--paper);
+    line-height: 1.3; /* 调整整体行高 */
+}
+
+.logo-en {
+    font-size: 0.9rem;  /* 英文缩小到原字号的75% */
+    font-weight: normal; /* 去除加粗 */
+    display: block;     /* 确保换行生效 */
+    margin-top: 0.2rem; /* 增加中英文间距 */
+    letter-spacing: 0.5px; /* 适当字母间距 */
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: all 0.3s;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+
+.menu-toggle {
+    display: none;
+    color: var(--paper);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* 统一导航链接颜色 */
+.nav-bar .nav-link,
+.nav-bar1 .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important; /* 强制统一颜色 */
+    opacity: 0.9; /* 统一透明度 */
+}
+
+.social-links {
+    display: flex;
+    gap: 3rem;/* 第一栏图标间隔 */
+}
+
+.social-icon {
+    /* 新增以下两行 */
+    color: inherit;       /* 继承父元素颜色 */
+    text-decoration: none; /* 去除下划线 */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.social-icon:hover {
+    background: var(--accent);
+    transform: translateY(-5px);
+}
+
+
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--wood);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        gap: 1.5rem;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: all 0.4s;
+    }
+
+    .nav-links.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .hero-content {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        height: 70vh;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .quick-access {
+        grid-template-columns: 1fr;
+    }
+
+    .chat-window {
+        width: 300px;
+        height: 400px;
+    }
+}
+
+/* 下拉菜单样式 */
+.submenu {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(94, 93, 93, 0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 1rem 5%;
+    top: 100%; /* 紧贴父菜单底部 */
+    z-index: 1001; /* 确保高于其他元素 */
+}
+
+/* 显示逻辑改为JS控制 */
+.submenu.active {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* 在home.css中添加 */
+.column-intro {
+    font-size: 50%;
+    text-align: justify;
+    margin-top: -30px;
+    margin-bottom: 30px;
+}
+
+/* 新增dropdown容器样式 */
+.dropdown .nav-link{
+    position: relative;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    height: 100%; /* 继承父级高度 */
+}
+

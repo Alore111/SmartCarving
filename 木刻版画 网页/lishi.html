@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木刻之道 · 非遗的来世</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/video.css">
+    <style>
+        :root {
+            --ink-black: #2D201C;    /* 墨色 */
+            --paper-white: #F5F2EA;   /* 宣纸白 */
+            --gold-accent: #C4A484;   /* 金箔色 */
+            --gradient-bg: linear-gradient(15deg, #F5F2EA 0%, #F0EDE5 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '思源宋体', 'Noto Serif SC', serif;
+        }
+
+        body {
+            background: var(--gradient-bg);
+            color: var(--ink-black);
+            line-height: 1.8;
+        }
+
+        /* 沉浸式页眉 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: url('woodgrain-texture.jpg') center/cover;
+            opacity: 0.08;
+            animation: grain 8s steps(10) infinite;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            padding: 2rem;
+            max-width: 800px;
+            color: black;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: var(--gold-accent);
+        }
+
+        /* 章节分隔 */
+        .section {
+            padding: 8rem 15%;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(255,255,255,0.6);
+        }
+
+        /* 画廊布局 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* 时间轴设计 */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 4rem auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: var(--gold-accent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-card {
+            position: relative;
+            width: 45%;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-card.left {
+            left: 0;
+            margin: 2rem 0 2rem 5%;
+        }
+
+        .timeline-card.right {
+            left: 55%;
+        }
+
+        /* 工艺步骤 */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gold-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0,0) }
+            10% { transform: translate(-5%,-10%) }
+            30% { transform: translate(3%,-15%) }
+            50% { transform: translate(12%,9%) }
+            70% { transform: translate(9%,4%) }
+            90% { transform: translate(-1%,7%) }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .section { padding: 4rem 8%; }
+            .timeline::after { left: 30px; }
+            .timeline-card {
+                width: auto;
+                margin-left: 60px;
+            }
+            .process-steps { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-bar">
+        <div class="logo">
+            <img src="img/tb.jpg" alt="Logo">
+            <span class="logo-text">山城智刻·印迹渝州<br>
+                <span class="logo-en">SmartCarving·Imprint Chongqing</span>
+            </span>
+        </div>
+
+
+        <div class="social-links">
+            <a class="nav-link" href="index.html">首页</a>
+
+            <div class="dropdown">
+                <a class="nav-link">资源</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="video.html">视频</a></li>
+                    <li><a class="nav-link" href="pic/pic.html">图片</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">百科</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="lishi.html">版画艺境</a></li>
+                    <li><a class="nav-link" href="">传统文化拾遗</a></li>
+                    <li><a class="nav-link" href="">重庆地名寻踪</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">服务</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="">🛠️ 工具包下载</a></li>
+                    <li><a class="nav-link" href="fw/map.html">🗺️ 重庆文旅地图</a></li>
+                    <li><a class="nav-link" href="">📚 学习资料库</a></li>
+                    <li><a class="nav-link" href="">🎨 模板与素材 </a></li>
+                    <li><a class="nav-link" href="">🎉 活动资源 </a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">文创</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="wc/wccp.html">文创产品</a></li>
+                    <li><a class="nav-link" href="wc/cyzj.html">创意征集</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- 新增智能导航 -->
+    <nav class="smart-nav">
+        <div class="nav-trigger">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="nav-list">
+            <div class="nav-item" data-target="lishi"><a class="nav-link" href="lishi.html">木刻历史</a></div>
+            <div class="nav-item" data-target="zhizuo"><a class="nav-link" href="zhizuo.html">木刻制作</a></div>
+            <div class="nav-item" data-target="baoyang"><a class="nav-link" href="baoyang.html">木刻保养</a></div>
+
+        </div>
+    </nav>
+
+
+    <!-- 页眉 -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>木刻版画<br>时间的拓印</h1>
+            <p>以刀为笔，以木为纸，传承千年东方美学</p>
+        </div>
+    </header>
+
+    <!-- 历史长河 -->
+    <section class="section">
+        <h2>千年刻痕</h2>
+        <div class="timeline">
+            <div class="timeline-card left active">
+                <h3>唐·起源</h3>
+                <p>公元868年《金刚经》扉画，现存最早的木刻版画实物</p>
+            </div>
+            <div class="timeline-card right active">
+                <h3>宋·精进</h3>
+                <p>活字印刷推动套色技术，《梅花喜神谱》展现诗画之美</p>
+            </div>
+            <!-- 更多时间节点 -->
+        </div>
+    </section>
+
+    <!-- 艺术之美 -->
+    <section class="section">
+        <h2>木韵刀语</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="img/tri/yang.jpg" alt="阳刻技法">
+                <div class="gallery-caption">
+                    <h3>阳刻的哲学</h3>
+                    <p>以留黑手法展现造型的骨相之美</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/tri/yin.jpg" alt="阴刻技法">
+                <div class="gallery-caption">
+                    <h3>阴刻的诗意</h3>
+                    <p>通过凹线营造水墨氤氲的意境</p>
+                </div>
+            </div>
+            <!-- 更多画廊项目 -->
+        </div>
+    </section>
+
+    <!-- 制作工艺 -->
+    <section class="section">
+        <h2>匠心制法</h2>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>选材</h3>
+                <p>精选纹理细腻的梨木或枣木</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>制版</h3>
+                <p>历经三蒸三晒的木材处理工艺</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>上墨</h3>
+                <p>历经三调三滚的油墨均匀工艺</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3>拓印</h3>
+                <p>承载千年墨韵托起刀刻风华</p>
+            </div>
+            <!-- 更多步骤 -->
+        </div>
+    </section>
+
+    <script src="js/submenu.js"></script>
+</body>
+
+</html>

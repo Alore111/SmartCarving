@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中华传统节日</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/pic/dh.css">
+    <link rel="stylesheet" href="css/video.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+            background-color: #f9f5e9;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 5rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid #8b4513;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #8b4513;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            position: relative;
+        }
+
+        .sidebar {
+            width: 180px;
+            background-color: #f0e6d2;
+            padding: 20px 10px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            left: -200px;
+            top: 0;
+            z-index: 90;
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
+            border: 2px solid #d9c7a7;
+            transition: left 0.3s ease;
+        }
+
+        .sidebar:hover {
+            left: 0;
+        }
+
+        .sidebar h3 {
+            font-size: 18px;
+            color: #8b4513;
+            margin-bottom: 15px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #d9c7a7;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 6px 10px;
+            color: #555;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .sidebar a:hover {
+            background-color: #d9c7a7;
+            color: #8b4513;
+            transform: scale(1.05);
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 40px);
+        }
+
+        .festival {
+            display: flex;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #d9c7a7;
+        }
+
+        .festival:last-child {
+            border-bottom: none;
+        }
+
+        .festival-info {
+            flex: 2;
+            padding-right: 20px;
+        }
+
+        .festival-image {
+            flex: 1;
+            height: 250px;
+            background-color: #e9e1d1;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .festival-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .festival h2 {
+            font-size: 28px;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+
+        .festival-date {
+            font-size: 16px;
+            color: #8b4513;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .festival p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -200px;
+                top: 0;
+                bottom: 0;
+                width: 200px;
+                max-height: none;
+            }
+
+            .sidebar:hover {
+                left: 0;
+            }
+
+            .festival {
+                flex-direction: column;
+            }
+
+            .festival-info {
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="nav-bar">
+        <div class="logo">
+            <img src="img/tb.jpg" alt="Logo">
+            <span class="logo-text">山城智刻·印迹渝州<br>
+                <span class="logo-en">SmartCarving·Imprint Chongqing</span>
+            </span>
+        </div>
+
+
+        <div class="social-links">
+            <a class="nav-link" href="index.html">首页</a>
+
+            <div class="dropdown">
+                <a class="nav-link">资源</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="video.html">视频</a></li>
+                    <li><a class="nav-link" href="pic/pic.html">图片</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">百科</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="lishi.html">版画艺境</a></li>
+                    <li><a class="nav-link" href="">传统文化拾遗</a></li>
+                    <li><a class="nav-link" href="">重庆地名寻踪</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">服务</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="">🛠️ 工具包下载</a></li>
+                    <li><a class="nav-link" href="fw/map.html">🗺️ 重庆文旅地图</a></li>
+                    <li><a class="nav-link" href="">📚 学习资料库</a></li>
+                    <li><a class="nav-link" href="">🎨 模板与素材 </a></li>
+                    <li><a class="nav-link" href="">🎉 活动资源 </a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link">文创</a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="wc/wccp.html">文创产品</a></li>
+                    <li><a class="nav-link" href="wc/cyzj.html">创意征集</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- 新增智能导航 -->
+    <nav class="smart-nav">
+        <div class="nav-trigger">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="nav-list">
+            <div class="nav-item" data-target="24"><a class="nav-link" href="24 solar terms.html">二十四节气</a></div>
+            <div class="nav-item" data-target="traditional"><a class="nav-link" href="traditional festival.html">传统节日</a></div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="header">
+            <h1>中华传统节日</h1>
+            <p>探索中华传统节日，感受千年文化的魅力</p>
+        </div>
+        <div class="main-content">
+            <div class="sidebar" id="sidebar">
+                <h3>节日导航</h3>
+                <ul>
+                    <li><a href="#spring-festival">春节</a></li>
+                    <li><a href="#lantern-festival">元宵节</a></li>
+                    <li><a href="#dragon-boat-festival">龙抬头</a></li>
+                    <li><a href="#qingming-festival">清明节</a></li>
+                    <li><a href="#dragon-boat-festival">端午节</a></li>
+                    <li><a href="#qixi-festival">七夕节</a></li>
+                    <li><a href="#mid-autumn-festival">中秋节</a></li>
+                    <li><a href="#double-ninth-festival">重阳节</a></li>
+                    <li><a href="#winter-solstice-festival">冬至</a></li>
+                    <li><a href="#laba-festival">腊八节</a></li>
+                    <li><a href="#xiaonian">小年</a></li>
+                </ul>
+            </div>
+            <div class="content" id="content">
+                <div class="festival" id="spring-festival">
+                    <div class="festival-info">
+                        <h2>春节</h2>
+                        <div class="festival-date">农历正月初一</div>
+                        <p>春节，是中国最重要的传统节日之一，标志着农历新年的开始。春节期间，人们会贴春联、放鞭炮、吃团圆饭、拜年等，象征着辞旧迎新、团圆和吉祥。春节的庆祝活动通常持续到正月十五元宵节。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="春节">
+                    </div>
+                </div>
+                <div class="festival" id="lantern-festival">
+                    <div class="festival-info">
+                        <h2>元宵节</h2>
+                        <div class="festival-date">农历正月十五</div>
+                        <p>元宵节，又称上元节、小正月、元夕等，是中国的传统节日之一。元宵节的庆祝活动包括赏花灯、猜灯谜、吃元宵等，象征着团圆和幸福。元宵节也是春节庆祝活动的最后一天。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="元宵节">
+                    </div>
+                </div>
+                <div class="festival" id="dragon-boat-festival">
+                    <div class="festival-info">
+                        <h2>龙抬头</h2>
+                        <div class="festival-date">农历二月初二</div>
+                        <p>龙抬头，又称青龙节，是中国的传统节日之一。这一天，人们会剃头、祭龙、祈福等，象征着新的一年里风调雨顺、五谷丰登。龙抬头的习俗源于古代对龙的崇拜。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="龙抬头">
+                    </div>
+                </div>
+                <div class="festival" id="qingming-festival">
+                    <div class="festival-info">
+                        <h2>清明节</h2>
+                        <div class="festival-date">公历4月4-6日</div>
+                        <p>清明节，是中国的传统节日之一，也是二十四节气之一。清明节的主要活动包括扫墓祭祖、踏青郊游等，象征着对逝去亲人的思念和对生命的热爱。清明节的习俗源于古代的寒食节。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="清明节">
+                    </div>
+                </div>
+                <div class="festival" id="dragon-boat-festival">
+                    <div class="festival-info">
+                        <h2>端午节</h2>
+                        <div class="festival-date">农历五月初五</div>
+                        <p>端午节，是中国的传统节日之一，纪念爱国诗人屈原。端午节的主要活动包括赛龙舟、吃粽子、挂艾草等，象征着驱邪避灾、祈求平安。端午节的习俗源于古代的龙图腾崇拜。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="端午节">
+                    </div>
+                </div>
+                <div class="festival" id="qixi-festival">
+                    <div class="festival-info">
+                        <h2>七夕节</h2>
+                        <div class="festival-date">农历七月初七</div>
+                        <p>七夕节，又称乞巧节、七姐节等，是中国的传统节日之一。七夕节源于牛郎织女的传说，象征着爱情和美好。七夕节的主要活动包括乞巧、穿针引线、吃巧果等，象征着对美好生活的向往。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="七夕节">
+                    </div>
+                </div>
+                <div class="festival" id="mid-autumn-festival">
+                    <div class="festival-info">
+                        <h2>中秋节</h2>
+                        <div class="festival-date">农历八月十五</div>
+                        <p>中秋节，是中国的传统节日之一，象征着团圆和丰收。中秋节的主要活动包括赏月、吃月饼、赏桂花等，象征着对家人的思念和对美好生活的向往。中秋节的习俗源于古代的祭月活动。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="中秋节">
+                    </div>
+                </div>
+                <div class="festival" id="double-ninth-festival">
+                    <div class="festival-info">
+                        <h2>重阳节</h2>
+                        <div class="festival-date">农历九月初九</div>
+                        <p>重阳节，又称登高节、茱萸节等，是中国的传统节日之一。重阳节的主要活动包括登高、插茱萸、饮菊花酒等，象征着驱邪避灾、祈求平安。重阳节的习俗源于古代的祭祀活动。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="重阳节">
+                    </div>
+                </div>
+                <div class="festival" id="winter-solstice-festival">
+                    <div class="festival-info">
+                        <h2>冬至</h2>
+                        <div class="festival-date">公历12月21-23日</div>
+                        <p>冬至，是中国的传统节日之一，也是二十四节气之一。冬至的主要活动包括吃饺子、喝羊肉汤、祭祖等，象征着团圆和温暖。冬至的习俗源于古代的祭天活动。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="冬至">
+                    </div>
+                </div>
+                <div class="festival" id="laba-festival">
+                    <div class="festival-info">
+                        <h2>腊八节</h2>
+                        <div class="festival-date">农历十二月初八</div>
+                        <p>腊八节，是中国的传统节日之一，主要活动包括喝腊八粥、祭祖等，象征着祈福和感恩。腊八节的习俗源于古代的祭祀活动。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="腊八节">
+                    </div>
+                </div>
+                <div class="festival" id="xiaonian">
+                    <div class="festival-info">
+                        <h2>小年</h2>
+                        <div class="festival-date">农历腊月廿三或廿四</div>
+                        <p>小年，是中国的传统节日之一，标志着春节庆祝活动的开始。小年的主要活动包括祭灶、扫尘、贴春联等，象征着辞旧迎新、祈福平安。小年的习俗源于古代的祭灶活动。</p>
+                    </div>
+                    <div class="festival-image">
+                        <img src="https://via.placeholder.com/400x250" alt="小年">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 平滑滚动到节日位置
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <script src="../js/submenu.js"></script>
+
+</body>
+
+</html>

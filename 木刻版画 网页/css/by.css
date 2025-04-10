@@ -1,0 +1,108 @@
+        :root {
+            --primary-color: #8B0000; /* 朱砂红 */
+            --secondary-color: #2F4F4F; /* 青石色 */
+            --light-bg: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '微软雅黑', sans-serif;
+        }
+
+        body {
+           background-color: #F8F5F0
+        }
+
+        /* 导航栏 */
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 主内容区 */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+            margin-top: 8rem;
+        }
+
+        .guide-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .guide-header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-family: '华文楷体', serif;
+        }
+
+        /* 指南卡片 */
+        .guide-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        .card-content {
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .tip-box {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        /* 图文混排 */
+        .img-section {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .guide-img {
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .img-section {
+                flex-direction: column;
+            }
+            .guide-img {
+                width: 100%;
+            }
+        }
+
+        /* 装饰元素 */
+        .deco-line {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+            margin: 2rem 0;
+        }
