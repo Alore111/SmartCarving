@@ -35,7 +35,7 @@
             <i class="fab fa-bilibili"></i>
         </a>
 
-        <a href="javascript:void(0);" class="social-icon">
+        <a href="javascript:void(0);" class="social-icon" id="xiaohongshuBtn">
             <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" class="icon-xhs">
                 <path
                         fill="currentColor"
@@ -114,7 +114,7 @@
 <div class="section home4">
     <div class="row">
         <div class="col">
-            <div class="box">
+            <div class="box" id="dongtai_box">
                 <div class="title">
                     <div class='h30'>
                         <div class="tb"></div> <!-- 新增图标容器 -->
@@ -124,8 +124,8 @@
                         <div><a href="/news"> 更多 </a></div>
                     </div>
                 </div>
-                <div edit_params="category_id%3D9%26tabs%3D1%26width%3D440%26height%3D248%26pagesize%3D1">
-                    <div class="img" style="background-image: url(/Uploads/Picture/2024/12/12/s675a97aab0555.jpg);">
+                <div id="dongtai_box_cover">
+                    <div class="img" style="background-image: url();">
                         <a title="“春节——中国人庆祝传统新年的社会实践”列入人类非物质文化遗产代表作名录" class="link"
                            href="/news_details/29429.html"
                            target="_blank">
@@ -136,7 +136,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="ul1" edit_params="category_id%3D9%26pagesize%3D5">
+                <div class="ul1" id="dongtai_box_list">
                     <div class="li">
                         <div class="date">2025.03.18</div>
                         <div class="h16"><a title="民族的特色，很古朴也很时尚" href="/news_details/29815.html"
@@ -511,6 +511,7 @@
 
 <script src="js/pop.js"></script>
 <script src="js/submenu.js"></script>
+<script type="module" src="js/api_index.js"></script>
 
 
 </body>

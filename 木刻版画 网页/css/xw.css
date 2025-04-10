@@ -81,18 +81,17 @@
     color: #fff;
 }
 
-.home4 .img .link:hover {
-    color: #fff !important;
-    ;
+.home4 .img .link:hover .h16 {
+    color: #ffe3e3 ;
 }
 
 .home4 .img .h16 {
     position: absolute;
+    color: #fff;
     left: 0;
     right: 0;
     bottom: 0;
     padding: 20px;
-    background: url(../image/opacity-b60.png);/* 文字底图 */
     text-align: left;
 }
 
