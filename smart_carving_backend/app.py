@@ -44,4 +44,4 @@ def add_dataset_item(dataset_name):
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True, port=3398)
+    app.run(debug=True, port=3396)
