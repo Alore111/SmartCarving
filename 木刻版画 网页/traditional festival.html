@@ -62,9 +62,9 @@
             padding: 20px 10px;
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            position: absolute;
-            left: -200px;
-            top: 0;
+            position: fixed;
+            left: 1500px;
+            top: 20%;
             z-index: 90;
             overflow-y: auto;
             max-height: calc(100vh - 100px);
@@ -72,9 +72,6 @@
             transition: left 0.3s ease;
         }
 
-        .sidebar:hover {
-            left: 0;
-        }
 
         .sidebar h3 {
             font-size: 18px;
@@ -112,7 +109,7 @@
         .content {
             flex: 1;
             padding: 20px;
-            overflow-y: auto;
+
             max-height: calc(100vh - 40px);
         }
 
@@ -234,13 +231,10 @@
             </div>
 
             <div class="dropdown">
-                <a class="nav-link">服务</a>
-                <ul class="submenu">
-                    <li><a class="nav-link" href="">🛠️ 工具包下载</a></li>
+                <a class="nav-link">导航</a>
+                <ul class="submenu"> <!-- 子菜单列表 -->
                     <li><a class="nav-link" href="fw/map.html">🗺️ 重庆文旅地图</a></li>
-                    <li><a class="nav-link" href="">📚 学习资料库</a></li>
-                    <li><a class="nav-link" href="">🎨 模板与素材 </a></li>
-                    <li><a class="nav-link" href="">🎉 活动资源 </a></li>
+                    <li><a class="nav-link" href="">👣打卡足迹 </a></li>
                 </ul>
             </div>
 

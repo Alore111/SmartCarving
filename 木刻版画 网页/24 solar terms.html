@@ -75,8 +75,9 @@
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
-            position: relative;
-            z-index: 90;
+            position: fixed;
+            left: 1500px;
+            top: 10%;
             overflow-y: auto;
             max-height: calc(100vh - 100px);
             border: 2px solid #d9c7a7;
@@ -122,7 +123,7 @@
         .content {
             flex: 1;
             padding: 20px;
-            overflow-y: auto;
+
             max-height: calc(100vh - 40px);
         }
 
@@ -242,13 +243,10 @@
         </div>
 
         <div class="dropdown">
-            <a class="nav-link">服务</a>
-            <ul class="submenu">
-                <li><a class="nav-link" href="">🛠️ 工具包下载</a></li>
+            <a class="nav-link">导航</a>
+            <ul class="submenu"> <!-- 子菜单列表 -->
                 <li><a class="nav-link" href="fw/map.html">🗺️ 重庆文旅地图</a></li>
-                <li><a class="nav-link" href="">📚 学习资料库</a></li>
-                <li><a class="nav-link" href="">🎨 模板与素材 </a></li>
-                <li><a class="nav-link" href="">🎉 活动资源 </a></li>
+                <li><a class="nav-link" href="">👣打卡足迹 </a></li>
             </ul>
         </div>
 
@@ -284,7 +282,6 @@
             <p>探索中国传统智慧，感受自然节律之美</p>
         </div>
         <div class="main-content">
-            <button class="nav-toggle">☰</button>
             <div class="sidebar" id="sidebar">
                 <h3>节气导航</h3>
                 <ul>
@@ -322,7 +319,7 @@
                         <p>立春，是二十四节气中的第一个节气，标志着春季的开始。立春时节，大地开始解冻，气温逐渐回升，万物复苏。古代人们会举行迎春仪式，祈求新的一年风调雨顺，五谷丰登。</p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="立春">
+                        <img src="img/cqyx/二十四节气/立春.png" alt="立春">
                     </div>
                 </div>
                 <div class="solar-term" id="rain-water">
@@ -332,7 +329,7 @@
                         <p>雨水，是二十四节气中的第二个节气，表示气温回升，冰雪融化，降水增多。雨水时节，春雨滋润大地，万物开始生长。古代农谚有云：“雨水时节，雨水贵如油”，强调了雨水对农业生产的重要性。</p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="雨水">
+                        <img src="img/cqyx/二十四节气/雨水.png" alt="雨水">
                     </div>
                 </div>
                 <div class="solar-term" id="insects-awaken">
@@ -342,7 +339,7 @@
                         <p>惊蛰，是二十四节气中的第三个节气，意味着春雷初响，惊醒了冬眠的昆虫。惊蛰时节，气温明显回升，春耕开始。古代人们认为惊蛰是万物复苏的象征，农事活动逐渐繁忙起来。</p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="惊蛰">
+                        <img src="img/cqyx/二十四节气/惊蛰.png" alt="惊蛰">
                     </div>
                 </div>
                 <div class="solar-term" id="spring-equinox">
@@ -352,7 +349,7 @@
                         <p>春分，是二十四节气中的第四个节气，表示昼夜平分，春分过后，白天逐渐变长。春分时节，气温适宜，百花盛开，是踏青赏花的好时节。古代人们会在春分时节祭拜太阳神，祈求丰收。</p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="春分">
+                        <img src="img/cqyx/二十四节气/春分.png" alt="春分">
                     </div>
                 </div>
                 <div class="solar-term" id="clear-and-bright">
@@ -363,7 +360,7 @@
                         </p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="清明">
+                        <img src="img/cqyx/二十四节气/清明.png" alt="清明">
                     </div>
                 </div>
                 <div class="solar-term" id="grain-rain">
@@ -374,7 +371,7 @@
                         </p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="谷雨">
+                        <img src="img/cqyx/二十四节气" alt="谷雨">
                     </div>
                 </div>
                 <div class="solar-term" id="summer-beginning">
@@ -384,7 +381,7 @@
                         <p>立夏，是二十四节气中的第七个节气，标志着夏季的开始。立夏时节，气温升高，万物繁茂。古代人们会举行迎夏仪式，祈求夏季丰收。立夏还有称体重、吃立夏蛋等传统习俗。</p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="立夏">
+                        <img src="img/cqyx/二十四节气" alt="立夏">
                     </div>
                 </div>
                 <div class="solar-term" id="grain-full">
@@ -395,7 +392,7 @@
                         </p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="小满">
+                        <img src="img/cqyx/二十四节气" alt="小满">
                     </div>
                 </div>
                 <div class="solar-term" id="grain-in-ear">
@@ -406,7 +403,7 @@
                         </p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="芒种">
+                        <img src="img/cqyx/二十四节气" alt="芒种">
                     </div>
                 </div>
                 <div class="solar-term" id="summer-solstice">
@@ -416,7 +413,7 @@
                         <p>夏至，是二十四节气中的第十个节气，表示一年中白昼最长、黑夜最短的一天。夏至时节，气温升高，降水增多，是农作物生长的关键时期。古代人们会在夏至时节祭拜天地，祈求丰收。</p>
                     </div>
                     <div class="solar-term-image">
-                        <img src="https://via.placeholder.com/400x250" alt="夏至">
+                        <img src="img/cqyx/二十四节气" alt="夏至">
                     </div>
                 </div>
                 <div class="solar-term" id="minor-heat">
@@ -571,19 +568,6 @@
     </div>
 
     <script>
-        // 导航栏显示/隐藏
-        const navToggle = document.querySelector('.nav-toggle');
-        const sidebar = document.getElementById('sidebar');
-        let isSidebarVisible = true;
-
-        navToggle.addEventListener('click', function () {
-            if (isSidebarVisible) {
-                sidebar.classList.add('hidden');
-            } else {
-                sidebar.classList.remove('hidden');
-            }
-            isSidebarVisible = !isSidebarVisible;
-        });
 
         // 平滑滚动到节气位置
         document.querySelectorAll('.sidebar a').forEach(link => {

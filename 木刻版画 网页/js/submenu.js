@@ -10,10 +10,10 @@ document.querySelectorAll('.dropdown').forEach(item => {
 
     // 鼠标离开父菜单（包括子菜单）
     item.addEventListener('mouseleave', (e) => {
-        // 延迟150ms关闭，给鼠标移动到子菜单的时间
+        // 延迟100ms关闭，给鼠标移动到子菜单的时间
         timer = setTimeout(() => {
             item.querySelector('.submenu').classList.remove('active');
-        }, 150);
+        }, 100);
     });
 
     // 子菜单自身悬浮时保持激活

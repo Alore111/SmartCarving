@@ -1,5 +1,5 @@
-// const API_BASE = 'http://127.0.0.1:3398/api/dataset'
-const API_BASE = 'https://carving-server.t.2ndtool.top/api/dataset'
+const API_BASE = 'http://127.0.0.1:3396/api/dataset'
+// const API_BASE = 'https://carving-server.t.2ndtool.top/api/dataset'
 
 export async function fetchAll(dataset, type = '') {
     const url = type ? `${API_BASE}/${dataset}?type=${type}` : `${API_BASE}/${dataset}`

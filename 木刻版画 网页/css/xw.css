@@ -92,6 +92,7 @@
     right: 0;
     bottom: 0;
     padding: 20px;
+    background: url(../image/opacity-b60.png);/* 文字底图 */
     text-align: left;
 }
 
