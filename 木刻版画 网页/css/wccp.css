@@ -85,6 +85,15 @@ body {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+.nav-listwc {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    text-align: center;
+    padding-top: 10.5rem;
+}
+
 .nav-link::after {
     content: '';
     position: absolute;

@@ -317,7 +317,8 @@ body {
 .masonry-grid {
     max-width: 1200px;
     margin: 0 auto;
-    columns: 3;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
     column-gap: 30px;
 }
 

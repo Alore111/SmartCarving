@@ -10,480 +10,538 @@
 
 </head>
 
+<style>
+    body {
+        background-color: rgb(205, 223, 208);
+    }
+</style>
+
 <body>
-    <!-- 导航栏 -->
-    <nav class="nav-bar">
-        <div class="logo">
-            <img src="img/tb.jpg" alt="Logo">
-            <span class="logo-text">山城智刻·印迹渝州<br>
+<!-- 导航栏 -->
+<nav class="nav-bar">
+    <div class="logo">
+        <img src="img/tb.jpg" alt="Logo">
+        <span class="logo-text">山城智刻·印迹渝州<br>
                 <span class="logo-en">SmartCarving·Imprint Chongqing</span>
             </span>
+    </div>
+
+
+    <div class="social-links">
+        <a class="nav-link" href="index.html">首页</a>
+
+        <div class="dropdown">
+            <a class="nav-link">资源</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="video.html">视频</a></li>
+                <li><a class="nav-link" href="pic/pic.html">图片</a></li>
+            </ul>
         </div>
 
-
-        <div class="social-links">
-            <a class="nav-link" href="index.html">首页</a>
-
-            <div class="dropdown">
-                <a class="nav-link">资源</a>
-                <ul class="submenu">
-                    <li><a class="nav-link" href="video.html">视频</a></li>
-                    <li><a class="nav-link" href="pic/pic.html">图片</a></li>
-                </ul>
-            </div>
-
-            <div class="dropdown">
-                <a class="nav-link">百科</a>
-                <ul class="submenu">
-                    <li><a class="nav-link" href="lishi.html">版画艺境</a></li>
-                    <li><a class="nav-link" href="24 solar terms.html">传统文化拾遗</a></li>
-                    <li><a class="nav-link" href="">重庆地名寻踪</a></li>
-                </ul>
-            </div>
-
-            <div class="dropdown">
-                <a class="nav-link">导航</a>
-                <ul class="submenu"> <!-- 子菜单列表 -->
-                    <li><a class="nav-link" href="fw/map.html">🗺️ 重庆文旅地图</a></li>
-                    <li><a class="nav-link" href="">👣打卡足迹 </a></li>
-                </ul>
-            </div>
-
-            <div class="dropdown">
-                <a class="nav-link">文创</a>
-                <ul class="submenu">
-                    <li><a class="nav-link" href="wc/wccp.html">文创产品</a></li>
-                    <li><a class="nav-link" href="wc/cyzj.html">创意征集</a></li>
-                </ul>
-            </div>
+        <div class="dropdown">
+            <a class="nav-link">百科</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="lishi.html">版画艺境</a></li>
+                <li><a class="nav-link" href="24solarterms.html">传统文化拾遗</a></li>
+                <li><a class="nav-link" href="">重庆地名寻踪</a></li>
+            </ul>
         </div>
 
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
+        <div class="dropdown">
+            <a class="nav-link">导航</a>
+            <ul class="submenu"> <!-- 子菜单列表 -->
+                <li><a class="nav-link" href="fw/map.html">🗺️ 重庆文旅地图</a></li>
+                <li><a class="nav-link" href="">👣打卡足迹 </a></li>
+            </ul>
         </div>
-    </nav>
 
-
-    <!-- 新增智能导航 -->
-    <nav class="smart-nav">
-        <div class="nav-trigger">
-            <i class="fas fa-chevron-left"></i>
-        </div>
-        <div class="nav-list">
-            <div class="nav-item" data-target="jiefangbei"><a class="nav-link" href="">解放碑时空</a></div>
-            <div class="nav-item" data-target="hongya"><a class="nav-link" href="">洪崖幻境</a></div>
-            <div class="nav-item" data-target="dazu"><a class="nav-link" href="">大足石刻</a></div>
-            <div class="nav-item" data-target="ciqikou"><a class="nav-link" href="">磁器口记忆</a></div>
-            <div class="nav-item" data-target="juyuan"><a class="nav-link" href="">重庆大剧院</a></div>
-            <div class="nav-item" data-target="shibati"><a class="nav-link" href="">十八梯</a></div>
-            <div class="nav-item" data-target="chuanwai"><a class="nav-link" href="">川外</a></div>
-        </div>
-    </nav>
-
-
-    <div class="video-container">
-        <div class="video-group">
-            <!-- 解放碑 -->
-            <div class="bilingual-row" id="jiefangbei">
-                <!-- 中文版 -->
-                <div class="video-card">
-                    <div class="video-badge">中文版</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX/?spm_id_from=333.1387.homepage.video_card.click&vd_source=a7fda5547c708f0f36c903614d689a52">
-                        <img src="img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">解放碑时空漫游</h3>
-                        <p class="video-desc">重庆母城的时代记忆，见证抗战烽火与城市新生。这座见证历史的丰碑，承载着重庆人的集体记忆。</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            查看详情
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 英文版 -->
-                <div class="video-card">
-                    <div class="video-badge">English</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-
-                    <div class="video-content">
-                        <h3 class="video-title">Liberation Monument Odyssey</h3>
-                        <p class="video-desc">Time-honored witness of Chongqing's history, embodying the city's
-                            resilience through war and rebirth.</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            View Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 洪崖洞 -->
-            <div class="bilingual-row" id="hongya">
-                <!-- 中文版 -->
-                <div class="video-card">
-                    <div class="video-badge">中文版</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">洪崖幻境夜未央</h3>
-                        <p class="video-desc">现实版千与千寻，悬崖上的璀璨明珠，巴渝传统建筑与现代灯光的完美融合。</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            查看详情
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 英文版 -->
-                <div class="video-card">
-                    <div class="video-badge">English</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">Hongya Illumination</h3>
-                        <p class="video-desc">A real-life Spirited Away scene where traditional architecture dances with
-                            modern light shows.</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            View Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 大足石刻 -->
-            <div class="bilingual-row" id="dazu">
-                <!-- 中文版 -->
-                <div class="video-card">
-                    <div class="video-badge">中文版</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">大足千年禅刻</h3>
-                        <p class="video-desc">唐宋石窟瑰宝，刻录信仰与艺术的千年对话。佛陀低眉静观岁月，刀锋流转间凝固永恒禅意。</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            查看详情
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 英文版 -->
-                <div class="video-card">
-                    <div class="video-badge">English</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">Dazu Millennial Zen</h3>
-                        <p class="video-desc">Tang-Song dynasties' stone marvels, etching faith and art through
-                            millennia. Serene Buddhas witness time, chiseling eternal Zen into rock.</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            View Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 磁器口 -->
-            <div class="bilingual-row" id="ciqikou">
-                <!-- 中文版 -->
-                <div class="video-card">
-                    <div class="video-badge">中文版</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">磁器口千年窑烟</h3>
-                        <p class="video-desc">明清市井活化石，青石巷飘荡巴渝旧梦。瓷韵茶香浸岁月，一砖一瓦皆山城烟火史。</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            查看详情
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 英文版 -->
-                <div class="video-card">
-                    <div class="video-badge">English</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">CiqiKou Millennial Hustle</h3>
-                        <p class="video-desc"> Ming-Qing streets alive with tales, where porcelain echoes meet
-                            spice-laden air. Cobbled lanes breathe Chongqing's fiery soul.</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            View Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 重庆大剧院 -->
-            <div class="bilingual-row" id="juyuan">
-                <!-- 中文版 -->
-                <div class="video-card">
-                    <div class="video-badge">中文版</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">两江艺境</h3>
-                        <p class="video-desc">双江交汇处的现代奇观，玻璃幕墙折射山城光影。音符与江水共舞，筑就重庆的艺术星辰。</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            查看详情
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 英文版 -->
-                <div class="video-card">
-                    <div class="video-badge">English</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">Liangjiang Artscape</h3>
-                        <p class="video-desc">A modern marvel where two rivers meet, glass facades dance with city
-                            lights. Melodies blend with waves, crafting Chongqing's cultural beacon.</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            View Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- 重庆十八梯 -->
-            <div class="bilingual-row" id="shibati">
-                <!-- 中文版 -->
-                <div class="video-card">
-                    <div class="video-badge">中文版</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">十八梯山城脉</h3>
-                        <p class="video-desc">石阶盘桓旧时光，青瓦叠印老重庆魂。夜色浸染时，梯坎上浮起千年不散的市井烟火。</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            查看详情
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 英文版 -->
-                <div class="video-card">
-                    <div class="video-badge">English</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">Shibati Mountain Soul</h3>
-                        <p class="video-desc">Stone steps coil through history, tiles echoing old Chongqing. When night
-                            falls, lanterns ignite undying streetlife along ancient slopes.</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            View Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 川外 -->
-            <div class="bilingual-row" id="chuanwai">
-                <!-- 中文版 -->
-                <div class="video-card">
-                    <div class="video-badge">中文版</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">四川外国语大学</h3>
-                        <p class="video-desc">歌乐山下的语言方舟，书页间流转五洲星芒。培育对话世界的星光，砖瓦皆刻满异邦诗行。</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            查看详情
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 英文版 -->
-                <div class="video-card">
-                    <div class="video-badge">English</div>
-                    <a
-                        href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2">
-                        <img src=" img/tb.jpg" alt="jiefangbei " width="640" height="360">
-                    </a>
-
-                    <div class="video-content">
-                        <h3 class="video-title">SISU</h3>
-                        <p class="video-desc">A linguistic ark At the foot of Mount Gele, where global voices spark. Pages
-                            bloom with foreign verse, bricks echo polyglot universes.</p>
-                        <a href="#" class="detail-btn">
-                            <i class="fas fa-info-circle"></i>
-                            View Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <div class="dropdown">
+            <a class="nav-link">文创</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="wc/wccp.html">文创产品</a></li>
+                <li><a class="nav-link" href="wc/cyzj.html">创意征集</a></li>
+            </ul>
         </div>
     </div>
 
-    <script>
-        // 增强型交互
-        // 卡片悬停动画
-        document.querySelectorAll('.video-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.transform = `
-                    perspective(1000px)
-                    rotateX(${(y - rect.height / 2) / 15}deg)
-                    rotateY(${-(x - rect.width / 2) / 15}deg)
-                `;
-            });
+    <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
 
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'none';
-            });
+
+<!-- 新增智能导航 -->
+<nav class="smart-nav">
+    <div class="nav-trigger">
+        <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="nav-listvi">
+        <div class="nav-item" data-target="jiefangbei"><a class="nav-link" href="">解放碑时空</a></div>
+        <div class="nav-item" data-target="hongya"><a class="nav-link" href="">洪崖幻境</a></div>
+        <div class="nav-item" data-target="dazu"><a class="nav-link" href="">大足石刻</a></div>
+        <div class="nav-item" data-target="ciqikou"><a class="nav-link" href="">磁器口记忆</a></div>
+        <div class="nav-item" data-target="juyuan"><a class="nav-link" href="">重庆大剧院</a></div>
+        <div class="nav-item" data-target="shibati"><a class="nav-link" href="">十八梯</a></div>
+        <div class="nav-item" data-target="chuanwai"><a class="nav-link" href="">川外</a></div>
+    </div>
+</nav>
+
+
+<div class="video-container">
+    <div class="video-group">
+        <!-- 解放碑 -->
+        <div class="bilingual-row" id="jiefangbei">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1rAdbYfEKX&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+
+                <div class="video-content">
+                    <h3 class="video-title">解放碑时空漫游</h3>
+                    <p class="video-desc">
+                        重庆母城的时代记忆，见证抗战烽火与城市新生。这座见证历史的丰碑，承载着重庆人的集体记忆。</p>
+                    <a href="https://www.bilibili.com/video/BV1rAdbYfEKX/?spm_id_from=333.1387.homepage.video_card.click&vd_source=a7fda5547c708f0f36c903614d689a52"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1rAdbYfEKX&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Liberation Monument Odyssey</h3>
+                    <p class="video-desc">Time-honored witness of Chongqing's history, embodying the city's
+                        resilience through war and rebirth.</p>
+                    <a href="https://www.bilibili.com/video/BV1rAdbYfEKX?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 洪崖洞 -->
+        <div class="bilingual-row" id="hongya">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1yFdhYzErQ&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">洪崖幻境夜未央</h3>
+                    <p class="video-desc">现实版千与千寻，悬崖上的璀璨明珠，巴渝传统建筑与现代灯光的完美融合。</p>
+                    <a href="https://www.bilibili.com/video/BV1yFdhYzErQ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1yFdhYzErQ&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Hongya Illumination</h3>
+                    <p class="video-desc">A real-life Spirited Away scene where traditional architecture dances with
+                        modern light shows.</p>
+                    <a href="https://www.bilibili.com/video/BV1yFdhYzErQ?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 大足石刻 -->
+        <div class="bilingual-row" id="dazu">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1rAdbYfEKX&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">大足千年禅刻</h3>
+                    <p class="video-desc">
+                        唐宋石窟瑰宝，刻录信仰与艺术的千年对话。佛陀低眉静观岁月，刀锋流转间凝固永恒禅意。</p>
+                    <a href="" class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1rAdbYfEKX&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Dazu Millennial Zen</h3>
+                    <p class="video-desc">Tang-Song dynasties' stone marvels, etching faith and art through
+                        millennia. Serene Buddhas witness time, chiseling eternal Zen into rock.</p>
+                    <a href="" class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 磁器口 -->
+        <div class="bilingual-row" id="ciqikou">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1rAdbYfEKX&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">磁器口千年窑烟</h3>
+                    <p class="video-desc">明清市井活化石，青石巷飘荡巴渝旧梦。瓷韵茶香浸岁月，一砖一瓦皆山城烟火史。</p>
+                    <a href="" class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1rAdbYfEKX&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">CiqiKou Millennial Hustle</h3>
+                    <p class="video-desc"> Ming-Qing streets alive with tales, where porcelain echoes meet
+                        spice-laden air. Cobbled lanes breathe Chongqing's fiery soul.</p>
+                    <a href="#" class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 重庆大剧院 -->
+        <div class="bilingual-row" id="juyuan">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1cFdLYsExR&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">两江艺境</h3>
+                    <p class="video-desc">
+                        双江交汇处的现代奇观，玻璃幕墙折射山城光影。音符与江水共舞，筑就重庆的艺术星辰。</p>
+                    <a href="https://www.bilibili.com/video/BV1cFdLYsExR/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1cFdLYsExR&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Liangjiang Artscape</h3>
+                    <p class="video-desc">A modern marvel where two rivers meet, glass facades dance with city
+                        lights. Melodies blend with waves, crafting Chongqing's cultural beacon.</p>
+                    <a href="https://www.bilibili.com/video/BV1cFdLYsExR?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 重庆十八梯 -->
+        <div class="bilingual-row" id="shibati">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1wRd5YZEQi&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">十八梯山城脉</h3>
+                    <p class="video-desc">石阶盘桓旧时光，青瓦叠印老重庆魂。夜色浸染时，梯坎上浮起千年不散的市井烟火。</p>
+                    <a href="https://www.bilibili.com/video/BV1wRd5YZEQi/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1wRd5YZEQi&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Shibati Mountain Soul</h3>
+                    <p class="video-desc">Stone steps coil through history, tiles echoing old Chongqing. When night
+                        falls, lanterns ignite undying streetlife along ancient slopes.</p>
+                    <a href="https://www.bilibili.com/video/BV1wRd5YZEQi?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 川外 -->
+        <div class="bilingual-row" id="chuanwai">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1nMdhYNEhQ&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">四川外国语大学</h3>
+                    <p class="video-desc">
+                        歌乐山下的语言方舟，书页间流转五洲星芒。培育对话世界的星光，砖瓦皆刻满异邦诗行。</p>
+                    <a href="https://www.bilibili.com/video/BV1nMdhYNEhQ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1nMdhYNEhQ&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">SISU</h3>
+                    <p class="video-desc">A linguistic ark At the foot of Mount Gele, where global voices spark. Pages
+                        bloom with foreign verse, bricks echo polyglot universes.</p>
+                    <a href="https://www.bilibili.com/video/BV1nMdhYNEhQ?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<!-- 在video.html的<script>部分替换为以下优化代码 -->
+<script>
+    // 合并智能导航交互逻辑
+    document.addEventListener('DOMContentLoaded', () => {
+        const smartNav = document.querySelector('.smart-nav');
+        const navItems = document.querySelectorAll('.nav-item');
+        const headerHeight = document.querySelector('.nav-bar').offsetHeight;
+
+        // 智能导航显隐逻辑
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth < 768) return; // 移动端禁用
+
+            const activationZone = 50;
+            const hideZone = 300;
+
+            if (e.clientX < activationZone) {
+                smartNav.style.left = '-10px';
+            } else if (e.clientX > hideZone) {
+                smartNav.style.left = '-260px';
+            }
         });
 
-        // 语言切换功能
-        const langBtns = document.querySelectorAll('.lang-btn');
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelector('.lang-btn.active')?.classList.remove('active');
-                btn.classList.add('active');
-                const lang = btn.dataset.lang;
-                document.querySelectorAll('.video-card').forEach(card => {
-                    card.style.display = lang === 'all' ? 'block' :
-                        card.querySelector('.video-badge').textContent === lang ? 'block' : 'none';
-                });
-            });
-        });
-    </script>
+        // 统一导航点击处理
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = item.dataset.target;
+                const targetElement = document.getElementById(targetId);
 
+                if (targetElement) {
+                    const targetPosition = targetElement.offsetTop - headerHeight;
 
-    <!-- 在video.html的<script>部分替换为以下优化代码 -->
-    <script>
-        // 合并智能导航交互逻辑
-        document.addEventListener('DOMContentLoaded', () => {
-            const smartNav = document.querySelector('.smart-nav');
-            const navItems = document.querySelectorAll('.nav-item');
-            const headerHeight = document.querySelector('.nav-bar').offsetHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: "smooth"
+                    });
 
-            // 智能导航显隐逻辑
-            document.addEventListener('mousemove', (e) => {
-                if (window.innerWidth < 768) return; // 移动端禁用
-
-                const activationZone = 50;
-                const hideZone = 300;
-
-                if (e.clientX < activationZone) {
-                    smartNav.style.left = '-10px';
-                } else if (e.clientX > hideZone) {
-                    smartNav.style.left = '-260px';
+                    // 更新激活状态
+                    navItems.forEach(n => n.classList.remove('active'));
+                    item.classList.add('active');
                 }
             });
+        });
 
-            // 统一导航点击处理
-            navItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = item.dataset.target;
-                    const targetElement = document.getElementById(targetId);
+        // 优化滚动高亮逻辑
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.bilingual-row');
+            const scrollPosition = window.scrollY + headerHeight + 50;
 
-                    if (targetElement) {
-                        const targetPosition = targetElement.offsetTop - headerHeight;
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
 
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: "smooth"
-                        });
-
-                        // 更新激活状态
-                        navItems.forEach(n => n.classList.remove('active'));
-                        item.classList.add('active');
-                    }
-                });
-            });
-
-            // 优化滚动高亮逻辑
-            window.addEventListener('scroll', () => {
-                const sections = document.querySelectorAll('.bilingual-row');
-                const scrollPosition = window.scrollY + headerHeight + 50;
-
-                sections.forEach((section, index) => {
-                    const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        navItems.forEach(n => n.classList.remove('active'));
-                        navItems[index].classList.add('active');
-                    }
-                });
-            });
-
-            // 移动端菜单切换
-            document.querySelector('.menu-toggle').addEventListener('click', () => {
-                document.querySelector('.social-links').classList.toggle('active');
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    navItems.forEach(n => n.classList.remove('active'));
+                    navItems[index].classList.add('active');
+                }
             });
         });
-    </script>
 
-    <script src="js/submenu.js"></script>
+        // 移动端菜单切换
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.social-links').classList.toggle('active');
+        });
+    });
+</script>
+
+<script src="js/submenu.js"></script>
 
 </body>
 
