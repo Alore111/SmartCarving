@@ -2,55 +2,34 @@
   {
     "id": "1",
     "type": "cover",
-    "title": "“春节——中国人庆祝传统新年的社会实践”列入人类非物质文化遗产代表作名录",
-    "cover_img": "https://www.news.cn/20241204/b669269addc04694987284af8eac736c/20241204b669269addc04694987284af8eac736c_4e7e67f24ac6466f83d0ed93e461da2c.JPG",
-    "content": "中国申报的“春节——中国人庆祝传统新年的社会实践”4日在巴拉圭亚松森举行的联合国教科文组织保护非物质文化遗产政府间委员会第19届常会上通过评审，列入联合国教科文组织人类非物质文化遗产代表作名录。至此，中国共有44个项目列入联合国教科文组织非物质文化遗产名录、名册，总数居世界第一。",
-    "url": "https://www.gov.cn/yaowen/liebiao/202412/content_6991015.htm",
+    "title": "非遗课堂——传统文化薪火相传的校园实践",
+    "cover_img": "img/dongtai.jpg",
+    "content": "非遗课堂——传统文化薪火相传的校园实践",
+    "url": "pic/hdjj.html",
     "date": "2024-12-05"
   },
   {
     "id": "2",
     "type": "list",
-    "title": "民族的特色，很古朴也很时尚",
-    "cover_img": "",
+    "title": "“梦校情缘”木刻版画主题工坊圆满落幕！",
     "content": "",
-    "url": "/news_details?id=2",
-    "date": "2025-03-18"
+    "url": "https://mp.weixin.qq.com/s/7x6I0HlA4BCPwOj8kzEt7Q",
+    "date": "2025-03-29"
   },
   {
     "id": "3",
     "type": "list",
-    "title": "“锦绣三月·民族织锦艺术展暨‘锦绣天成’桂琼两省（区）织锦艺术交流展”在广西壮族自治区群众艺术馆开展",
-    "cover_img": "",
+    "title": "非遗进校园｜用新生为古老注入活力",
     "content": "",
-    "url": "/news2_details?id=3",
-    "date": "2025-04-01"
+    "url": "https://mp.weixin.qq.com/s/9G2wTLz0kOJIWQdYVQwS9A",
+    "date": "2025-04-07"
   },
   {
     "id": "4",
     "type": "list",
-    "title": "浙江省“非遗传承薪火行动”培训暨非遗工坊联盟成立仪式举办",
-    "cover_img": "",
+    "title": "非遗进课堂丨木刻版画技艺",
     "content": "",
-    "url": "/news2_details?id=4",
-    "date": "2025-04-01"
-  },
-  {
-    "id": "5",
-    "type": "list",
-    "title": "出台玛纳斯非物质文化遗产保护条例",
-    "cover_img": "",
-    "content": "",
-    "url": "/news2_details?id=5",
-    "date": "2025-03-31"
-  },
-  {
-    "id": "6",
-    "type": "list",
-    "title": "踏访贵州乡村 指引文旅体融合发展方向",
-    "cover_img": "",
-    "content": "",
-    "url": "/news_details?id=6",
-    "date": "2025-03-25"
+    "url": "https://mp.weixin.qq.com/s/TaqUNu_hWmNc7sY0YkwhZA",
+    "date": "2025-04-09"
   }
 ]
