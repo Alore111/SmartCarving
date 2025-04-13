@@ -1,0 +1,141 @@
+{
+  "users": [
+    {
+      "userId": "user_001",
+      "userName": "张三",
+      "tracks": [
+        {
+          "routeId": "route_001",
+          "routeName": "重庆主城经典游",
+          "startTime": "2025-04-13T09:00:00+08:00",
+          "footprints": [
+            {
+              "timestamp": "2025-04-13T09:30:00+08:00",
+              "locationName": "解放碑",
+              "latitude": 29.5623,
+              "longitude": 106.5823,
+              "note": "打卡重庆地标",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "人好多！"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-13T11:00:00+08:00",
+              "locationName": "洪崖洞",
+              "latitude": 29.5611,
+              "longitude": 106.5826,
+              "note": "拍夜景很出片",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "洪崖洞夜景"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "routeId": "route_002",
+          "routeName": "磁器口古镇半日游",
+          "startTime": "2025-04-14T13:00:00+08:00",
+          "footprints": [
+            {
+              "timestamp": "2025-04-14T13:30:00+08:00",
+              "locationName": "磁器口古镇",
+              "latitude": 29.6473,
+              "longitude": 106.4329,
+              "note": "吃了毛血旺",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "街边美食摊"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "userId": "user_002",
+      "userName": "李四",
+      "tracks": [
+        {
+          "routeId": "route_003",
+          "routeName": "武隆仙女山一日游",
+          "startTime": "2025-04-12T07:00:00+08:00",
+          "footprints": [
+            {
+              "timestamp": "2025-04-12T09:00:00+08:00",
+              "locationName": "仙女山森林公园",
+              "latitude": 29.4272,
+              "longitude": 107.7545,
+              "note": "草原很美，适合骑马",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "骑马小分队"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-12T13:30:00+08:00",
+              "locationName": "天生三桥",
+              "latitude": 29.3941,
+              "longitude": 107.7033,
+              "note": "电影《满城尽带黄金甲》取景地",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "壮观的天坑"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "userId": "user_003",
+      "userName": "王五",
+      "tracks": [
+        {
+          "routeId": "route_004",
+          "routeName": "重庆周边自驾游",
+          "startTime": "2025-04-10T08:00:00+08:00",
+          "footprints": [
+            {
+              "timestamp": "2025-04-10T10:00:00+08:00",
+              "locationName": "丰都鬼城",
+              "latitude": 29.8695,
+              "longitude": 107.7381,
+              "note": "很有民俗文化气息",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "鬼城入口"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-10T15:00:00+08:00",
+              "locationName": "长寿湖",
+              "latitude": 29.8549,
+              "longitude": 107.2231,
+              "note": "湖边骑行，风景不错",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "湖面倒影美如画"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

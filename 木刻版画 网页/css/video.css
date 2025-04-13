@@ -41,7 +41,7 @@ body {
 .nav-bar1 {
     top:77px;
     justify-content: center;
-    justify-items: center; 
+    justify-items: center;
 }
 
 .logo {
@@ -251,7 +251,7 @@ body {
 
     .chat-window {
         width: 300px;
-        height: 400px;
+        height: 0;
     }
 }
 

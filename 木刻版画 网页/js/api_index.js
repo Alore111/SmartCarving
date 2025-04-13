@@ -2,6 +2,7 @@ import {fetchAll} from "./request.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     init_dongtai()
+    init_luntan()
 })
 
 const init_dongtai = async () => {
@@ -39,6 +40,23 @@ const init_dongtai = async () => {
         </div>
     `
     })
+}
 
-
+const init_luntan = async () => {
+    let luntan_box_list = document.getElementById('luntan_box_list')
+    luntan_box_list.innerHTML = ''
+    let luntan_list_data = await fetchAll('luntan', 'list')
+    luntan_list_data.forEach((item, index) => {
+        luntan_box_list.innerHTML += `
+            <div class="li">
+                <div class="h16"><a title="${item.title}"
+                                    href="${item.url}"
+                                    target="_blank">${item.title}</a>
+                </div>
+                <div class="p">
+                    ${item.content}
+                </div>
+                <div class="date">${item.date}</div>
+            </div>`
+    })
 }

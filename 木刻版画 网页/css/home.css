@@ -208,7 +208,7 @@ body {
 /* 主视觉区优化 */
 .hero {
     height: 100vh;
-    
+
     display: flex;
     align-items: center;
     position: relative;
@@ -298,16 +298,19 @@ body {
 }
 
 .chat-window {
-    display: none;
     background: white;
     width: 350px;
-    height: 50vh;
+    height: 0;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     position: absolute;
     bottom: 70px;
     right: 0;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+.chat-window.active {
+    height: 70vh;
 }
 
 .chat-header {
@@ -576,8 +579,9 @@ footer {
 
     .chat-window {
         width: 300px;
-        height: 40vh;
+        height: 0;
     }
+
 }
 
 /* 下拉菜单样式 */

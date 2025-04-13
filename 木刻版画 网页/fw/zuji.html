@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重庆旅游线路管理</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/pic/dh.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SimSun', 'STSong', serif;
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 5rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid #8b4513;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #8b4513;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .map-container {
+            display: flex;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .map-container {
+                flex-direction: column;
+            }
+        }
+
+        .map {
+            flex: 7;
+            height: 600px;
+            background-color: #e9e9e9;
+            position: relative;
+            display: flex;
+        }
+
+        .map img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-panel {
+            width: 280px;
+            background-color: #fdfaf6;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-family: "Helvetica Neue", sans-serif;
+        }
+
+        .info-panel h2 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #5a3211;
+            border-bottom: 2px solid #e6dcd2;
+            padding-bottom: 8px;
+        }
+
+        .line-list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+
+        .line-list li {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+
+        .line-list li:hover {
+            background-color: #f1e8e0;
+        }
+
+        .line-list li.active {
+            background-color: #ead6c8;
+            border-left: 4px solid #8B4513;
+        }
+
+        .line-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .route-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #8B4513;
+        }
+
+        .user-name {
+            font-size: 14px;
+            color: #704c2e;
+        }
+
+        .upload-btn {
+            width: 100%;
+            padding: 10px 0;
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .upload-btn:hover {
+            background-color: #6e3610;
+        }
+
+
+        .track-details-panel {
+            width: 0;
+            padding: 0;
+            background-color: #fffaf5;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            font-family: 'Helvetica Neue', sans-serif;
+            overflow-y: auto;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .track-details-panel.active {
+            width: 300px;
+            padding: 16px;
+        }
+
+        .footprint-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footprint-item {
+            margin-bottom: 20px;
+        }
+
+        .photo {
+            margin-top: 8px;
+        }
+
+        .photo img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 4px;
+        }
+
+        .photo-desc {
+            font-size: 13px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="nav-bar">
+    <div class="logo">
+        <img src="../img/tb.jpg" alt="Logo">
+        <span class="logo-text">山城智刻·印迹渝州<br>
+            <span class="logo-en">SmartCarving·Imprint Chongqing</span>
+        </span>
+    </div>
+
+
+    <div class="social-links">
+        <a class="nav-link" href="../index.html">首页</a>
+
+        <div class="dropdown">
+            <a class="nav-link">资源</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="../video.html">视频</a></li>
+                <li><a class="nav-link" href="../pic/pic.html">图片</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <a class="nav-link">百科</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="../lishi.html">版画艺境</a></li>
+                <li><a class="nav-link" href="../24solarterms.html">传统文化拾遗</a></li>
+                <li><a class="nav-link" href="">重庆地名寻踪</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <a class="nav-link">导航</a>
+            <ul class="submenu"> <!-- 子菜单列表 -->
+                <li><a class="nav-link" href="../fw/map.html">🗺️ 重庆文旅地图</a></li>
+                <li><a class="nav-link" href="../fw/zuji.html">👣打卡足迹 </a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <a class="nav-link">文创</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="../wc/wccp.html">文创产品</a></li>
+                <li><a class="nav-link" href="../wc/cyzj.html">创意征集</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="header">
+        <h1>重庆文旅地图</h1>
+        <p>探索重庆主城的著名景点，感受巴渝文化的独特魅力</p>
+    </div>
+    <div class="map-container">
+        <!-- 地图显示区 -->
+        <div class="map">
+            <div id="track-details" class="track-details-panel"></div>
+            <div id="track_map" style="width: 100%; height: 100%;"></div>
+
+            <!-- 可以通过动态方式添加地图上的点 -->
+<!--            <div class="map-point" style="top: 30%; left: 40%;" data-id="track1"></div>-->
+        </div>
+
+        <!-- 信息面板 -->
+        <div class="info-panel">
+            <h2>用户足迹</h2>
+            <ul class="line-list" id="line-list">
+            </ul>
+
+            <button class="upload-btn">上传足迹</button>
+        </div>
+    </div>
+</div>
+<script type="module" src="../js/api_track.js"></script>
+<script src="../js/submenu.js"></script>
+
+
+
+</body>
+</html>
