@@ -521,31 +521,13 @@ body {
     }
 }
 
-.nav-listso {
+.nav-list {
     display: flex;
     flex-direction: column;
     gap: 15px;
     justify-content: center;
     text-align: center;
-    padding-top: 15rem;
-}
-
-.nav-listli {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
-    text-align: center;
-    padding-top: 13rem;
-}
-
-.nav-listvi {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
-    text-align: center;
-    padding-top: 4rem;
+    height: 100%;
 }
 
 .nav-item {
