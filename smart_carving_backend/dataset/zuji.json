@@ -5,33 +5,241 @@
       "userName": "张三",
       "tracks": [
         {
-          "routeId": "route_001",
-          "routeName": "重庆主城经典游",
+          "routeId": "route_cq_3days",
+          "routeName": "重庆3日游经典路线",
           "startTime": "2025-04-13T09:00:00+08:00",
           "footprints": [
             {
               "timestamp": "2025-04-13T09:30:00+08:00",
-              "locationName": "解放碑",
-              "latitude": 29.5623,
-              "longitude": 106.5823,
-              "note": "打卡重庆地标",
+              "locationName": "湖广会馆",
+              "latitude": 29.557921,
+              "longitude": 106.586915,
+              "note": "参观湖广移民历史",
               "photos": [
                 {
                   "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
-                  "description": "人好多！"
+                  "description": "古建筑风格"
                 }
               ]
             },
             {
               "timestamp": "2025-04-13T11:00:00+08:00",
-              "locationName": "洪崖洞",
-              "latitude": 29.5611,
-              "longitude": 106.5826,
-              "note": "拍夜景很出片",
+              "locationName": "白象居",
+              "latitude": 29.556103,
+              "longitude": 106.585193,
+              "note": "打卡重庆小众机位",
               "photos": [
                 {
                   "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
-                  "description": "洪崖洞夜景"
+                  "description": "城市与山城交错"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-13T12:30:00+08:00",
+              "locationName": "八一好吃街",
+              "latitude": 29.556189,
+              "longitude": 106.577491,
+              "note": "午餐重庆小吃",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "辣味十足"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-13T14:00:00+08:00",
+              "locationName": "解放碑",
+              "latitude": 29.557253,
+              "longitude": 106.575329,
+              "note": "重庆标志地标",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "繁华商业街"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-13T15:30:00+08:00",
+              "locationName": "洪崖洞",
+              "latitude": 29.562201,
+              "longitude": 106.579031,
+              "note": "夜景最佳机位",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "千与千寻既视感"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-13T17:00:00+08:00",
+              "locationName": "千厮门大桥",
+              "latitude": 29.569264,
+              "longitude": 106.57679,
+              "note": "俯瞰两江交汇",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "城市夜景一览无余"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-14T09:00:00+08:00",
+              "locationName": "来福士",
+              "latitude": 29.56482,
+              "longitude": 106.587253,
+              "note": "摩天建筑观景",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "水晶连廊好震撼"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-14T10:30:00+08:00",
+              "locationName": "鹅岭二厂",
+              "latitude": 29.551101,
+              "longitude": 106.540183,
+              "note": "文艺老厂房",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "喝了杯手冲咖啡"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-14T12:00:00+08:00",
+              "locationName": "李子坝",
+              "latitude": 29.550659,
+              "longitude": 106.530585,
+              "note": "轻轨穿楼奇观",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "轻轨入楼瞬间"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-14T13:30:00+08:00",
+              "locationName": "重庆人民大礼堂",
+              "latitude": 29.561674,
+              "longitude": 106.553277,
+              "note": "合影打卡中式建筑",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "壮丽中轴对称风格"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-14T15:00:00+08:00",
+              "locationName": "三峡博物馆",
+              "latitude": 29.562014,
+              "longitude": 106.550513,
+              "note": "了解重庆与三峡历史",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "历史文化浓厚"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-14T16:30:00+08:00",
+              "locationName": "观音桥",
+              "latitude": 29.576104,
+              "longitude": 106.533919,
+              "note": "购物美食聚集地",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "人气爆棚"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-14T18:00:00+08:00",
+              "locationName": "不夜九街",
+              "latitude": 29.579622,
+              "longitude": 106.54406,
+              "note": "夜生活开始啦",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "灯火通明"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-15T09:00:00+08:00",
+              "locationName": "山城步道",
+              "latitude": 29.550481,
+              "longitude": 106.566712,
+              "note": "探索山城地形",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "坡坡坎坎步步惊喜"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-15T10:30:00+08:00",
+              "locationName": "长江索道",
+              "latitude": 29.55244,
+              "longitude": 106.594183,
+              "note": "横跨长江的空中旅程",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "城市高空视角"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-15T12:00:00+08:00",
+              "locationName": "龙门浩老街",
+              "latitude": 29.555993,
+              "longitude": 106.594746,
+              "note": "保留传统风貌",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "青石板路"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-15T13:30:00+08:00",
+              "locationName": "弹子石老街",
+              "latitude": 29.579709,
+              "longitude": 106.588015,
+              "note": "滨江历史街区",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "江边打卡点"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-15T15:00:00+08:00",
+              "locationName": "南滨路",
+              "latitude": 29.541622,
+              "longitude": 106.576856,
+              "note": "江景步道慢行",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "夜景一绝"
                 }
               ]
             }
@@ -45,8 +253,8 @@
             {
               "timestamp": "2025-04-14T13:30:00+08:00",
               "locationName": "磁器口古镇",
-              "latitude": 29.6473,
-              "longitude": 106.4329,
+              "latitude": 29.581184,
+              "longitude": 106.449705,
               "note": "吃了毛血旺",
               "photos": [
                 {
@@ -71,8 +279,8 @@
             {
               "timestamp": "2025-04-12T09:00:00+08:00",
               "locationName": "仙女山森林公园",
-              "latitude": 29.4272,
-              "longitude": 107.7545,
+              "latitude": 29.495371,
+              "longitude": 107.749641,
               "note": "草原很美，适合骑马",
               "photos": [
                 {
@@ -84,8 +292,8 @@
             {
               "timestamp": "2025-04-12T13:30:00+08:00",
               "locationName": "天生三桥",
-              "latitude": 29.3941,
-              "longitude": 107.7033,
+              "latitude": 29.433682,
+              "longitude": 107.804818,
               "note": "电影《满城尽带黄金甲》取景地",
               "photos": [
                 {
@@ -110,8 +318,8 @@
             {
               "timestamp": "2025-04-10T10:00:00+08:00",
               "locationName": "丰都鬼城",
-              "latitude": 29.8695,
-              "longitude": 107.7381,
+              "latitude": 29.887322,
+              "longitude": 107.722209,
               "note": "很有民俗文化气息",
               "photos": [
                 {
@@ -123,8 +331,8 @@
             {
               "timestamp": "2025-04-10T15:00:00+08:00",
               "locationName": "长寿湖",
-              "latitude": 29.8549,
-              "longitude": 107.2231,
+              "latitude": 29.917471,
+              "longitude": 107.235429,
               "note": "湖边骑行，风景不错",
               "photos": [
                 {

@@ -74,7 +74,10 @@
             height: 100%;
             object-fit: cover;
         }
-
+        .amap-marker-label {
+            border: 1px solid #8B4513;
+            border-radius: 2px;
+        }
         .info-panel {
             width: 280px;
             background-color: #fdfaf6;
@@ -151,45 +154,98 @@
         }
 
 
-        .track-details-panel {
+        /* 使用唯一父级类名作为命名空间 */
+        .track-detail-sidebar {
             width: 0;
             padding: 0;
-            background-color: #fffaf5;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            font-family: 'Helvetica Neue', sans-serif;
+            background: #fff5ee;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            font-family: 'Arial', sans-serif;
+            color: #333;
             overflow-y: auto;
             transition: all 0.3s ease-in-out;
         }
 
-        .track-details-panel.active {
+        .track-detail-sidebar.active {
             width: 300px;
             padding: 16px;
         }
 
-        .footprint-list {
+        /* 所有子元素样式都基于父级命名空间 */
+        .track-detail-sidebar .track-title {
+            color: #8B4513;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #8B4513;
+            padding-bottom: 8px;
+        }
+
+        .track-detail-sidebar .track-meta {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .track-detail-sidebar .track-meta strong {
+            color: #8B4513;
+            display: inline-block;
+        }
+
+        .track-detail-sidebar .track-divider {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #8B4513 0%, rgba(139,69,19,0.2) 100%);
+            margin: 15px 0;
+        }
+
+        .track-detail-sidebar .footprints-list {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
-        .footprint-item {
-            margin-bottom: 20px;
+        .track-detail-sidebar .footprint-item {
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
         }
 
-        .photo {
-            margin-top: 8px;
+        .track-detail-sidebar .footprint-item:hover {
+            background: #fdf5e6;
         }
 
-        .photo img {
-            max-width: 100%;
+        /* 图片相关样式 */
+        .track-detail-sidebar .footprint-photo {
+            margin: 10px 0;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .track-detail-sidebar .footprint-photo img {
+            width: 100%;
             height: auto;
-            border-radius: 6px;
-            margin-bottom: 4px;
+            display: block;
+            border-radius: 4px 4px 0 0;
         }
 
-        .photo-desc {
-            font-size: 13px;
-            color: #555;
+        .track-detail-sidebar .photo-caption {
+            font-size: 0.9em;
+            color: #666;
+            padding: 5px 8px;
+            margin: 0;
+            background: #f8f8f8;
+        }
+
+        /* 子标题 */
+        .track-detail-sidebar .section-title {
+            color: #8B4513;
+            font-size: 1.2em;
+            margin: 15px 0 10px;
+        }
+
+        /* 时间元素特殊处理 */
+        .track-detail-sidebar track-time {
+            color: #666;
+            font-style: italic;
         }
     </style>
 </head>
@@ -255,7 +311,9 @@
     <div class="map-container">
         <!-- 地图显示区 -->
         <div class="map">
-            <div id="track-details" class="track-details-panel"></div>
+            <div id="track-details" class="track-detail-sidebar">
+                <h2>足迹详情</h2>
+            </div>
             <div id="track_map" style="width: 100%; height: 100%;"></div>
 
             <!-- 可以通过动态方式添加地图上的点 -->
