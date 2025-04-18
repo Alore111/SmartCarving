@@ -1,6 +1,6 @@
-// const BASE_URL = 'http://127.0.0.1:3396'
+const BASE_URL = 'http://127.0.0.1:3396'
 // const BASE_URL = 'https://carving-server.t.2ndtool.top'
-const BASE_URL = 'https://carving-server.2ndtool.top'
+// const BASE_URL = 'https://carving-server.2ndtool.top'
 const DATASET_API_BASE = BASE_URL + '/api/dataset'
 const USER_API_BASE = BASE_URL + '/api/users'
 

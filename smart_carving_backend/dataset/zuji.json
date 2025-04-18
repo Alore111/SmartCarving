@@ -344,6 +344,130 @@
           ]
         }
       ]
+    },
+    {
+      "userId": "Alore",
+      "userName": "Alore",
+      "tracks": [
+        {
+          "routeId": "route_1",
+          "routeName": "重庆周边自驾游",
+          "startTime": "2025-04-10T08:00:00+08:00",
+          "footprints": [
+            {
+              "timestamp": "2025-04-10T10:00:00+08:00",
+              "locationName": "丰都鬼城",
+              "latitude": 29.887322,
+              "longitude": 107.722209,
+              "note": "很有民俗文化气息",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "鬼城入口"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-10T15:00:00+08:00",
+              "locationName": "长寿湖",
+              "latitude": 29.917471,
+              "longitude": 107.235429,
+              "note": "湖边骑行，风景不错",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "湖面倒影美如画"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "userId": "ecc8d3bd-e54e-4157-a106-5e422d49aa0b",
+      "userName": "Alore",
+      "tracks": [
+        {
+          "routeId": "route_1",
+          "routeName": "重庆周边自驾游",
+          "startTime": "2025-04-10T08:00:00+08:00",
+          "footprints": [
+            {
+              "timestamp": "2025-04-10T10:00:00+08:00",
+              "locationName": "丰都鬼城",
+              "latitude": 29.887322,
+              "longitude": 107.722209,
+              "note": "很有民俗文化气息",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "鬼城入口"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-10T15:00:00+08:00",
+              "locationName": "长寿湖",
+              "latitude": 29.917471,
+              "longitude": 107.235429,
+              "note": "湖边骑行，风景不错",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "湖面倒影美如画"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-13T11:00:00+08:00",
+              "locationName": "白象居3",
+              "latitude": 29.556103,
+              "longitude": 106.585193,
+              "note": "打卡重庆小众机位",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "城市与山城交错"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "routeId": "route_2",
+          "routeName": "重庆周边自驾游",
+          "startTime": "2025-04-10T08:00:00+08:00",
+          "footprints": [
+            {
+              "timestamp": "2025-04-10T10:00:00+08:00",
+              "locationName": "丰都鬼城",
+              "latitude": 29.887322,
+              "longitude": 107.722209,
+              "note": "很有民俗文化气息",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "鬼城入口"
+                }
+              ]
+            },
+            {
+              "timestamp": "2025-04-10T15:00:00+08:00",
+              "locationName": "长寿湖",
+              "latitude": 29.917471,
+              "longitude": 107.235429,
+              "note": "湖边骑行，风景不错",
+              "photos": [
+                {
+                  "url": "https://image.t.2ndtool.top/i/3/2025/04/12/xjkxgm-3.png",
+                  "description": "湖面倒影美如画"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

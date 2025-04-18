@@ -37,3 +37,62 @@ class Dataset:
         data.append(record)
         self._save(data)
         return record
+
+    def get_all_users(self):
+        return self._load().get("users", [])
+
+    def get_user(self, user_id):
+        users = self.get_all_users()
+        return next((u for u in users if u.get("userId") == user_id), None)
+
+    def add_user_if_not_exists(self, user_id, user_name=""):
+        data = self._load()
+        users = data.get("users", [])
+        if not any(u.get("userId") == user_id for u in users):
+            users.append({
+                "userId": user_id,
+                "userName": user_name,
+                "tracks": []
+            })
+            self._save({"users": users})
+
+    def add_track(self, user_id, track):
+        self.add_user_if_not_exists(user_id)
+        data = self._load()
+        for user in data["users"]:
+            if user["userId"] == user_id:
+                if "tracks" not in user:
+                    user["tracks"] = []
+                track["routeId"] = f"route_{len(user['tracks']) + 1}"
+                user["tracks"].append(track)
+                break
+        self._save(data)
+        return track
+
+    def add_footprint(self, user_id, route_id, footprint):
+        data = self._load()
+        for user in data["users"]:
+            if user["userId"] == user_id:
+                for track in user.get("tracks", []):
+                    if track["routeId"] == route_id:
+                        if "footprints" not in track:
+                            track["footprints"] = []
+                        track["footprints"].append(footprint)
+                        self._save(data)
+                        return footprint
+        return None
+
+    def add_photo_to_footprint(self, user_id, route_id, timestamp, photo):
+        data = self._load()
+        for user in data["users"]:
+            if user["userId"] == user_id:
+                for track in user.get("tracks", []):
+                    if track["routeId"] == route_id:
+                        for fp in track.get("footprints", []):
+                            if fp.get("timestamp") == timestamp:
+                                if "photos" not in fp:
+                                    fp["photos"] = []
+                                fp["photos"].append(photo)
+                                self._save(data)
+                                return photo
+        return None

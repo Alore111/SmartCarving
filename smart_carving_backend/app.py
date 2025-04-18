@@ -1,9 +1,31 @@
 from flask import Flask, render_template, request, jsonify
 from dataset import Dataset
 from flask_cors import CORS
+from users import UserManager
 
 app = Flask(__name__)
 CORS(app)
+
+
+def authenticate_request(user_id=None):
+    token = None
+    if 'Authorization' in request.headers:
+        token = request.headers["Authorization"].split("Bearer ")[-1]
+
+    if not token:
+        return None, jsonify({"error": "未登录"}), 401
+
+    um = UserManager()
+    user = um.get_user_by_token(token)
+    if not user:
+        return None, jsonify({"error": "未知token"}), 403
+
+
+    if user_id and user_id != user.get("userId"):
+        print(user_id, user.get("userId"))
+        return None, jsonify({"error": "非法token"}), 403
+
+    return user, None, None
 
 @app.route("/")
 def home():
@@ -54,21 +76,42 @@ def get_all_users(dataset_name):
     return jsonify(users)
 
 # 添加用户（如果不存在）
-@app.route("/api/users/<dataset_name>", methods=["POST"])
-def add_user(dataset_name):
+@app.route("/api/users/register", methods=["POST"])
+def add_user():
     data = request.get_json()
-    user_id = data.get("userId")
-    user_name = data.get("userName", "")
-    if not user_id:
-        return jsonify({"error": "Missing userId"}), 400
+    username = data.get("userName", "")
+    password = data.get("password", "")
+    if not username or not password:
+        return jsonify({"error": "用户名或密码为空"}), 400
+    um = UserManager()
+    reg_info = um.register(username, password)
+    if reg_info.get('success'):
+        user_id = reg_info.get('userId')
+        ds = Dataset("zuji")
+        ds.add_user_if_not_exists(user_id, username)
+        return jsonify({"message": "注册成功"}), 201
+    return jsonify({"error": reg_info.get("message","未知错误")}), 500
 
-    ds = Dataset(dataset_name)
-    ds.add_user_if_not_exists(user_id, user_name)
-    return jsonify({"message": "User added or already exists"}), 201
+@app.route("/api/users/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    username = data.get("userName", "")
+    password = data.get("password", "")
+    if not username or not password:
+        return jsonify({"error": "用户名或密码为空"}), 400
+    um = UserManager()
+    token = um.login(username, password)
+    if token:
+        return jsonify({"token": token}), 200
+    return jsonify({"error": "用户名或密码错误"}), 401
 
 # 添加旅游线路
 @app.route("/api/users/<dataset_name>/<user_id>/tracks", methods=["POST"])
 def add_track(dataset_name, user_id):
+    user, auth_error, _ = authenticate_request(user_id)
+    if auth_error:
+        return auth_error
+
     ds = Dataset(dataset_name)
     track_data = request.get_json()
     if not track_data:
@@ -80,6 +123,10 @@ def add_track(dataset_name, user_id):
 # 添加足迹
 @app.route("/api/users/<dataset_name>/<user_id>/tracks/<route_id>/footprints", methods=["POST"])
 def add_footprint(dataset_name, user_id, route_id):
+    user, auth_error, _ = authenticate_request(user_id)
+    if auth_error:
+        return auth_error
+
     ds = Dataset(dataset_name)
     footprint = request.get_json()
     if not footprint:
@@ -93,6 +140,10 @@ def add_footprint(dataset_name, user_id, route_id):
 # 添加照片到指定足迹（通过 timestamp 定位）
 @app.route("/api/users/<dataset_name>/<user_id>/tracks/<route_id>/footprints/<timestamp>/photos", methods=["POST"])
 def add_photo(dataset_name, user_id, route_id, timestamp):
+    user, auth_error, _ = authenticate_request(user_id)
+    if auth_error:
+        return auth_error
+
     ds = Dataset(dataset_name)
     photo = request.get_json()
     if not photo:

@@ -55,6 +55,22 @@
             overflow: hidden;
         }
 
+        .map-wrapper-container {
+            position: absolute;
+            width: 770px;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .map-wrapper {
+            position: relative;
+            -webkit-user-drag: none
+        }
+
+        .map-wrapper img {
+            -webkit-user-drag: none
+        }
+
         @media (max-width: 768px) {
             .map-container {
                 flex-direction: column;
@@ -232,18 +248,25 @@
         <p>探索重庆主城的著名景点，感受巴渝文化的独特魅力</p>
     </div>
     <div class="map-container">
-        <div class="map">
-            <img src="../img/map2.png" alt="重庆地图">
-            <!-- 景点标记 -->
-            <div class="map-point" style="top: 54%; left: 52%;" data-id="hongyadong"></div>
-            <div class="map-point" style="top: 55%; left: 49%;" data-id="libai"></div>
-            <div class="map-point" style="top: 52%; left: 44%;" data-id="ciqikou"></div>
-            <div class="map-point" style="top: 54%; left: 50%;" data-id="chongqingmuseum"></div>
-            <div class="map-point" style="top: 57%; left: 52%;" data-id="nanbin"></div>
-            <div class="map-point" style="top: 53%; left: 53%;" data-id="shimao"></div>
-            <div class="map-point" style="top: 39%; left: 51%;" data-id="yuelai"></div>
-            <!-- 更多景点标记 -->
+        <!-- 背景图固定 -->
+        <img src="../img/map2-bg.png" class="map-img bg" alt=""/>
+        <div class="map-wrapper-container">
+            <!-- 地图图层 + 标记（可缩放拖动） -->
+            <div class="map-wrapper" id="mapWrapper">
+                <img src="../img/map2-ft.png" class="map-img ft" alt=""/>
+
+                <!-- 景点标记 -->
+                <div class="map-point" style="top: 54%; left: 52%;" data-id="hongyadong"></div>
+                <div class="map-point" style="top: 55%; left: 49%;" data-id="libai"></div>
+                <div class="map-point" style="top: 52%; left: 44%;" data-id="ciqikou"></div>
+                <div class="map-point" style="top: 54%; left: 50%;" data-id="chongqingmuseum"></div>
+                <div class="map-point" style="top: 57%; left: 52%;" data-id="nanbin"></div>
+                <div class="map-point" style="top: 53%; left: 53%;" data-id="shimao"></div>
+                <div class="map-point" style="top: 39%; left: 51%;" data-id="yuelai"></div>
+                <!-- 更多景点标记 -->
+            </div>
         </div>
+
         <div class="info-panel">
             <h2 class="spot-details-title">景点详情</h2>
             <p class="spot-description">点击地图上的景点，查看详细信息。</p>
@@ -339,6 +362,7 @@
 </script>
 
 <script src="../js/submenu.js"></script>
+<script src="../js/map.js"></script>
 
 </body>
 </html>
