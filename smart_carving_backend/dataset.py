@@ -96,3 +96,27 @@ class Dataset:
                                 self._save(data)
                                 return photo
         return None
+
+    def upsert_track(self, user_id, track):
+        self.add_user_if_not_exists(user_id)
+        data = self._load()
+        for user in data["users"]:
+            if user["userId"] == user_id:
+                if "tracks" not in user:
+                    user["tracks"] = []
+
+                # 如果存在 routeId，尝试更新已有轨迹
+                if "routeId" in track:
+                    for i, existing_track in enumerate(user["tracks"]):
+                        if existing_track["routeId"] == track["routeId"]:
+                            user["tracks"][i] = track
+                            self._save(data)
+                            return track
+                    # 没找到匹配 routeId，就当新增处理
+                else:
+                    track["routeId"] = f"route_{len(user['tracks']) + 1}"
+                    user["tracks"].append(track)
+                    self._save(data)
+                    return track
+
+        return None

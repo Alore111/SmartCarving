@@ -55,7 +55,7 @@ class UserManager:
                 user['token_time'] = time.time()
                 self._save_users()
                 return {'success': True, 'message': '登录成功', 'userId': user['userId'], 'token': token}
-        return {'success': False, 'message': '用户名或密码错误'}
+        return None
 
     def get_user_by_token(self, token: str):
         for user in self.users:

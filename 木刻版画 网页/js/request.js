@@ -1,99 +1,115 @@
-const BASE_URL = 'http://127.0.0.1:3396'
+import './notice.js'
+
+// const BASE_URL = 'http://127.0.0.1:3396'
 // const BASE_URL = 'https://carving-server.t.2ndtool.top'
-// const BASE_URL = 'https://carving-server.2ndtool.top'
+const BASE_URL = 'https://carving-server.2ndtool.top'
 const DATASET_API_BASE = BASE_URL + '/api/dataset'
 const USER_API_BASE = BASE_URL + '/api/users'
 
+const SUCCESS_CODE_LIST = [200, 201]
+
+// 通用请求处理函数
+async function requestAndCheck(url, options = {}, errorMsg = '请求失败') {
+    const token = localStorage.getItem('token')
+    if (token) options.headers = {...options.headers, 'Authorization': "Bearer " + token}
+    const response = await fetch(url, options)
+    let res = await response.json()
+    res.ok = true
+    if (!SUCCESS_CODE_LIST.includes(res.code)) {
+        Notice.show(res.message || errorMsg, 'error')
+        res.ok = false
+    }
+    // console.log(res)
+    return res
+}
+
+// ========== 用户认证 ==========
+export async function register(username, password) {
+    return await requestAndCheck(`${BASE_URL}/api/users/register`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, password})
+    }, '注册失败')
+}
+
+export async function login(username, password) {
+    return await requestAndCheck(`${BASE_URL}/api/users/login`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, password})
+    }, '登录失败')
+}
+
+export async function getUserInfo() {
+    return await requestAndCheck(`${BASE_URL}/api/users/info`, {}, '获取用户信息失败')
+}
+
+// ========== 通用数据集 API ==========
 export async function fetchAll(dataset, type = '') {
     const url = type ? `${DATASET_API_BASE}/${dataset}?type=${type}` : `${DATASET_API_BASE}/${dataset}`
-    const res = await fetch(url)
-    if (!res.ok) throw new Error('获取数据失败')
-    return await res.json()
+    return await requestAndCheck(url, {}, '获取数据失败')
 }
 
 export async function fetchById(dataset, id) {
-    const res = await fetch(`${DATASET_API_BASE}/${dataset}/${id}`)
-    if (!res.ok) throw new Error('获取记录失败')
-    return await res.json()
+    return await requestAndCheck(`${DATASET_API_BASE}/${dataset}/${id}`, {}, '获取数据失败')
 }
 
 export async function addRecord(dataset, data) {
-    const res = await fetch(`${DATASET_API_BASE}/${dataset}`, {
+    return await requestAndCheck(`${DATASET_API_BASE}/${dataset}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
-    })
-    if (!res.ok) throw new Error('添加记录失败')
-    return await res.json()
+    }, '添加数据失败')
 }
 
 // ========== 用户足迹 API ==========
-
-// 获取所有用户
-export async function fetchAllUsers(dataset) {
-    const res = await fetch(`${USER_API_BASE}/${dataset}`)
-    if (!res.ok) throw new Error('获取用户失败')
-    return await res.json()
-}
-
-// 添加用户
-export async function addUser(dataset, userId, userName = '') {
-    const res = await fetch(`${USER_API_BASE}/${dataset}`, {
+export async function updateFootPrint(footprintData) {
+    let userInfo = localStorage.getItem('userInfo')
+    let userId
+    if (userInfo) userId = JSON.parse(userInfo).userId
+    return await requestAndCheck(`${USER_API_BASE}/zuji/${userId}/tracks/update`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, userName })
-    })
-    if (!res.ok) throw new Error('添加用户失败')
-    return await res.json()
-}
-
-// 添加线路
-export async function addTrack(dataset, userId, trackData) {
-    const res = await fetch(`${USER_API_BASE}/${dataset}/${userId}/tracks`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(trackData)
-    })
-    if (!res.ok) throw new Error('添加线路失败')
-    return await res.json()
-}
-
-// 添加足迹
-export async function addFootprint(dataset, userId, routeId, footprintData) {
-    const res = await fetch(`${USER_API_BASE}/${dataset}/${userId}/tracks/${routeId}/footprints`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(footprintData)
-    })
-    if (!res.ok) throw new Error('添加足迹失败')
-    return await res.json()
+    }, '更新数据失败')
 }
 
-// 添加照片
-export async function addPhotoToFootprint(dataset, userId, routeId, timestamp, photoData) {
-    const res = await fetch(`${USER_API_BASE}/${dataset}/${userId}/tracks/${routeId}/footprints/${timestamp}/photos`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(photoData)
-    })
-    if (!res.ok) throw new Error('添加照片失败')
-    return await res.json()
+export async function uploadFile(file) {
+    const formData = new FormData()
+    formData.append('image', file)
+    formData.append('token', '1c17b11693cb5ec63859b091c5b9c1b2')
+    try {
+        const response = await fetch('https://image.t.2ndtool.top/api/index.php', {
+            method: 'POST',
+            body: formData
+        })
+        const res = await response.json()
+        res.ok = true
+        if (res.code !== 200 && res.code !== 201) {
+            Notice.show(res.message || '文件上传失败', 'error')
+            res.ok = false
+        }
+        return res
+    } catch (err) {
+        Notice.show('网络错误，文件上传失败', 'error')
+        return {ok: false, message: err.message}
+    }
 }
 
-
+// ========== 自动生成辅助函数 ==========
 function generateRouteId() {
-    return `route_${Date.now()}` // 示例：route_1712989892938
+    return `route_${Date.now()}`
 }
 
 function generateTimestamp() {
-    return new Date().toISOString() // 示例：2025-04-13T14:35:00.000Z
+    return new Date().toISOString()
 }
 
 export async function createTrackAuto(dataset, userId, routeName) {
     const routeId = generateRouteId()
     const startTime = generateTimestamp()
-    const res = await addTrack(dataset, userId, { routeId, routeName, startTime })
-    res.routeId = routeId // 返回给调用者
+    const res = await addTrack(dataset, userId, {routeId, routeName, startTime})
+    res.routeId = routeId
     return res
 }
 
@@ -107,7 +123,6 @@ export async function createFootprintAuto(dataset, userId, routeId, locationName
         note,
         photos: []
     })
-    res.timestamp = timestamp // 返回给调用者
+    res.timestamp = timestamp
     return res
 }
-
