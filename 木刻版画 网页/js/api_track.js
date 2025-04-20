@@ -1,4 +1,4 @@
-import {fetchAll, getUserInfo, login, register, updateFootPrint, uploadFile} from "./request.js";
+import {delFootPrints, fetchAll, getUserInfo, login, register, updateFootPrint, uploadFile} from "./request.js";
 import "https://webapi.amap.com/maps?v=2.0&key=864f2b31e0b6558c0e4ade5157767fd1"
 import "https://webapi.amap.com/loca?v=2.0.0&key=864f2b31e0b6558c0e4ade5157767fd1"
 
@@ -77,7 +77,7 @@ export function showTrackDetails(trackDetail) {
     // 清空之前内容
     container.innerHTML = `
         <div class="track-header">
-            <h3 class="track-title">${routeName}<button class="track-edit-btn">编辑</button></h3>
+            <h3 class="track-title">${routeName}<button class="track-edit-btn">编辑</button><button class="track-del-btn">删除</button></h3>
             <p class="track-meta"><strong>用户：</strong><span class="user-info">${userName}</span></p>
             <p class="track-meta"><strong>出发时间：</strong><time class="track-time">${new Date(startTime).toLocaleString()}</time></p>
         </div>
@@ -86,6 +86,7 @@ export function showTrackDetails(trackDetail) {
             <h4 class="section-title">足迹列表</h4>
             <ul class="footprints-list"></ul>
         </div>
+        
     `;
     const userInfo = localStorage.getItem('userInfo');
     let myUserId;
@@ -98,8 +99,19 @@ export function showTrackDetails(trackDetail) {
             fillFormFromData(trackDetail);
             refreshImageUploaderListener();
         });
+        document.querySelector('.track-del-btn').addEventListener('click', async () => {
+            console.log(trackDetail.routeId)
+            if (confirm('确定要删除这条线路吗？')) {
+                const res = await delFootPrints(routeId);
+                if (res.ok) {
+                    Notice.show(`删除成功`, "success", 1000, 'index-loading')
+                    await fetchTracks();
+                }
+            }
+        })
     } else {
         document.querySelector('.track-edit-btn').style.display = 'none';
+        document.querySelector('.track-del-btn').style.display = 'none';
     }
 
     const list = document.createElement('ul');

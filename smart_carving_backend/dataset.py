@@ -120,3 +120,19 @@ class Dataset:
                     return track
 
         return None
+
+    def delete_track(self, user_id, route_id):
+        data = self._load()
+        for user in data["users"]:
+            if user["userId"] == user_id:
+                original_len = len(user.get("tracks", []))
+                user["tracks"] = [
+                    track for track in user.get("tracks", [])
+                    if track.get("routeId") != route_id
+                ]
+                if len(user["tracks"]) < original_len:
+                    self._save(data)
+                    return True
+                break
+        return False
+

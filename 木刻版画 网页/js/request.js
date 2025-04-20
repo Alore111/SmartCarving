@@ -74,6 +74,15 @@ export async function updateFootPrint(footprintData) {
     }, '更新数据失败')
 }
 
+export async function delFootPrints(routeId) {
+    let userInfo = localStorage.getItem('userInfo')
+    let userId
+    if (userInfo) userId = JSON.parse(userInfo).userId
+    return await requestAndCheck(`${USER_API_BASE}/zuji/${userId}/tracks/${routeId}`, {
+        method: 'DELETE'
+    }, '删除数据失败')
+}
+
 export async function uploadFile(file) {
     const formData = new FormData()
     formData.append('image', file)
@@ -94,35 +103,4 @@ export async function uploadFile(file) {
         Notice.show('网络错误，文件上传失败', 'error')
         return {ok: false, message: err.message}
     }
-}
-
-// ========== 自动生成辅助函数 ==========
-function generateRouteId() {
-    return `route_${Date.now()}`
-}
-
-function generateTimestamp() {
-    return new Date().toISOString()
-}
-
-export async function createTrackAuto(dataset, userId, routeName) {
-    const routeId = generateRouteId()
-    const startTime = generateTimestamp()
-    const res = await addTrack(dataset, userId, {routeId, routeName, startTime})
-    res.routeId = routeId
-    return res
-}
-
-export async function createFootprintAuto(dataset, userId, routeId, locationName, lat, lng, note = '') {
-    const timestamp = generateTimestamp()
-    const res = await addFootprint(dataset, userId, routeId, {
-        timestamp,
-        locationName,
-        latitude: lat,
-        longitude: lng,
-        note,
-        photos: []
-    })
-    res.timestamp = timestamp
-    return res
 }

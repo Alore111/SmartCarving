@@ -187,6 +187,18 @@ def upsert_track(dataset_name, user_id):
         return make_response(404, "用户不存在")
     return make_response(200, "处理成功", updated_track)
 
+@app.route("/api/users/<dataset_name>/<user_id>/tracks/<route_id>", methods=["DELETE"])
+def delete_track(dataset_name, user_id, route_id):
+    user, auth_error = authenticate_request(user_id)
+    if auth_error:
+        return auth_error
+
+    ds = Dataset(dataset_name)
+    success = ds.delete_track(user_id, route_id)
+    if not success:
+        return make_response(404, "未找到指定用户或路径")
+    return make_response(200, "删除成功")
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=3396)
