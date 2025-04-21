@@ -106,7 +106,7 @@ def login():
 
     um = UserManager()
     token = um.login(username, password)
-    if token:
+    if token['success']:
         return_data = {
             "userId": token['userId'],
             "token": token['token']
