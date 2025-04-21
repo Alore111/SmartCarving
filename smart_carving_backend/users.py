@@ -34,4 +34,4 @@ class UserManager:
         return {'success': False, 'message': '用户名或密码错误'}
 
     def get_user_by_token(self, token: str):
-        return self.db.get_user_by_token(token=token)
+        return self.db.get_user_by_token(token)

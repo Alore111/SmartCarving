@@ -3,11 +3,9 @@ import pymysql
 class DatabaseSql:
     def __init__(self):
         host = "localhost"
-        # host = "124.70.222.169"
-        # host = "sql.t.2ndtool.top"
         port = 3306
         user = "smart_carving"
-        password = "smart_carving_123456"
+        password = "smart_carving_YUGuySAD"
         database = "smart_carving"
         self.conn = pymysql.connect(host=host, user=user, password=password, database=database, port=port)
         self.cursor = self.conn.cursor(pymysql.cursors.DictCursor)
