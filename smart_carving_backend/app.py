@@ -1,7 +1,10 @@
+from uuid import uuid4
+
 from flask import Flask, render_template, request, jsonify
 from dataset import Dataset
 from flask_cors import CORS
 from users import UserManager
+from database_sql import DatabaseSql
 
 app = Flask(__name__)
 CORS(app)
@@ -38,19 +41,30 @@ def home():
 # 获取所有记录或按 type 过滤
 @app.route("/api/dataset/<dataset_name>", methods=["GET"])
 def get_dataset(dataset_name):
-    ds = Dataset(dataset_name)
-    item_type = request.args.get("type")
-    if item_type:
-        data = ds.filter_by_type(item_type)
-    else:
+    sql = DatabaseSql()
+    data = None
+    if dataset_name == "dongtai":
+        item_type = request.args.get("type")
+        if item_type:
+            data = sql.get_dongtai_by_type(item_type)
+        else:
+            data = sql.get_all_dongtai()
+    elif dataset_name == "luntan":
+        data = sql.get_all_luntan()
+    elif dataset_name == "zuji":
+        ds = Dataset(dataset_name)
         data = ds.get_all()
     return make_response(200, "获取成功", data)
 
 # 获取某条记录
 @app.route("/api/dataset/<dataset_name>/<int:item_id>", methods=["GET"])
 def get_dataset_item(dataset_name, item_id):
-    ds = Dataset(dataset_name)
-    item = ds.get_by_id(item_id)
+    sql = DatabaseSql()
+    item = None
+    if dataset_name == "dongtai":
+        item = sql.get_dongtai_by_id(item_id)
+    elif dataset_name == "luntan":
+        item = sql.get_luntan_by_id(item_id)
     if not item:
         return make_response(404, "记录不存在")
     return make_response(200, "获取成功", item)
@@ -58,25 +72,36 @@ def get_dataset_item(dataset_name, item_id):
 # 添加记录，前端需传入 type 等字段
 @app.route("/api/dataset/<dataset_name>", methods=["POST"])
 def add_dataset_item(dataset_name):
-    ds = Dataset(dataset_name)
-    data = request.get_json()
-    if not data:
-        return make_response(400, "缺少 JSON 数据")
 
     try:
-        added = ds.add_record(data)
-        return make_response(200, "添加成功", added)
+        sql = DatabaseSql()
+        data = request.get_json()
+        if dataset_name == "dongtai":
+            id_ = str(uuid4())
+            type_ = data.get("type")
+            content = data.get("content")
+            title = data.get("title")
+            cover_img = data.get("cover_img")
+            url = data.get("url")
+            date = data.get("date")
+            if not type_ or not content or not title or not cover_img or not url or not date:
+                return make_response(400, "缺少 JSON 数据")
+            sql.insert_dongtai(id_, type_, title, cover_img, content, url, date)
+            return make_response(200, "添加成功")
+        elif dataset_name == "luntan":
+            id_ = str(uuid4())
+            type_ = data.get("type")
+            title = data.get("title")
+            content = data.get("content")
+            url = data.get("url")
+            date = data.get("date")
+            if not type_ or not title or not content or not url or not date:
+                return make_response(400, "缺少 JSON 数据")
+            sql.insert_luntan(id_, type_, title, content, url, date)
     except Exception as e:
         return make_response(500, f"添加失败: {str(e)}")
 
 # ------------- 足迹相关接口 ----------------
-
-# 获取所有用户
-@app.route("/api/users/<dataset_name>", methods=["GET"])
-def get_all_users(dataset_name):
-    ds = Dataset(dataset_name)
-    users = ds.get_all_users()
-    return make_response(200, "获取成功", users)
 
 # 添加用户（如果不存在）
 @app.route("/api/users/register", methods=["POST"])
