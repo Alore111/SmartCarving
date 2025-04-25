@@ -135,7 +135,7 @@
                         <span class="cell-text">{{ scope.row.name }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="描述" width="200">
+                <el-table-column label="描述" width="300">
                     <template #default="scope">
                         <span class="cell-text">{{ scope.row.description }}</span>
                     </template>
@@ -150,12 +150,12 @@
                         <span class="cell-text">{{ scope.row.details.openingHours }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="门票" width="100">
+                <el-table-column label="门票" width="200">
                     <template #default="scope">
                         <span class="cell-text">{{ scope.row.details.ticketPrice }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="提示" width="200">
+                <el-table-column label="提示" width="300">
                     <template #default="scope">
                         <span class="cell-text">{{ scope.row.details.bk }}</span>
                     </template>
@@ -325,13 +325,13 @@
             async checkLogin() {
                 const token = localStorage.getItem('token')
                 if (!token) {
-                    window.location.href = 'index.html'
+                    window.location.href = 'admin_login.html'
                     return false
                 }
                 const login_info_res = await ApiAdmin.AdminInfo()
                 const login_info = login_info_res.data
                 if (!login_info) {
-                    window.location.href = 'index.html'
+                    window.location.href = 'admin_login.html'
                     return false
                 }
                 localStorage.setItem("userInfo", login_info)

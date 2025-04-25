@@ -151,9 +151,11 @@
     import { login } from './js/request.js';
     document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
+        Notice.show("正在登录", "loading", 2000, "login_loading")
         const username = document.querySelector('input[type="text"]').value;
         const password = document.querySelector('input[type="password"]').value;
         login(username, password).then((res) => {
+            Notice.close("login_loading")
             if (res.ok) {
                 localStorage.setItem('token', res.data.token);
                 window.location.href = 'admin.html';
