@@ -313,7 +313,13 @@
                 })
                 let lng = this.currentForm.details.longitude
                 let lat = this.currentForm.details.latitude
-                this.marker.setPosition([lng, lat])
+                if (lng && lat) {
+                    if (!isNaN(lng) && !isNaN(lat)) {
+                        this.marker.setPosition([lng, lat])
+                    }else{
+                        this.marker.setPosition([106.55, 29.56])
+                    }
+                }
 
                 this.amap.on('click', (e) => {
                     const {lng, lat} = e.lnglat
