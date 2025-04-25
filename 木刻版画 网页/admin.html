@@ -226,7 +226,16 @@
                     </el-form-item>
 
                     <el-dialog title="选择位置" v-model="mapDialogVisible" width="800px">
-                        <div id="amap" style="width: 100%; height: 500px;"></div>
+                        <div>
+                            <div id="amap" style="width: 100%; height: 500px;"></div>
+                            <el-autocomplete
+                                    v-model="searchKeyword"
+                                    :fetch-suggestions="querySearch"
+                                    placeholder="请输入地址关键词"
+                                    @select="handleAddressSelect"
+                                    style="width: 100%; margin-top: 5px"
+                            />
+                        </div>
                     </el-dialog>
                 </template>
             </el-form>
@@ -242,6 +251,11 @@
 <!-- Vue 和 Element Plus 脚本 -->
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 <script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
+<script type="text/javascript">
+    window._AMapSecurityConfig = {
+        securityJsCode: "7fcafc0fd135f1998aaf8033adb43f08",
+    };
+</script>
 
 <script type="module">
     import * as ElementPlusIconsVue from 'https://unpkg.com/@element-plus/icons-vue';
@@ -262,7 +276,9 @@
                 spots: [],
                 mapDialogVisible: false,
                 amap: null,
-                marker: null
+                marker: null,
+                searchKeyword: '',
+                suggestionList: [],
             }
         },
         async mounted() {
@@ -270,7 +286,7 @@
             await this.fetchData()
             if (!window.AMap) {
                 const script = document.createElement('script')
-                script.src = 'https://webapi.amap.com/maps?v=2.0&key=864f2b31e0b6558c0e4ade5157767fd1'
+                script.src = 'https://webapi.amap.com/maps?v=1.4.15&key=0950e0daef1fe6a0f0397deaeec1ad5a&plugin=AMap.Geocoder'
                 script.onload = () => console.log('AMap loaded')
                 document.head.appendChild(script)
             }
@@ -316,17 +332,67 @@
                 if (lng && lat) {
                     if (!isNaN(lng) && !isNaN(lat)) {
                         this.marker.setPosition([lng, lat])
-                    }else{
+                    } else {
                         this.marker.setPosition([106.55, 29.56])
                     }
                 }
 
                 this.amap.on('click', (e) => {
                     const {lng, lat} = e.lnglat
-                    this.currentForm.details.longitude = lng.toFixed(6)
-                    this.currentForm.details.latitude = lat.toFixed(6)
-                    this.marker.setPosition([lng, lat])
+                    this.updateLocation(lng, lat)
                 })
+
+                // 初始化搜索插件
+                AMap.plugin(['AMap.PlaceSearch', 'AMap.AutoComplete'], () => {
+                    this.autoComplete = new AMap.AutoComplete({input: null}) // 用于配合 UI 输入提示，可省略
+                    this.placeSearch = new AMap.PlaceSearch({map: this.amap})
+
+                    // 可选：绑定 autocomplete 到 input 元素（也可以直接监听输入）
+                })
+            },
+
+            updateLocation(lng, lat, address = '') {
+                this.marker.setPosition([lng, lat])
+                this.amap.setCenter([lng, lat])
+                this.currentForm.details.longitude = lng.toFixed(6)
+                this.currentForm.details.latitude = lat.toFixed(6)
+                if (address) {
+                    this.currentForm.details.address = address
+                }
+            },
+            async querySearch(queryString, cb) {
+                if (!queryString) {
+                    cb([])
+                    return
+                }
+                const rawData = await this.geoCode(queryString);
+                if (!rawData) return;
+                if (!Array.isArray(rawData)) return;
+                console.log(rawData)
+                cb(rawData.map(item => ({value: item.formattedAddress, ...item})));
+            },
+
+            geoCode(address) {
+                return new Promise((resolve, reject) => {
+                    const geocoder = new AMap.Geocoder({
+                        city: "重庆",
+                    });
+                    geocoder.getLocation(address, (status, result) => {
+                        if (status === 'complete' && result.geocodes.length) {
+                            resolve(result.geocodes);
+                        } else {
+                            this.$message.error("地址查找失败");
+                            resolve(null);
+                        }
+                    });
+                });
+            },
+
+            // 用户选择某个地址后
+            handleAddressSelect(item) {
+                const lng = item.location.lng;
+                const lat = item.location.lat;
+                this.updateLocation(lng, lat);
             },
             async checkLogin() {
                 const token = localStorage.getItem('token')
@@ -442,7 +508,7 @@
                         if (update_res.ok) {
                             Notice.show('更新成功', 'success')
                         } else return;
-                    }else if (this.currentView == 'spot') {
+                    } else if (this.currentView == 'spot') {
 
                         const update_res = await ApiAdmin.updateSpot(this.currentForm.code, {
                             [this.currentForm.code]: {
