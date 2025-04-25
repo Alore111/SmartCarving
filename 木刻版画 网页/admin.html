@@ -334,6 +334,7 @@
                     window.location.href = 'index.html'
                     return false
                 }
+                localStorage.setItem("userInfo", login_info)
                 if (login_info.role !== 'admin') {
                     window.location.href = 'index.html'
                     return false
