@@ -16,7 +16,7 @@ def make_response(code=200, message="success", data=None):
         "data": data
     })
 
-def authenticate_request(user_id=None):
+def authenticate_request(user_id=None, role=None):
     token = None
     if 'Authorization' in request.headers:
         token = request.headers["Authorization"].split("Bearer ")[-1]
@@ -28,6 +28,9 @@ def authenticate_request(user_id=None):
     user = um.get_user_by_token(token)
     if not user:
         return None, make_response(403, "登录已失效")
+
+    if role and user.get("role") != role:
+        return None, make_response(403, "权限不足")
 
     if user_id and user_id != user.get("userId"):
         return None, make_response(403, "非法token")
@@ -51,27 +54,22 @@ def get_dataset(dataset_name):
             data = sql.get_all_dongtai()
     elif dataset_name == "luntan":
         data = sql.get_all_luntan()
+    elif dataset_name == "spots":
+        data = sql.get_all_spots()
     elif dataset_name == "zuji":
         ds = Dataset(dataset_name)
         data = ds.get_all()
+    elif dataset_name == "users":
+        user, err = authenticate_request(role="admin")
+        if err:
+            return err
+        data = sql.get_all_users()
     return make_response(200, "获取成功", data)
-
-# 获取某条记录
-@app.route("/api/dataset/<dataset_name>/<int:item_id>", methods=["GET"])
-def get_dataset_item(dataset_name, item_id):
-    sql = DatabaseSql()
-    item = None
-    if dataset_name == "dongtai":
-        item = sql.get_dongtai_by_id(item_id)
-    elif dataset_name == "luntan":
-        item = sql.get_luntan_by_id(item_id)
-    if not item:
-        return make_response(404, "记录不存在")
-    return make_response(200, "获取成功", item)
 
 # 添加记录，前端需传入 type 等字段
 @app.route("/api/dataset/<dataset_name>", methods=["POST"])
 def add_dataset_item(dataset_name):
+    user, err = authenticate_request(role="admin")
 
     try:
         sql = DatabaseSql()
@@ -86,7 +84,10 @@ def add_dataset_item(dataset_name):
             date = data.get("date")
             if not type_ or not content or not title or not cover_img or not url or not date:
                 return make_response(400, "缺少 JSON 数据")
-            sql.insert_dongtai(id_, type_, title, cover_img, content, url, date)
+            try:
+                sql.insert_dongtai(id_, type_, title, cover_img, content, url, date)
+            except Exception as e:
+                return make_response(500, f"添加失败: {str(e)}")
             return make_response(200, "添加成功")
         elif dataset_name == "luntan":
             id_ = str(uuid4())
@@ -97,10 +98,50 @@ def add_dataset_item(dataset_name):
             date = data.get("date")
             if not type_ or not title or not content or not url or not date:
                 return make_response(400, "缺少 JSON 数据")
-            sql.insert_luntan(id_, type_, title, content, url, date)
+            try:
+                sql.insert_luntan(id_, type_, title, content, url, date)
+            except Exception as e:
+                return make_response(500, f"添加失败: {str(e)}")
+
+        elif dataset_name == "spots":
+            try:
+                sql.insert_spots_from_json(data)
+            except Exception as e:
+                return make_response(500, f"添加失败: {str(e)}")
+            return make_response(200, "添加成功")
+
     except Exception as e:
         return make_response(500, f"添加失败: {str(e)}")
 
+@app.route("/api/dataset/<dataset_name>/<item_code>", methods=["PUT"])
+def update_dataset_item(dataset_name, item_code):
+    user, err = authenticate_request(role="admin")
+    if err:
+        return err
+    update_data = request.get_json()
+    sql = DatabaseSql()
+    if dataset_name == "dongtai":
+        sql.update_dongtai(item_code)
+    elif dataset_name == "luntan":
+        sql.update_luntan(item_code)
+    elif dataset_name == "spots":
+        sql.update_spots_from_json(update_data)
+    return make_response(200, "更新成功")
+
+@app.route("/api/dataset/<dataset_name>/<item_code>", methods=["DELETE"])
+def delete_dataset_item(dataset_name, item_code):
+    user, err = authenticate_request(role="admin")
+    if err:
+        return err
+    sql = DatabaseSql()
+    if dataset_name == "dongtai":
+        sql.delete_dongtai(item_code)
+    elif dataset_name == "luntan":
+        sql.delete_luntan(item_code)
+    elif dataset_name == "spots":
+        del_data = {item_code:{}}
+        sql.delete_spots_by_json(del_data)
+    return make_response(200, "删除成功")
 # ------------- 足迹相关接口 ----------------
 
 # 添加用户（如果不存在）
@@ -146,6 +187,48 @@ def get_user_info():
     if auth_error:
         return auth_error
     return make_response(200, "获取成功", user)
+
+@app.route("/api/users/info", methods=["PUT"])
+def update_user_info():
+    user, auth_error = authenticate_request(role="admin")
+    if auth_error:
+        return auth_error
+    data = request.get_json()
+    userId = data.get("userId")
+    userName = data.get("userName")
+    role = data.get("role")
+    sql = DatabaseSql()
+    if sql.update_user_info(userId, userName, role):
+        return make_response(200, "更新成功")
+    return make_response(500, "更新失败")
+
+@app.route("/api/users/add", methods=["POST"])
+def add_user_to_dataset():
+    user, auth_error = authenticate_request(role="admin")
+    if auth_error:
+        return auth_error
+    data = request.get_json()
+    userName = data.get("userName")
+    password = data.get("password")
+    role = data.get("role")
+    um = UserManager()
+    insert_info = um.insert_user(userName, password, role)
+    if insert_info.get('success'):
+        user_id= insert_info.get('userId')
+        ds = Dataset("zuji")
+        ds.add_user_if_not_exists(user_id, userName)
+        return make_response(200, "添加成功")
+    return make_response(500, "添加失败")
+
+@app.route("/api/users/delete/<user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    user, auth_error = authenticate_request(role="admin")
+    if auth_error:
+        return auth_error
+    sql = DatabaseSql()
+    if sql.delete_user(user_id):
+        return make_response(200, "删除成功")
+    return make_response(500, "删除失败")
 
 # 添加旅游线路
 @app.route("/api/users/<dataset_name>/<user_id>/tracks", methods=["POST"])

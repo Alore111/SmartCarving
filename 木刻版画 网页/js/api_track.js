@@ -1,6 +1,22 @@
 import {delFootPrints, fetchAll, getUserInfo, login, register, updateFootPrint, uploadFile} from "./request.js";
 import "https://webapi.amap.com/maps?v=2.0&key=864f2b31e0b6558c0e4ade5157767fd1"
 import "https://webapi.amap.com/loca?v=2.0.0&key=864f2b31e0b6558c0e4ade5157767fd1"
+import "../js/notice.js"
+
+let loading_list = ['track_list','login_check']
+
+function initLoading() {
+    Notice.show("加载中...", "loading", 10000, 'index-loading')
+}
+initLoading()
+
+function endLoading(loading_name) {
+    loading_list = loading_list.filter(item => item !== loading_name)
+    if (loading_list.length === 0) {
+        Notice.close('index-loading')
+    }
+}
+
 
 let map = null;
 let loca = null;
@@ -9,6 +25,7 @@ let footprintCount = 1;
 
 async function fetchTracks() {
     let data = await fetchAll('zuji'); // 获取所有足迹数据
+    endLoading('track_list')
     data = data.data
 
     const tracks = [];
@@ -741,6 +758,7 @@ window.onload = async function () {
             localStorage.removeItem('userInfo');
         }
     }
+    endLoading('login_check')
 
 
     // 初始化地图选择功能

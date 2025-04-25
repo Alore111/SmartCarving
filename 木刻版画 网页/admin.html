@@ -1,42 +1,467 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>“印”迹传承</title>
+    <title>山城智刻·印迹渝州 - 后台管理</title>
+
+    <!-- Element Plus 样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #app {
+            display: flex;
+            min-height: 100vh;
+            background: #f0f2f5;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #001529;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .operation-bar {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .el-menu {
+            border-right: none !important;
+        }
+
+        .cell-text {
+            display: inline-block;
+            max-width: 100%;
+            height: 40px;
+            line-height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+    </style>
 </head>
 
-<script type="importmap">
-    {
-      "imports": {
-        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
-      }
-    }
-</script>
-
+<body>
 <div id="app">
-    <div>{{ message }}</div>
-    <div>当前计数：{{ count }}</div>
-    <div @click="plus1" style="cursor: pointer; color: blue;">加一</div>
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <div style="padding: 0 20px 20px;font-size: 18px;color: #1890ff;">
+            山城智刻·印迹渝州
+        </div>
+        <el-menu
+                active-text-color="#1890ff"
+                background-color="#001529"
+                text-color="#fff"
+                @select="handleMenuSelect"
+        >
+            <el-menu-item index="user">用户管理</el-menu-item>
+            <el-menu-item index="spot">景点管理</el-menu-item>
+            <el-menu-item index="other">其他管理</el-menu-item>
+        </el-menu>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content">
+        <!-- 头部 -->
+        <div class="header">
+            <span style="font-size: 18px;">{{ currentModule }}</span>
+            <div style="display: flex;align-items: center;gap: 15px;">
+                <el-icon>
+                    <User/>
+                </el-icon>
+                管理员
+            </div>
+        </div>
+
+        <!-- 用户管理 -->
+        <div v-if="currentView === 'user'">
+            <div class="operation-bar">
+                <el-input v-model="searchUser" placeholder="搜索用户" style="width: 300px;"></el-input>
+                <el-button type="primary" @click="openDialog('user')">新增用户</el-button>
+            </div>
+
+            <el-table :data="filteredUsers" border>
+                <el-table-column prop="userName" label="用户名"></el-table-column>
+                <el-table-column prop="role" label="角色"></el-table-column>
+                <el-table-column label="操作" width="180">
+                    <template #default="scope">
+                        <el-button size="small" @click="editItem('user', scope.row)">编辑</el-button>
+                        <el-button size="small" type="danger" @click="deleteItem('user', scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+
+        <!-- 景点管理 -->
+        <div v-if="currentView === 'spot'">
+            <div class="operation-bar">
+                <el-input v-model="searchScenic" placeholder="搜索景点" style="width: 300px;"></el-input>
+                <el-button type="primary" @click="openDialog('spot')">新增景点</el-button>
+            </div>
+
+            <el-table :data="filteredScenics" border>
+                <el-table-column label="景点代码" width="120">
+                    <template #default="scope">
+                        <span class="cell-text">{{ scope.row.code }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="景点名称" width="160">
+                    <template #default="scope">
+                        <span class="cell-text">{{ scope.row.name }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="描述" width="200">
+                    <template #default="scope">
+                        <span class="cell-text">{{ scope.row.description }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="地址" width="200">
+                    <template #default="scope">
+                        <span class="cell-text">{{ scope.row.details.address }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="开放时间" width="140">
+                    <template #default="scope">
+                        <span class="cell-text">{{ scope.row.details.openingHours }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="门票" width="100">
+                    <template #default="scope">
+                        <span class="cell-text">{{ scope.row.details.ticketPrice }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="提示" width="200">
+                    <template #default="scope">
+                        <span class="cell-text">{{ scope.row.details.bk }}</span>
+                    </template>
+                </el-table-column>
+
+
+                <el-table-column label="操作" width="180">
+                    <template #default="scope">
+                        <el-button size="small" @click="editItem('spot', scope.row)">编辑</el-button>
+                        <el-button size="small" type="danger" @click="deleteItem('spot', scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+
+        <!-- 表单对话框 -->
+        <el-dialog v-model="dialogVisible" :title="dialogTitle">
+            <el-form :model="currentForm" label-width="80px">
+                <template v-if="currentView === 'user'">
+                    <el-form-item label="用户名" required>
+                        <el-input v-model="currentForm.userName"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码" required v-if="isNew">
+                        <el-input v-model="currentForm.password" show-password></el-input>
+                    </el-form-item>
+                    <el-form-item label="角色">
+                        <el-select v-model="currentForm.role">
+                            <el-option label="管理员" value="admin"></el-option>
+                            <el-option label="游客" value="tourist"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </template>
+
+                <template v-if="currentView === 'spot'">
+                    <el-form-item label="景点代码" required>
+                        <el-input v-model="currentForm.code"></el-input>
+                    </el-form-item>
+                    <el-form-item label="景点名称" required>
+                        <el-input v-model="currentForm.name"></el-input>
+                    </el-form-item>
+                    <el-form-item label="描述" required>
+                        <el-input type="textarea" rows="5" v-model="currentForm.description"></el-input>
+                    </el-form-item>
+                    <el-form-item label="地址">
+                        <el-input v-model="currentForm.details.address"></el-input>
+                    </el-form-item>
+                    <el-form-item label="开放时间">
+                        <el-input type="textarea" v-model="currentForm.details.openingHours"></el-input>
+                    </el-form-item>
+                    <el-form-item label="门票">
+                        <el-input v-model="currentForm.details.ticketPrice"></el-input>
+                    </el-form-item>
+                    <el-form-item label="提示">
+                        <el-input type="textarea" rows="5" v-model="currentForm.details.bk"></el-input>
+                    </el-form-item>
+                    <el-form-item label="经纬度">
+                        <el-row :gutter="10">
+                            <el-col :span="8">
+                                <el-input placeholder="纬度" v-model="currentForm.details.latitude"/>
+                            </el-col>
+                            <el-col :span="8">
+                                <el-input placeholder="经度" v-model="currentForm.details.longitude"/>
+                            </el-col>
+                            <el-col :span="8">
+                                <el-button @click="mapDialogVisible = true">选择位置</el-button>
+                            </el-col>
+                        </el-row>
+                    </el-form-item>
+
+                    <el-dialog title="选择位置" v-model="mapDialogVisible" width="800px">
+                        <div id="amap" style="width: 100%; height: 500px;"></div>
+                    </el-dialog>
+                </template>
+            </el-form>
+
+            <template #footer>
+                <el-button @click="dialogVisible = false">取消</el-button>
+                <el-button type="primary" @click="submitForm">确认</el-button>
+            </template>
+        </el-dialog>
+    </div>
 </div>
 
-<script type="module">
-    import { createApp } from 'vue'
+<!-- Vue 和 Element Plus 脚本 -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
 
-    createApp({
+<script type="module">
+    import * as ElementPlusIconsVue from 'https://unpkg.com/@element-plus/icons-vue';
+    import * as ApiAdmin from './js/api_admin.js';
+
+
+    const app = Vue.createApp({
         data() {
             return {
-                message: 'Hello',
-                count: 0
+                currentView: 'user',
+                currentModule: '用户管理',
+                searchUser: '',
+                searchScenic: '',
+                dialogVisible: false,
+                isNew: true,
+                currentForm: {},
+                users: [],
+                spots: [],
+                mapDialogVisible: false,
+                amap: null,
+                marker: null
+            }
+        },
+        async mounted() {
+            await this.checkLogin()
+            await this.fetchData()
+            if (!window.AMap) {
+                const script = document.createElement('script')
+                script.src = 'https://webapi.amap.com/maps?v=2.0&key=864f2b31e0b6558c0e4ade5157767fd1'
+                script.onload = () => console.log('AMap loaded')
+                document.head.appendChild(script)
+            }
+        },
+        computed: {
+            filteredUsers() {
+                return this.users.filter(item =>
+                    item.userName.includes(this.searchUser)
+                )
+            },
+            filteredScenics() {
+                return this.spots.filter(item =>
+                    item.name.includes(this.searchScenic)
+                )
+            },
+            dialogTitle() {
+                return `${this.isNew ? '新增' : '编辑'}${this.currentModule}`
+            }
+        },
+        watch: {
+            mapDialogVisible(val) {
+                if (val) {
+                    this.$nextTick(() => {
+                        if (!this.amap) {
+                            this.initMap()
+                        }
+                    })
+                }
             }
         },
         methods: {
-            plus1() {
-                this.count += 1
+            initMap() {
+                this.amap = new AMap.Map('amap', {
+                    zoom: 12,
+                    center: [106.55, 29.56],
+                })
+
+                this.marker = new AMap.Marker({
+                    map: this.amap
+                })
+                let lng = this.currentForm.details.longitude
+                let lat = this.currentForm.details.latitude
+                this.marker.setPosition([lng, lat])
+
+                this.amap.on('click', (e) => {
+                    const {lng, lat} = e.lnglat
+                    this.currentForm.details.longitude = lng.toFixed(6)
+                    this.currentForm.details.latitude = lat.toFixed(6)
+                    this.marker.setPosition([lng, lat])
+                })
+            },
+            async checkLogin() {
+                const token = localStorage.getItem('token')
+                if (!token) {
+                    window.location.href = 'index.html'
+                    return false
+                }
+                const login_info_res = await ApiAdmin.AdminInfo()
+                const login_info = login_info_res.data
+                if (!login_info) {
+                    window.location.href = 'index.html'
+                    return false
+                }
+                if (login_info.role !== 'admin') {
+                    window.location.href = 'index.html'
+                    return false
+                }
+                return true
+
+            },
+
+            async fetchData() {
+                Notice.show("正在加载数据，请稍候", "loading", 5000, "admin_fetching")
+                const spots = await ApiAdmin.fetchSpots()
+                this.spots = Object.entries(spots.data).map(([id, spot]) => ({
+                    code: id,
+                    ...spot
+                }))
+
+                console.log(this.spots)
+
+                const users = await ApiAdmin.fetchUsers()
+                this.users = users.data
+                Notice.close("admin_fetching")
+            },
+
+            handleMenuSelect(index) {
+                this.currentView = index
+                this.currentModule = {
+                    user: '用户管理',
+                    spot: '景点管理',
+                    other: '其他管理'
+                }[index]
+            },
+            openDialog(type) {
+                this.isNew = true
+                if (type == "spot") {
+                    this.currentForm = {
+                        details: {}
+                    }
+                } else {
+                    this.currentForm = {}
+                }
+                this.dialogVisible = true
+            },
+            editItem(type, item) {
+                this.isNew = false
+                this.currentForm = {...item}
+                this.dialogVisible = true
+            },
+            async deleteItem(type, row) {
+                await this.$confirm('确定删除该条记录吗？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(async () => {
+                    if (type == 'user') {
+                        const delete_res = await ApiAdmin.AdminDeleteUser(row.userId)
+                        if (delete_res.ok) {
+                            Notice.show('删除成功', 'success')
+                        }
+                    } else if (type == 'spot') {
+                        const delete_res = await ApiAdmin.AdminDeleteSpot(row.code)
+                        if (delete_res.ok) {
+                            Notice.show('删除成功', 'success')
+                        }
+                    }
+                }).catch(() => {
+
+                })
+                await this.fetchData()
+            },
+            async submitForm() {
+                if (this.isNew) {
+                    const newItem = {
+                        ...this.currentForm,
+                    }
+                    if (this.currentView == 'user') {
+                        const insert_res = await ApiAdmin.AdminInsertUser({
+                            ...newItem,
+                        })
+                        if (insert_res.ok) {
+                            Notice.show('新增成功', 'success')
+                        } else return;
+                    } else if (this.currentView == 'spot') {
+                        const insert_res = await ApiAdmin.AdminInsertSpot({
+                            [newItem.code]: {
+                                name: newItem.name,
+                                description: newItem.description,
+                                details: newItem.details,
+                            }
+                        })
+                        if (insert_res.ok) {
+                            Notice.show('新增成功', 'success')
+                        } else return;
+                    }
+                    await this.fetchData()
+                } else {
+                    // console.log(this.currentForm)
+                    if (this.currentView == 'user') {
+                        const update_res = await ApiAdmin.updateUser(this.currentForm)
+                        if (update_res.ok) {
+                            Notice.show('更新成功', 'success')
+                        } else return;
+                    }else if (this.currentView == 'spot') {
+
+                        const update_res = await ApiAdmin.updateSpot(this.currentForm.code, {
+                            [this.currentForm.code]: {
+                                name: this.currentForm.name,
+                                description: this.currentForm.description,
+                                details: this.currentForm.details,
+                            }
+                        })
+                        if (update_res.ok) {
+                            Notice.show('更新成功', 'success')
+                        } else return;
+                    }
+                    await this.fetchData()
+                }
+                this.dialogVisible = false
             }
         }
-    }).mount('#app')
-</script>
+    })
 
+    app.use(ElementPlus)
+
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+        app.component(key, component)
+    }
+
+    app.mount('#app')
+</script>
+</body>
 </html>

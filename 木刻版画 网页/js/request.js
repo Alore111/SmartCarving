@@ -25,7 +25,7 @@ async function requestAndCheck(url, options = {}, errorMsg = '请求失败') {
 
 // ========== 用户认证 ==========
 export async function register(username, password) {
-    return await requestAndCheck(`${BASE_URL}/api/users/register`, {
+    return await requestAndCheck(`${USER_API_BASE}/register`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({username, password})
@@ -33,7 +33,7 @@ export async function register(username, password) {
 }
 
 export async function login(username, password) {
-    return await requestAndCheck(`${BASE_URL}/api/users/login`, {
+    return await requestAndCheck(`${USER_API_BASE}/login`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({username, password})
@@ -41,8 +41,31 @@ export async function login(username, password) {
 }
 
 export async function getUserInfo() {
-    return await requestAndCheck(`${BASE_URL}/api/users/info`, {}, '获取用户信息失败')
+    return await requestAndCheck(`${USER_API_BASE}/info`, {}, '获取用户信息失败')
 }
+
+export async function updateUserInfo(data) {
+    return await requestAndCheck(`${USER_API_BASE}/info`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    }, '更新用户信息失败')
+}
+
+export async function insertUser(data) {
+    return await requestAndCheck(`${USER_API_BASE}/add`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    }, '新增用户失败')
+}
+
+export async function deleteUser(userId) {
+    return await requestAndCheck(`${USER_API_BASE}/delete/${userId}`, {
+        method: 'DELETE'
+    }, '删除失败')
+}
+
 
 // ========== 通用数据集 API ==========
 export async function fetchAll(dataset, type = '') {
@@ -60,6 +83,20 @@ export async function addRecord(dataset, data) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
     }, '添加数据失败')
+}
+
+export async function updateRecord(dataset, id, data) {
+    return await requestAndCheck(`${DATASET_API_BASE}/${dataset}/${id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    }, "更新数据失败")
+}
+
+export async function deleteRecord(dataset, id) {
+    return await requestAndCheck(`${DATASET_API_BASE}/${dataset}/${id}`, {
+        method: 'DELETE'
+    }, "删除数据失败")
 }
 
 // ========== 用户足迹 API ==========

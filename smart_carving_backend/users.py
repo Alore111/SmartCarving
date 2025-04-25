@@ -35,3 +35,10 @@ class UserManager:
 
     def get_user_by_token(self, token: str):
         return self.db.get_user_by_token(token)
+
+    def insert_user(self, userName, password, role):
+        userId = str(uuid.uuid4())
+        hashed_password = self._hash_password(password)
+        insert_info = self.db.insert_user(userId, userName, hashed_password, role)
+        if insert_info:
+            return {'success': True, 'message': '注册成功', 'userId': userId}

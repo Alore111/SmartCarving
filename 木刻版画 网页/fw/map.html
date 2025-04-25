@@ -91,6 +91,10 @@
             position: relative;
         }
 
+        .map-img.ft {
+            margin-left: 240px;
+        }
+
         .map-point {
             position: absolute;
             width: 4px;
@@ -253,20 +257,6 @@
         <div class="map-wrapper-container">
             <!-- 地图图层 + 标记（可缩放拖动） -->
             <div class="map-wrapper" id="mapWrapper">
-                <img src="../img/map2-ft.png" class="map-img ft" alt=""/>
-
-                <!-- 景点标记 -->
-            <div class="map-point" style="top: 53%; left: 52%;" data-id="hongyadong"></div>
-            <div class="map-point" style="top: 53.7%; left: 51.5%;" data-id="jiefangbei"></div>
-            <div class="map-point" style="top: 52%; left: 44%;" data-id="ciqikou"></div>
-            <div class="map-point" style="top: 54.5%; left: 51%;" data-id="chongqingshibati"></div>
-            <div class="map-point" style="top: 52%; left: 52%;" data-id="chongqingdajuyuan"></div>
-            <div class="map-point" style="top: 58%; left: 48%;" data-id="dongwuyuan"></div>
-            <div class="map-point" style="top: 55%; left: 50.3%;" data-id="budao"></div>
-            <div class="map-point" style="top: 54%; left: 49%;" data-id="liziba"></div>
-            <div class="map-point" style="top: 54.5%; left: 49.5%;" data-id="eling"></div>
-            <div class="map-point" style="top: 53.5%; left: 50.5%;" data-id="dalitang"></div>
-            <!-- 更多景点标记 -->
             </div>
         </div>
 
@@ -278,132 +268,11 @@
 </div>
 
 <script>
-    // 景点数据
-    const spots = {
-        hongyadong: {
-            name: "洪崖洞",
-            description: "洪崖洞是国家4A级旅游景区，坐落于渝中区嘉陵江畔，以巴渝传统吊脚楼建筑群为核心，融合民俗风貌、山城景观与现代商业，是重庆最具标志性的历史人文地标。其依山就势的11层立体建筑，集文化体验、特色餐饮、观景休闲于一体，被誉为“悬崖上的魔幻之城”。",
-            details: {
-                address: "重庆市渝中区嘉陵江滨江路88号",
-                openingHours: "全天开放（开灯时间：19:00）",
-                ticketPrice: "免费（无需预约）",
-                bk:"1.千厮门大桥观景台：俯瞰洪崖洞全景与两江夜景的黄金视角。 2.洪崖洞崖壁栈道：近距离感受吊脚楼与崖壁的结合。 3.尽量错峰出行（其实最后的结果都是人挤人） 4.走楼梯，不要等电梯，等很久都挤不上一趟。 5.不适合购物，溢价严重。 6.极有可能打不到车。",
-            }
-        },
-        jiefangbei: {
-            name: "解放碑",
-            description: "解放碑（人民解放纪念碑）是重庆的历史与文化核心地标，始建于1941年，原为抗战胜利纪功碑，后为纪念重庆解放更名。现为国家级抗战遗址，也是中国唯一一座纪念抗日战争胜利的纪念碑。其所在的解放碑步行街是西部最繁华商圈，融合历史底蕴与现代商业，被誉为“重庆的都市心脏”。",
-            details: {
-                address: "重庆市渝中区解放碑步行街",
-                openingHours: "全天开放（周边商场10:00-22:00）",
-                ticketPrice: "免费（无需预约）",
-                bk:" 1.步行街：解放碑正前方，低角度仰拍"
-            }
-        },
-        ciqikou: {
-            name: "磁器口",
-            description: "磁器口古镇始建于宋代，曾是嘉陵江畔重要的水陆码头，素有“小重庆”之称。古镇依山而建，青石板路纵横交错，完整保留明清时期巴渝民居风貌，以码头文化、茶馆文化、传统手工艺为特色，是体验老重庆市井风情的必游之地。",
-            details: {
-                address: "重庆市沙坪坝区磁器口正街",
-                openingHours: "古镇全天开放（商铺9:00-22:00）",
-                ticketPrice: "免费（部分场馆如宝轮寺需另购票）",
-                bk:"1.尽量错峰出行（重庆无淡季）2.商业化较严重，特产同质化。"
-            }
-        },
-        chongqingshibati: {
-            name: "重庆十八梯",
-            description: "十八梯曾是连接重庆上下半城的百年老阶梯，承载着山城码头文化的市井记忆。2021年修复后，以“老重庆缩影”为定位，保留明清梯坎、吊脚楼等传统肌理，融合历史展馆、文创空间与山城美食，重现“坡坡坎坎烟火气”，成为渝中区继洪崖洞后的又一文化地标。",
-            details: {
-                address: "重庆市渝中区十八梯传统风貌区",
-                openingHours: "全天开放（商铺及展馆10:00-22:00）",
-                ticketPrice: "免费（部分体验项目需另收费）",
-                bk:"1.云端观景台：顶层平台俯瞰渝中半岛夜景，与解放碑同框。"
-            }
-        },
-        chongqingdajuyuan: {
-            name: "重庆大剧院",
-            description: "重庆大剧院坐落于两江交汇的江北嘴CBD，以“玻璃时空门”为设计灵感，由香港建筑师严迅奇操刀，是中国西部规模最大、设施最先进的综合性剧院。其棱角分明的几何造型与流动的玻璃幕墙，日间如水晶切面，夜间随灯光变幻色彩，与隔江的洪崖洞、来福士广场共同构成重庆夜景的“黄金三角”。",
-            details: {
-                address: "重庆市江北区江北嘴文华街东路",
-                openingHours: "外部景观全天开放；内部演出场馆根据演出安排开放（参观需提前查询演出场次）",
-                ticketPrice: "外部参观免费；演出票按场次收费（门口没人站着检票可以直接进去，但是进去都要过安检）",
-                bk:"1.江滩观景台：拍摄大剧院与对岸洪崖洞的镜面对称夜景。 2.重庆大剧院东门方向：对面就是来福士，晚上灯光巨美。 3.不要错过末班地铁，正常情况是23点左右。 4.坐电梯，大剧场堂座在2楼，二楼上3F，三楼上4F。 5.1号门是西门，中剧场。2号门是东门，大剧场。暂未开放3号门sd口，默认在车库。"
-            }
-        },
-        dongwuyuan: {
-            name: "重庆动物园",
-            description: "重庆市动物园坐落于九龙坡区杨家坪，占地45公顷，自1955年建园以来，始终以野生动物护、科研教育为核心使命，现已成为集生态旅游、科普教育、动物繁育于一体的国家AAAA级旅游景区和全国科普教育基地。作为西南地区重要的生物多样性保护基地，这里不仅是市民亲近自然的窗口，更是全球大熊猫繁育研究的标杆之一，每年吸引数百万游客前来探秘。",
-            details: {
-                address: "重庆市九龙坡区西郊一村1号",
-                openingHours: "08:00-18:00（16:30停止入园）",
-                ticketPrice: "成人25元/人，学生票半价。",
-                bk:"1.最好上午早点去，排队花的时间少，9点到10:30熊猫营业最活跃。 2.可以带点面包、水，但禁止投喂动物乱扔垃圾。",
-            }
-        },
-        budao: {
-            name: "山城步道",
-            description: "山城步道是重庆最具代表性的步道系统之一，串联渝中半岛的上下半城，依山而建的石阶与悬空栈道蜿蜒于悬崖之上，完整保留老重庆的市井风貌与山城立体肌理。步道沿途可见青砖灰瓦的吊脚楼、民国时期历史建筑，以及俯瞰长江的绝佳观景台，被誉为“行走的山城历史博物馆”。",
-            details: {
-                address: "重庆市渝中区中兴路234号（山城巷入口）",
-                openingHours: "全天开放（建议白天游览，夜间部分路段照明有限）",
-                ticketPrice: "免费",
-                bk:"1.山城巷：青石板路串联老民居，打卡“悬崖上的灯笼阵”，夜晚灯火如星缀满山壁"
-            }
-        },
-        liziba: {
-            name: "李子坝轻轨穿楼",
-            description: "李子坝因“轻轨穿楼”奇观闻名全球，轻轨2号线列车从居民楼6-8层呼啸而过，成为重庆“8D魔幻交通”的标志性场景。此处融合交通、居住与旅游功能，设有观景平台、抗战遗址公园及文创街区，是感受山城立体空间的必打卡地。",
-            details: {
-                address: "重庆市渝中区李子坝正街",
-                openingHours: "观景平台全天开放；2号线轻轨工作日运行时间6:30-23:10",
-                ticketPrice: "免费",
-                bk:"1.李子坝站台内：轻轨进站。 2.李子坝观景台：三层观景平台多角度拍摄轻轨穿楼。"
-            }
-        },
-        eling: {
-            name: "鹅岭二厂",
-            description: "鹅岭二厂前身为民国中央银行印钞厂，经改造后成为重庆最具代表性的文创园区。裸露的水泥墙、钢铁管道与先锋艺术装置碰撞，融合工业废墟美学与潮流文化，因电影《从你的全世界路过》取景爆红，现为文艺青年打卡圣地。",
-            details: {
-                address: "重庆市渝中区鹅岭正街1号",
-                openingHours: "园区全天开放（商铺及展览10:00-22:00）",
-                ticketPrice: "免费（部分艺术展需另购票，20-50元不等）",
-                bk:"1.园区地面多石板路与阶梯，穿舒适鞋履。"
-            }
-        },
-        dalitang: {
-            name: "人民大礼堂",
-            description: "重庆人民大礼堂始建于1954年，由建筑大师张家德设计，是中国传统宫殿建筑与西方大跨度结构的融合典范。其仿北京天坛的穹顶造型与三重檐绿色琉璃瓦，气势恢宏，被誉为“东方建筑明珠”，现为重庆十大文化符号之一，兼具大型会议、文化演出与城市地标功能。",
-            details: {
-                address: "重庆市渝中区人民路173号",
-                openingHours: "外部参观全天开放；内部场馆：09:00-17:00（演出期间闭馆，需提前查询）",
-                ticketPrice: "外部免费；进入礼堂内部8元/人（学生半价）",
-                bk:"1.礼堂前广场：对称轴线拍摄穹顶全景，最佳机位为广场中轴线石阶。 2.三峡博物馆台阶：对面就是礼堂，适合打卡。"
-            }
-        }
-    };
-
-    // 点击景点标记时显示信息
-    document.querySelectorAll('.map-point').forEach(point => {
-        point.addEventListener('click', function () {
-            const spotId = this.getAttribute('data-id');
-            const spot = spots[spotId];
-            const infoPanel = document.querySelector('.info-panel');
-            infoPanel.innerHTML = `
-                    <h2 class="spot-details-title">${spot.name}</h2>
-                    <div class="spot-description">${spot.description}</div>
-                    <div class="spot-details">
-                        <p><strong>地址：</strong>${spot.details.address}</p>
-                        <p><strong>开放时间：</strong>${spot.details.openingHours}</p>
-                        <p><strong>门票价格：</strong>${spot.details.ticketPrice}</p>
-                        <p><strong>小提示：</strong>${spot.details.bk}</p>
-                    </div>
-                `;
-        });
-    });
 </script>
 
 <script src="../js/submenu.js"></script>
 <script src="../js/map.js"></script>
+<script type="module" src="../js/api_map.js"></script>
 
 </body>
 </html>
