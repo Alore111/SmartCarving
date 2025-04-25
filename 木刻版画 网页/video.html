@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>山城视界·渝州映像</title>
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/pic/pic.css">
     <link rel="stylesheet" href="css/video.css">
 
 </head>
@@ -14,6 +15,14 @@
     body {
         background-color: rgb(205, 223, 208);
     }
+
+    .video-container {
+    padding: 0px 5% 50px;
+}
+
+.gallery-container {
+    padding: 100px 5% 50px;
+}
 </style>
 
 <body>
@@ -70,24 +79,19 @@
 </nav>
 
 
-<!-- 新增智能导航 -->
-<nav class="smart-nav">
-    <div class="nav-trigger">
-        <i class="fas fa-chevron-left"></i>
-    </div>
-    <div class="nav-list">
-        <div class="nav-item" data-target="jiefangbei"><a class="nav-link" href="">解放碑时空</a></div>
-        <div class="nav-item" data-target="hongya"><a class="nav-link" href="">洪崖幻境</a></div>
-        <div class="nav-item" data-target="dazu"><a class="nav-link" href="">大足石刻</a></div>
-        <div class="nav-item" data-target="ciqikou"><a class="nav-link" href="">磁器口记忆</a></div>
-        <div class="nav-item" data-target="juyuan"><a class="nav-link" href="">重庆大剧院</a></div>
-        <div class="nav-item" data-target="shibati"><a class="nav-link" href="">十八梯</a></div>
-        <div class="nav-item" data-target="chuanwai"><a class="nav-link" href="">川外</a></div>
-    </div>
-</nav>
 
 
-<div class="video-container">
+<div class="gallery-container">
+    <!-- 过滤栏 -->
+    <div class="filter-bar">
+        <button class="filter-btn active">全部</button>
+        <button class="filter-btn">重庆印象</button>
+        <button class="filter-btn">二十四节气</button>
+    </div>
+
+
+<div class="video" data-category="chongqing">
+<div class="video-container" >
     <div class="video-group">
         <!-- 解放碑 -->
         <div class="bilingual-row" id="jiefangbei">
@@ -104,6 +108,7 @@
                         </iframe>
                     </div>
                 </div>
+
 
 
                 <div class="video-content">
@@ -472,7 +477,389 @@
 
     </div>
 </div>
+</div>
 
+<div class="video" data-category="solarterm">
+<div class="video-container" >
+    <div class="video-group">
+        <!-- 清明 -->
+        <div class="bilingual-row" id="jiefangbei">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1wZd5YdEMD&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+
+
+                <div class="video-content">
+                    <h3 class="video-title">清明</h3>
+                    <p class="video-desc">
+                        清明时节，天气晴朗，草木茂盛，是扫墓祭祖、踏青郊游的好时节。</p>
+                    <a href="https://www.bilibili.com/video/BV1wZd5YdEMD/?spm_id_from=333.1387.homepage.video_card.click&vd_source=a7fda5547c708f0f36c903614d689a52"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1wZd5YdEMD&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Pure Brightness</h3>
+                    <p class="video-desc">During the Qingming Festival, the weather is clear and the vegetation is lush, making it a good time for tomb sweeping, ancestor worship, and outdoor activities.</p>
+                    <a href="https://www.bilibili.com/video/BV1wZd5YdEMD?spm_id_from=333.788.videopod.episodes&vd_source=a7fda5547c708f0f36c903614d689a52&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 谷雨 -->
+        <div class="bilingual-row" id="hongya">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1R6d8YpE5b&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">谷雨</h3>
+                    <p class="video-desc">谷雨时节，气温适宜，降水充沛，是春耕的关键时期。</p>
+                    <a href="https://www.bilibili.com/video/BV1R6d8YpE5b/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1R6d8YpE5b&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Grain Rain</h3>
+                    <p class="video-desc">During the Grain Rain season, the temperature is suitable and the precipitation is abundant, making it a crucial period for spring plowing.</p>
+                    <a href="https://www.bilibili.com/video/BV1R6d8YpE5b?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 立夏 -->
+        <div class="bilingual-row" id="dazu">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1FJ5bzPE5T&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">立夏</h3>
+                    <p class="video-desc">
+                        立夏时节，气温升高，万物繁茂。</p>
+                    <a href="https://www.bilibili.com/video/BV1FJ5bzPE5T/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6" class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1FJ5bzPE5T&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Beginning of summer</h3>
+                    <p class="video-desc">In the beginning of summer, as the temperature rises, all things flourish.</p>
+                    <a href="https://www.bilibili.com/video/BV1FJ5bzPE5T?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2" class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 小满 -->
+        <div class="bilingual-row" id="ciqikou">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1ZW5bz8ENW&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">小满</h3>
+                    <p class="video-desc">小满时节，气温升高，降水增多，是农作物生长的关键时期。</p>
+                    <a href="https://www.bilibili.com/video/BV1ZW5bz8ENW/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6" class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1ZW5bz8ENW&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Grain Buds</h3>
+                    <p class="video-desc"> During the Xiaoman season, as temperatures rise and precipitation increases, it is a critical period for crop growth.</p>
+                    <a href="https://www.bilibili.com/video/BV1ZW5bz8ENW?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2" class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 芒种 -->
+        <div class="bilingual-row" id="juyuan">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1hbLhzZExy&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">芒种</h3>
+                    <p class="video-desc">
+                        芒种时节，气温升高，降水增多，是农作物生长的关键时期。</p>
+                    <a href="https://www.bilibili.com/video/BV1hbLhzZExy/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1hbLhzZExy&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Grain in Ear</h3>
+                    <p class="video-desc">The Mangzhong season is a critical period for crop growth when temperatures rise and precipitation increases.</p>
+                    <a href="https://www.bilibili.com/video/BV1hbLhzZExy?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 夏至 -->
+        <div class="bilingual-row" id="shibati">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1htLhzbERJ&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">夏至</h3>
+                    <p class="video-desc">夏至时节，气温升高，降水增多，是农作物生长的关键时期。</p>
+                    <a href="https://www.bilibili.com/video/BV1htLhzbERJ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1htLhzbERJ&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Summer Solstice</h3>
+                    <p class="video-desc">The summer solstice season is a critical period for crop growth as temperatures rise and precipitation increases.</p>
+                    <a href="https://www.bilibili.com/video/BV1htLhzbERJ?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 小暑 -->
+        <div class="bilingual-row" id="chuanwai">
+            <!-- 中文版 -->
+            <div class="video-card">
+                <div class="video-badge">中文版</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1nMdhYNEhQ&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">小暑</h3>
+                    <p class="video-desc">
+                        小暑时节，气温升高，降水增多，是农作物生长的关键时期。</p>
+                    <a href="https://www.bilibili.com/video/BV1nMdhYNEhQ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=d4eecf42ec397bd09c10d699c35404d6"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        查看详情
+                    </a>
+                </div>
+            </div>
+
+            <!-- 英文版 -->
+            <div class="video-card">
+                <div class="video-badge">English</div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://player.bilibili.com/player.html?bvid=BV1nMdhYNEhQ&p=2&high_quality=1&danmaku=0&autoplay=0"
+                                scrolling="no"
+                                frameborder="no"
+                                allowfullscreen="true">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-content">
+                    <h3 class="video-title">Minor Heat</h3>
+                    <p class="video-desc">During the Xiaoshu season, as temperatures rise and precipitation increases, it is a critical period for crop growth.</p>
+                    <a href="https://www.bilibili.com/video/BV1nMdhYNEhQ?spm_id_from=333.788.videopod.episodes&vd_source=d4eecf42ec397bd09c10d699c35404d6&p=2"
+                       class="detail-btn">
+                        <i class="fas fa-info-circle"></i>
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
 
 <!-- 在video.html的<script>部分替换为以下优化代码 -->
 <script>
@@ -539,6 +926,29 @@
             document.querySelector('.social-links').classList.toggle('active');
         });
     });
+</script>
+
+<script>
+    // 替换原有的筛选功能代码为以下内容
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelector('.filter-btn.active')?.classList.remove('active');
+            btn.classList.add('active');
+            const categoryMap = {
+                '全部': 'all',
+                '重庆印象': 'chongqing',
+                '二十四节气': 'solarterm',
+                '中国传统节日': 'festival',
+            };
+            const category = categoryMap[btn.textContent];
+
+            document.querySelectorAll('.video ').forEach(card => {
+                card.style.display = category === 'all' ? 'block' :
+                    card.dataset.category === category ? 'block' : 'none';
+            });
+        });
+    });
+
 </script>
 
 <script src="js/submenu.js"></script>
