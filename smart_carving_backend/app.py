@@ -230,6 +230,114 @@ def delete_user(user_id):
         return make_response(200, "删除成功")
     return make_response(500, "删除失败")
 
+
+# 获取评论列表（支持按 spot_id 查询）
+@app.route("/api/comments", methods=["GET"])
+def get_comments():
+    sql = DatabaseSql()
+    spot_id = request.args.get("spot_id")
+    limit = int(request.args.get("limit", 10))
+    offset = int(request.args.get("offset", 0))
+
+    if not isinstance(spot_id, int):
+        spot_id = sql.get_spot_id_by_code(spot_id)
+
+    if not spot_id:
+        return make_response(400, "缺少景点 spot_id 参数")
+
+    try:
+        comments = sql.list_comments(spot_id, limit, offset)
+        return make_response(200, "获取成功", comments)
+    except Exception as e:
+        return make_response(500, f"查询失败: {str(e)}")
+
+
+# 获取所有评论（后台用，不按景点 spot_id 限制）
+@app.route('/api/comments/all', methods=['GET'])
+def get_all_comments():
+    user, auth_error = authenticate_request(role="admin")
+    if auth_error:
+        return auth_error
+
+    limit = int(request.args.get('limit', 20))
+    offset = int(request.args.get('offset', 0))
+    status_filter = request.args.get('status')  # 可选：pending / approved / rejected
+    try:
+        sql = DatabaseSql()
+        comments = sql.list_comments_all(status_filter, limit, offset)
+        return make_response(200, "获取成功", comments)
+    except Exception as e:
+        return make_response(500, f"获取评论失败: {str(e)}")
+
+# 用户提交评论
+@app.route("/api/comments", methods=["POST"])
+def submit_comment():
+    user, err = authenticate_request()
+    if err:
+        return err
+
+    data = request.get_json()
+    spot_id = data.get("spot_id")
+    content = data.get("content")
+    recommend = data.get("recommend")  # 1: 推荐  0: 雷
+
+    if spot_id is None or content is None or recommend is None:
+        return make_response(400, "缺少必填字段")
+
+    try:
+        sql = DatabaseSql()
+        if type(spot_id) == str:
+            spot_id = sql.get_spot_id_by_code(spot_id)
+        sql.submit_comment(spot_id, user['userId'], content, recommend)
+        return make_response(201, "评论提交成功，等待审核")
+    except Exception as e:
+        return make_response(500, f"提交失败: {str(e)}")
+
+# 审核评论（通过）
+@app.route("/api/comments/<comment_id>/approve", methods=["PUT"])
+def approve_comment(comment_id):
+    user, err = authenticate_request(role="admin")
+    if err:
+        return err
+
+    try:
+        sql = DatabaseSql()
+        success = sql.approve_comment(comment_id)
+        if success:
+            return make_response(200, "审核通过成功")
+        else:
+            return make_response(404, "未找到待审核的评论")
+    except Exception as e:
+        return make_response(500, f"审核失败: {str(e)}")
+
+# 审核评论（拒绝）
+@app.route("/api/comments/<comment_id>/reject", methods=["PUT"])
+def reject_comment(comment_id):
+    user, err = authenticate_request(role="admin")
+    if err:
+        return err
+
+    try:
+        sql = DatabaseSql()
+        sql.reject_comment(comment_id)
+        return make_response(200, "审核拒绝成功")
+    except Exception as e:
+        return make_response(500, f"审核失败: {str(e)}")
+
+# 软删除评论
+@app.route("/api/comments/<comment_id>", methods=["DELETE"])
+def delete_comment(comment_id):
+    user, err = authenticate_request(role="admin")
+    if err:
+        return err
+
+    try:
+        sql = DatabaseSql()
+        sql.delete_comment(comment_id)
+        return make_response(200, "删除成功")
+    except Exception as e:
+        return make_response(500, f"删除失败: {str(e)}")
+
 # 添加旅游线路
 @app.route("/api/users/<dataset_name>/<user_id>/tracks", methods=["POST"])
 def add_track(dataset_name, user_id):

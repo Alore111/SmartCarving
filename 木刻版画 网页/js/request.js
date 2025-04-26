@@ -141,3 +141,48 @@ export async function uploadFile(file) {
         return {ok: false, message: err.message}
     }
 }
+
+// ========== 景点评论 API ==========
+
+// 获取评论列表
+export async function fetchComments(spotId, limit = 10, offset = 0) {
+    const url = `${BASE_URL}/api/comments?spot_id=${spotId}&limit=${limit}&offset=${offset}`
+    return await requestAndCheck(url, {}, '获取评论失败')
+}
+// 获取所有评论
+export async function fetchAllComments(limit = 20, offset = 0, status = '') {
+    let url = `${BASE_URL}/api/comments/all?limit=${limit}&offset=${offset}`
+    if (status) url += `&status=${status}`
+    return await requestAndCheck(url, {}, '获取所有评论失败')
+}
+
+// 提交新评论
+export async function submitComment(commentData) {
+    return await requestAndCheck(`${BASE_URL}/api/comments`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(commentData)
+    }, '提交评论失败')
+}
+
+// 审核通过评论
+export async function approveComment(commentId) {
+    return await requestAndCheck(`${BASE_URL}/api/comments/${commentId}/approve`, {
+        method: 'PUT'
+    }, '审核评论失败')
+}
+
+// 审核拒绝评论
+export async function rejectComment(commentId) {
+    return await requestAndCheck(`${BASE_URL}/api/comments/${commentId}/reject`, {
+        method: 'PUT'
+    }, '拒绝评论失败')
+}
+
+// 删除评论（软删除）
+export async function deleteComment(commentId) {
+    return await requestAndCheck(`${BASE_URL}/api/comments/${commentId}`, {
+        method: 'DELETE'
+    }, '删除评论失败')
+}
+

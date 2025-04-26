@@ -110,10 +110,18 @@ class DatabaseSql:
             }
         }
 
+    def get_spot_id_by_code(self, code):
+        sql = "SELECT id FROM spots WHERE code = %s"
+        self.cursor.execute(sql, (code,))
+        row = self.cursor.fetchone()
+        if not row:
+            return None
+        return row['id']
+
     def get_all_spots(self):
         sql = """
         SELECT code, name, description, address, opening_hours,
-               ticket_price, tips, latitude, longitude
+               ticket_price, tips, latitude, longitude, recommend_count, thunder_count
         FROM spots
         """
         self.cursor.execute(sql)
@@ -130,7 +138,9 @@ class DatabaseSql:
                     "ticketPrice": row["ticket_price"],
                     "bk": row["tips"],
                     "latitude": row["latitude"],
-                    "longitude": row["longitude"]
+                    "longitude": row["longitude"],
+                    "recommend_count": row["recommend_count"],
+                    "thunder_count": row["thunder_count"],
                 }
             }
         return result
@@ -255,68 +265,119 @@ class DatabaseSql:
         self.cursor.execute(sql, (id,))
         self.conn.commit()
 
-
-    # 添加景点
-    def insert_jingdian(self, name, keyword, descriptionShort, description, img, location, lon, lat):
-        sql = """
-            INSERT INTO jingdian (name, keyword, descriptionShort, description, img, location, lonlat)
-            VALUES (%s, %s, %s, %s, %s, %s, ST_PointFromText(%s))
+    def submit_comment(self, spot_id, user_id, content, recommend):
         """
-        point_wkt = f'POINT({lon} {lat})'  # 经纬度用WKT格式
-        self.cursor.execute(sql, (name, keyword, descriptionShort, description, img, location, point_wkt))
+        用户提交评论
+        """
+        sql = """
+            INSERT INTO spot_comments (spot_id, user_id, content, recommend, status, is_deleted, created_at)
+            VALUES (%s, %s, %s, %s, 'pending', 0, NOW())
+        """
+        self.cursor.execute(sql, (spot_id, user_id, content, recommend))
         self.conn.commit()
 
-    # 查询所有景点
-    def get_all_jingdian(self):
-        sql = "SELECT id, name, keyword, descriptionShort, description, img, location, ST_AsText(lonlat) as lonlat FROM jingdian"
-        self.cursor.execute(sql)
+    def approve_comment(self, comment_id):
+        """
+        审核通过评论，同时更新对应景点的推荐/雷数
+        """
+        # 先查评论详情
+        select_sql = "SELECT spot_id, recommend FROM spot_comments WHERE id = %s  AND is_deleted = 0"
+        self.cursor.execute(select_sql, (comment_id,))
+        comment = self.cursor.fetchone()
+
+        if comment:
+            spot_id = comment['spot_id']
+            recommend = comment['recommend']
+
+            # 更新评论审核状态
+            update_comment_sql = """
+                UPDATE spot_comments 
+                SET status = 'approved', approved_at = NOW()
+                WHERE id = %s
+            """
+            self.cursor.execute(update_comment_sql, (comment_id,))
+
+            # 更新景点 recommend_count 或 thunder_count
+            if recommend == 1:
+                update_spot_sql = "UPDATE spots SET recommend_count = recommend_count + 1 WHERE id = %s"
+            elif recommend == 0:
+                update_spot_sql = "UPDATE spots SET thunder_count = thunder_count + 1 WHERE id = %s"
+            else:
+                update_spot_sql = None
+
+            if update_spot_sql:
+                self.cursor.execute(update_spot_sql, (spot_id,))
+
+            self.conn.commit()
+            return True
+        else:
+            return False
+
+    def reject_comment(self, comment_id):
+        """
+        审核拒绝评论
+        """
+        sql = """
+            UPDATE spot_comments 
+            SET status = 'rejected', approved_at = NOW()
+            WHERE id = %s AND is_deleted = 0
+        """
+        self.cursor.execute(sql, (comment_id,))
+        self.conn.commit()
+
+    def delete_comment(self, comment_id):
+        """
+        软删除评论
+        """
+        sql = """
+            UPDATE spot_comments 
+            SET is_deleted = 1
+            WHERE id = %s
+        """
+        self.cursor.execute(sql, (comment_id,))
+        self.conn.commit()
+
+    def list_comments(self, spot_id, limit=10, offset=0):
+        """
+        查询某景点审核通过且未删除的评论列表
+        """
+        sql = """
+            SELECT spot_comments.id, userName, content, recommend, created_at, spots.name AS spot_name
+            FROM spot_comments, users, spots
+            WHERE spot_id = %s AND status = 'approved' AND is_deleted = 0 
+            AND spot_comments.user_id = users.userId AND spot_comments.spot_id = spots.id
+            ORDER BY created_at DESC
+        """
+        if limit:
+            sql += " LIMIT %s OFFSET %s"
+        self.cursor.execute(sql, (spot_id, limit, offset))
         return self.cursor.fetchall()
 
-    # 根据ID查询景点
-    def get_jingdian_by_id(self, jingdian_id):
-        sql = "SELECT id, name, keyword, descriptionShort, description, img, location, ST_AsText(lonlat) as lonlat FROM jingdian WHERE id = %s"
-        self.cursor.execute(sql, (jingdian_id,))
-        return self.cursor.fetchone()
+    def list_comments_all(self, status_filter, limit=10, offset=0):
+        try:
+            query = """
+                SELECT approved_at, spot_comments.id, status, content, recommend, created_at, users.userName, spots.name AS spot_name
+                FROM spot_comments, users, spots
+                WHERE is_deleted = 0 AND spot_comments.user_id = users.userId AND spot_comments.spot_id = spots.id
+            """
+            params = []
 
-    # 更新景点信息
-    def update_jingdian(self, jingdian_id, name=None, keyword=None, descriptionShort=None, description=None, img=None, location=None, lon=None, lat=None):
-        fields = []
-        values = []
-        if name is not None:
-            fields.append("name = %s")
-            values.append(name)
-        if keyword is not None:
-            fields.append("keyword = %s")
-            values.append(keyword)
-        if descriptionShort is not None:
-            fields.append("descriptionShort = %s")
-            values.append(descriptionShort)
-        if description is not None:
-            fields.append("description = %s")
-            values.append(description)
-        if img is not None:
-            fields.append("img = %s")
-            values.append(img)
-        if location is not None:
-            fields.append("location = %s")
-            values.append(location)
-        if lon is not None and lat is not None:
-            fields.append("lonlat = ST_PointFromText(%s)")
-            values.append(f"POINT({lon} {lat})")
+            if status_filter:
+                query += " AND status = %s"
+                params.append(status_filter)
 
-        if not fields:
-            return  # 没有需要更新的字段
+            if limit:
+                query += " ORDER BY created_at DESC LIMIT %s OFFSET %s"
+                params.extend([limit, offset])
+            else:
+                query += " ORDER BY created_at DESC"
 
-        sql = f"UPDATE jingdian SET {', '.join(fields)} WHERE id = %s"
-        values.append(jingdian_id)
-        self.cursor.execute(sql, values)
-        self.conn.commit()
-
-    # 删除景点
-    def delete_jingdian(self, jingdian_id):
-        sql = "DELETE FROM jingdian WHERE id = %s"
-        self.cursor.execute(sql, (jingdian_id,))
-        self.conn.commit()
+            self.cursor.execute(query, params)
+            comments = self.cursor.fetchall()
+            return comments
+        except Exception as e:
+            print(f"Error: {e}")
+            return []
 
     def close(self):
         self.cursor.close()

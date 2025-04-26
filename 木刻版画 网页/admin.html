@@ -81,7 +81,8 @@
         >
             <el-menu-item index="user">用户管理</el-menu-item>
             <el-menu-item index="spot">景点管理</el-menu-item>
-            <el-menu-item index="other">其他管理</el-menu-item>
+            <el-menu-item index="comment">评论管理</el-menu-item>
+<!--            <el-menu-item index="other">其他管理</el-menu-item>-->
         </el-menu>
     </div>
 
@@ -89,7 +90,10 @@
     <div class="main-content">
         <!-- 头部 -->
         <div class="header">
-            <span style="font-size: 18px;">{{ currentModule }}</span>
+            <div style="display: flex;align-items: center;gap: 15px;">
+                <span style="font-size: 18px;">{{ currentModule }}</span>
+                <el-button type="warning" @click="fetchData()">刷新列表</el-button>
+            </div>
             <div style="display: flex;align-items: center;gap: 15px;">
                 <el-icon>
                     <User/>
@@ -171,6 +175,38 @@
             </el-table>
         </div>
 
+        <!-- 评论管理 -->
+        <div v-if="currentView === 'comment'">
+            <div class="operation-bar">
+                <el-input v-model="searchComment" placeholder="搜索评论内容" style="width: 300px;"></el-input>
+            </div>
+
+            <el-table :data="filteredComments" border>
+                <el-table-column prop="userName" label="用户名"></el-table-column>
+                <el-table-column prop="spot_name" label="景点"></el-table-column>
+                <el-table-column prop="content" label="评论内容"></el-table-column>
+                <el-table-column label="审核状态">
+                    <template #default="scope">
+                        <el-tag :type="scope.row.status === 'pending' ? 'warning' : scope.row.status === 'approved' ? 'success' : 'danger'">
+                            {{ scope.row.status === 'pending' ? '待审核' : scope.row.status === 'approved' ? '已通过' : '未通过' }}
+                        </el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="created_at" label="评论时间">
+                    <template #default="scope">
+                        <span class="cell-text">{{ formatTime(scope.row.created_at) }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" width="180">
+                    <template #default="scope">
+                        <el-button size="small" @click="editItem('spot', scope.row)">操作</el-button>
+                        <el-button size="small" type="danger" @click="deleteItem('comment', scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+
+
         <!-- 表单对话框 -->
         <el-dialog v-model="dialogVisible" :title="dialogTitle">
             <el-form :model="currentForm" label-width="80px">
@@ -238,6 +274,28 @@
                         </div>
                     </el-dialog>
                 </template>
+
+                <template v-if="currentView === 'comment'">
+                    <el-form-item label="用户名" disabled>
+                        <el-input :disabled="true" :readonly="true" v-model="currentForm.userName"></el-input>
+                    </el-form-item>
+                    <el-form-item label="评论内容" >
+                        <el-input :disabled="true" :readonly="true" type="textarea" rows="5" v-model="currentForm.content"></el-input>
+                    </el-form-item>
+                    <el-form-item label="景区" >
+                        <el-input :disabled="true" :readonly="true" v-model="currentForm.spot_name"></el-input>
+                    </el-form-item>
+                    <el-form-item label="用户态度" >
+                        <el-tag :type="currentForm.recommend?'success':'danger'">{{currentForm.recommend?'推荐':'不推荐'}}</el-tag>
+                    </el-form-item>
+                    <el-form-item label="审核结果" >
+                        <el-select v-model="currentForm.status">
+                            <el-option label="待审核" value="pending" :disabled="true"></el-option>
+                            <el-option label="通过" value="approved"></el-option>
+                            <el-option label="不通过" value="rejected"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </template>
             </el-form>
 
             <template #footer>
@@ -279,6 +337,9 @@
                 marker: null,
                 searchKeyword: '',
                 suggestionList: [],
+                comments: [],
+                searchComment: '',
+
             }
         },
         async mounted() {
@@ -300,6 +361,11 @@
             filteredScenics() {
                 return this.spots.filter(item =>
                     item.name.includes(this.searchScenic)
+                )
+            },
+            filteredComments() {
+                return this.comments.filter(item =>
+                    item.content.includes(this.searchComment)
                 )
             },
             dialogTitle() {
@@ -349,6 +415,9 @@
 
                     // 可选：绑定 autocomplete 到 input 元素（也可以直接监听输入）
                 })
+            },
+            formatTime(time) {
+                return time ? new Date(time).toLocaleString() : ''
             },
 
             updateLocation(lng, lat, address = '') {
@@ -423,20 +492,25 @@
                     ...spot
                 }))
 
-                console.log(this.spots)
+                // console.log(this.spots)
 
                 const users = await ApiAdmin.fetchUsers()
                 this.users = users.data
+
+                const comments = await ApiAdmin.AdminFetchComments();
+                this.comments = comments.data;
+
                 Notice.close("admin_fetching")
             },
 
             handleMenuSelect(index) {
-                this.currentView = index
+                this.currentView = index;
                 this.currentModule = {
                     user: '用户管理',
                     spot: '景点管理',
+                    comment: '评论管理',
                     other: '其他管理'
-                }[index]
+                }[index];
             },
             openDialog(type) {
                 this.isNew = true
@@ -470,7 +544,13 @@
                         if (delete_res.ok) {
                             Notice.show('删除成功', 'success')
                         }
+                    } else if (type == 'comment') {
+                        const delete_res = await ApiAdmin.AdminDeleteComment(row.id);
+                        if (delete_res.ok) {
+                            Notice.show('删除成功', 'success');
+                        }
                     }
+
                 }).catch(() => {
 
                 })
@@ -487,7 +567,7 @@
                         })
                         if (insert_res.ok) {
                             Notice.show('新增成功', 'success')
-                        } else return;
+                        }
                     } else if (this.currentView == 'spot') {
                         const insert_res = await ApiAdmin.AdminInsertSpot({
                             [newItem.code]: {
@@ -498,7 +578,7 @@
                         })
                         if (insert_res.ok) {
                             Notice.show('新增成功', 'success')
-                        } else return;
+                        }
                     }
                     await this.fetchData()
                 } else {
@@ -507,7 +587,7 @@
                         const update_res = await ApiAdmin.updateUser(this.currentForm)
                         if (update_res.ok) {
                             Notice.show('更新成功', 'success')
-                        } else return;
+                        }
                     } else if (this.currentView == 'spot') {
 
                         const update_res = await ApiAdmin.updateSpot(this.currentForm.code, {
@@ -519,7 +599,12 @@
                         })
                         if (update_res.ok) {
                             Notice.show('更新成功', 'success')
-                        } else return;
+                        }
+                    } else if (this.currentView == 'comment') {
+                        const update_res = await ApiAdmin.updateCommentStatus(this.currentForm.id, this.currentForm.status)
+                        if (update_res.ok) {
+                            Notice.show('更新成功', 'success')
+                        }
                     }
                     await this.fetchData()
                 }
