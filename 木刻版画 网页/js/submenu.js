@@ -25,4 +25,24 @@ document.querySelectorAll('.dropdown').forEach(item => {
     item.querySelector('.submenu').addEventListener('mouseleave', () => {
         item.querySelector('.submenu').classList.remove('active');
     });
-});    
+});
+document.querySelector('.menu-toggle').addEventListener('click', function() {
+    const links = document.querySelector('.social-links');
+    links.classList.toggle('active');
+
+    // 关闭所有打开的下拉菜单
+    document.querySelectorAll('.submenu').forEach(menu => {
+        menu.classList.remove('active');
+    });
+});
+
+// 下拉菜单交互保持原有逻辑，但建议添加移动端触摸支持
+document.querySelectorAll('.dropdown > .nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            const submenu = this.nextElementSibling;
+            submenu.classList.toggle('active');
+        }
+    });
+});

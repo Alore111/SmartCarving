@@ -1,3 +1,5 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
+
 :root {
     --wood: #6E5B4C;      /* 木刻主色 */
     --ink: #3A2E28;       /* 版画墨色 */
@@ -137,61 +139,92 @@
 
 
 /* 响应式设计 */
-@media (max-width: 992px) {
-    .hero-content h1 {
-        font-size: 2.8rem;
-    }
-}
-
+/* 在现有媒体查询中添加768px适配 */
 @media (max-width: 768px) {
+    /* 导航栏整体调整 */
+    .nav-bar {
+        padding: 0.75rem 3%; /* 减少左右留白 */
+    }
+
+    /* Logo区域优化 */
+    .logo img {
+        height: 35px; /* 适当缩小logo */
+    }
+    .logo-text {
+        font-size: 1rem; /* 调小中文标题 */
+        line-height: 1.2;
+    }
+    .logo-en {
+        font-size: 0.7rem; /* 调小英文副标题 */
+        margin-top: 0.1rem;
+    }
+
+    /* 导航链接区域 */
+    .social-links {
+        gap: 1.2rem; /* 缩小导航项间距 */
+        display: none; /* 默认隐藏桌面导航 */
+    }
+
+    /* 显示移动端菜单按钮 */
     .menu-toggle {
         display: block;
     }
 
-    .nav-links {
+    /* 移动端菜单样式 */
+    .social-links.active {
+        display: flex;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        background: var(--wood);
+        background: rgba(94, 93, 93, 0.95);
         flex-direction: column;
-        align-items: center;
-        padding: 1rem 0;
-        gap: 1.5rem;
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-        transition: all 0.4s;
+        padding: 1rem 3%;
+        gap: 0.8rem;
     }
 
-    .nav-links.active {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-
-    .hero-content {
-        margin: 0 auto;
+    /* 下拉菜单调整 */
+    .dropdown {
+        position: relative;
+        width: 100%;
         text-align: center;
     }
+    .submenu {
+        position: static;
+        display: none !important; /* 移动端默认隐藏二级菜单 */
+        width: 100%;
+        background: rgba(70, 70, 70, 0.9);
+        padding: 0.5rem 0;
+    }
+    .submenu.active {
+        display: flex !important;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 
-    .hero-content h1 {
-        font-size: 2.5rem;
+    /* 导航链接通用样式 */
+    .nav-link {
+        padding: 0.5rem;
+        display: block;
+        width: 100%;
+        border-radius: 8px;
     }
 }
 
-@media (max-width: 576px) {
-    .hero {
-        height: 70vh;
+/* 新增992-769px区间适配（可选） */
+@media (min-width: 769px) and (max-width: 992px) {
+    .social-links {
+        gap: 1.5rem; /* 适当缩小间距 */
     }
-
-    .hero-content h1 {
-        font-size: 2rem;
+    .logo-text {
+        font-size: 1.1rem;
     }
-
-    .quick-access {
-        grid-template-columns: 1fr;
+    .logo-en {
+        font-size: 0.75rem;
     }
-
-    .chat-window {
-        width: 300px;
-        height: 0;
+    .nav-link {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.95rem;
     }
 }
 
