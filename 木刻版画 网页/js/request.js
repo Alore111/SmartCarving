@@ -124,9 +124,10 @@ export async function delFootPrints(routeId) {
 export async function uploadFile(file) {
     const formData = new FormData()
     formData.append('image', file)
-    formData.append('token', '1c17b11693cb5ec63859b091c5b9c1b2')
+    // formData.append('token', '1c17b11693cb5ec63859b091c5b9c1b2')
+    formData.append('token', '27332ccac61013e8a71b9dd0fa735d7b')
     try {
-        const response = await fetch('https://image.t.2ndtool.top/api/index.php', {
+        const response = await fetch('https://upload.f.can6.top/api/index.php', {
             method: 'POST',
             body: formData
         })

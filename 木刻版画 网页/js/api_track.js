@@ -4,6 +4,7 @@ import "https://webapi.amap.com/loca?v=2.0.0&key=864f2b31e0b6558c0e4ade5157767fd
 import "../js/notice.js"
 
 let loading_list = ['track_list','login_check']
+window.currFootprints = []
 
 function initLoading() {
     Notice.show("加载中...", "loading", 10000, 'index-loading')
@@ -84,6 +85,7 @@ async function fetchTracks() {
 export function showTrackDetails(trackDetail) {
     // console.log('显示线路详情:', trackDetail);
     renderFootprintPulseLines(trackDetail.footprints)
+    window.currFootprints = trackDetail.footprints
 
     const container = document.getElementById('track-details');
     if (!container) return;
@@ -94,7 +96,11 @@ export function showTrackDetails(trackDetail) {
     // 清空之前内容
     container.innerHTML = `
         <div class="track-header">
-            <h3 class="track-title">${routeName}<button class="track-edit-btn">编辑</button><button class="track-del-btn">删除</button></h3>
+            <h3 class="track-title">${routeName}
+                <button onclick="share('https://carving.2ndtool.top/fw/zuji.html?routeId=${routeId}')" class="track-share-btn">分享</button>
+                <button class="track-edit-btn">编辑</button>
+                <button class="track-del-btn">删除</button>
+            </h3>
             <p class="track-meta"><strong>用户：</strong><span class="user-info">${userName}</span></p>
             <p class="track-meta"><strong>出发时间：</strong><time class="track-time">${new Date(startTime).toLocaleString()}</time></p>
         </div>
@@ -153,6 +159,62 @@ export function showTrackDetails(trackDetail) {
     });
 
     container.appendChild(list);
+
+
+    const share_content = document.createElement('div');
+    share_content.style.height = '0';
+    share_content.style.overflow = 'hidden';
+    share_content.id = 'share-target-content'
+
+    const share_list = document.createElement('ul');
+    share_list.className = 'footprint-list';
+
+    footprints.forEach(fp => {
+        const item = document.createElement('li');
+        item.className = 'footprint-item';
+        item.innerHTML = `
+        <p class="track-meta location"><strong>位置：</strong>${fp.locationName}</p>
+        <p class="track-meta time"><strong>时间：</strong><time class="track-time">${new Date(fp.timestamp).toLocaleString()}</time></p>
+        ${fp.note ? `<p class="track-meta note"><strong>备注：</strong>${fp.note}</p>` : ''}
+        ${fp.photos.map(photo => `
+            <div class="footprint-photo">
+                <img src="${photo.url}" alt="${photo.description}" loading="lazy" />
+                ${photo.description ? `<p class="photo-caption">${photo.description}</p>` : ''}
+            </div>
+        `).join('')}
+        <hr class="track-divider item-divider"/>
+    `;
+        share_list.appendChild(item);
+    });
+
+    share_content.appendChild(share_list);
+
+    const hidden_bar = document.createElement('div');
+    hidden_bar.className = 'hidden-bar';
+    share_content.appendChild(hidden_bar);
+
+    const share_user_info = document.createElement('div');
+    share_user_info.className = 'share-user-info';
+    share_user_info.innerHTML = `
+        <p class="share-user-name"><span class="user-name">${userName}</span> · <span class="route-name">${routeName}</span></p>
+        <p class="share-user-time"><span class="user-time">${new Date(startTime).toLocaleString()}</span></p>
+    `;
+    share_content.appendChild(share_user_info);
+
+    const website_info = document.createElement('div');
+    website_info.className = 'website-info';
+    website_info.innerHTML = `
+        <div class="website-logo">
+            <img src="../img/tb.jpg" alt="Logo" />
+        </div>
+        <div class="website-text">
+            <p class="website-name">山城智刻·印迹渝州</p>
+            <p class="website-slogan">重庆文旅地图</p>
+        </div>        
+    `;
+    share_content.appendChild(website_info);
+
+    container.appendChild(share_content);
 }
 
 function renderFootprintPulseLines(footprints) {
@@ -743,7 +805,7 @@ function fillFormFromData(data) {
 
 // 页面加载后初始化
 window.onload = async function () {
-    await fetchTracks();  // 获取线路列表
+    const tracks = await fetchTracks();  // 获取线路列表
     const add_tracks_btn = document.querySelector(".upload-btn")
     add_tracks_btn.addEventListener("click", openUploadModal);
     const token = localStorage.getItem('token');
@@ -801,4 +863,15 @@ window.onload = async function () {
         resizeEnable: true,
         mapStyle: "amap://styles/whitesmoke",
     });
+
+
+    let args = new URLSearchParams(window.location.search);
+    let targetRouteId = args.get('routeId');
+
+    if (targetRouteId) {
+        const routeIndex = tracks.findIndex(track => track.routeId === targetRouteId);
+        if (routeIndex !== -1) {
+            document.querySelectorAll('.line-list li')[routeIndex].click();
+        }
+    }
 }

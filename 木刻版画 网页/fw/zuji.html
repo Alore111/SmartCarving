@@ -109,6 +109,7 @@
             cursor: pointer;
             color: #8B4513;
         }
+
         #refresh_list {
             font-size: 14px;
             margin-right: 5px;
@@ -192,6 +193,7 @@
         .track-detail-sidebar.active {
             width: 300px;
             padding: 16px;
+            overflow-x: hidden;
         }
 
         /* 所有子元素样式都基于父级命名空间 */
@@ -214,9 +216,22 @@
             font-size: 14px;
 
         }
+
         .track-detail-sidebar .track-del-btn {
             width: 100%;
             background: #ce2020;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+
+        }
+
+        .track-detail-sidebar .track-share-btn {
+            width: 100%;
+            background: #7ace20;
             color: #fff;
             border: none;
             padding: 5px 10px;
@@ -265,6 +280,91 @@
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+        #share-target-content {
+            width: 300px;
+            overflow: hidden;
+        }
+
+        #share-target-content .footprint-list {
+            max-height: 600px;
+            overflow: hidden;
+            font-size: 12px;
+            padding-left: 5px;
+            margin-left: 5px;
+            border-left: 1px solid #a0653980;
+        }
+
+        #share-target-content .hidden-bar {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            margin-top: -140px;
+            height: 140px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            pointer-events: none;
+        }
+
+        #share-target-content .footprint-photo {
+            margin: 10px 0;
+            width: 115px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #share-target-content .share-user-info {
+            margin: 10px 0;
+            margin-left: 10px;
+            font-size: 12px;
+        }
+
+        #share-target-content .share-user-info .user-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #8B4513;
+        }
+
+        #share-target-content .share-user-info .route-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #b65d1d;
+        }
+
+        #share-target-content .share-user-info .user-time {
+            color: #666;
+        }
+
+
+        #share-target-content .website-info {
+            display: flex;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        #share-target-content .website-info .website-logo {
+            width: 35px;
+            height: 35px;
+        }
+
+        #share-target-content .website-info .website-text {
+            margin-left: 10px;
+        }
+
+        #share-target-content .website-info .website-name {
+            font-size: 12px;
+            font-weight: 600;
+            font-family: sans-serif;
+            color: #371c09;
+        }
+
+        #share-target-content .website-info .website-slogan {
+            font-size: 11px;
+            color: #2d2d2d;
+            font-family: sans-serif;
+            font-weight: 700;
+        }
+
 
         .track-detail-sidebar .footprint-photo img {
             width: 100%;
@@ -443,7 +543,7 @@
 
     <div class="social-links">
         <a class="nav-link" href="../index.html">首页</a>
-        
+
         <div class="dropdown">
             <a class="nav-link">导航</a>
             <ul class="submenu"> <!-- 子菜单列表 -->
@@ -453,7 +553,7 @@
         </div>
 
         <div class="dropdown">
-            <a class="nav-link">资源</a>
+            <a class="nav-link">数字展厅</a>
             <ul class="submenu">
                 <li><a class="nav-link" href="../video.html">视频</a></li>
                 <li><a class="nav-link" href="../pic/pic.html">图片</a></li>
@@ -465,7 +565,7 @@
             <ul class="submenu">
                 <li><a class="nav-link" href="../lishi.html">版画艺境</a></li>
                 <li><a class="nav-link" href="../24solarterms.html">传统文化拾遗</a></li>
-                <li><a class="nav-link" href="">重庆地名寻踪</a></li>
+                <li><a class="nav-link" href="../game.html">重庆地名寻踪</a></li>
             </ul>
         </div>
 
@@ -506,6 +606,7 @@
             <div class="list-header">
                 <h2>用户足迹</h2>
                 <strong id="refresh_list" onclick="refreshList()">刷新</strong>
+                <!--                <strong id="shareBtn" onclick="">分享</strong>-->
                 <strong id="login_status" onclick="showLogin()">未登录</strong>
             </div>
 
@@ -608,9 +709,12 @@
     </div>
 </div>
 
+<div id="shareContainer"></div>
+
 <script src="../js/notice.js"></script>
 <script src="../js/submenu.js"></script>
 <script type="module" src="../js/api_track.js"></script>
+<script src="../js/api_share.js"></script>
 <script>
     let isLogin = true;
 
@@ -637,6 +741,21 @@
         document.getElementById('form-title').textContent = isLogin ? '登录' : '注册';
         document.getElementById('submit-btn').textContent = isLogin ? '登录' : '注册';
         document.querySelector('.switch-btn').textContent = isLogin ? '还没有账号？点击注册' : '已有账号？点击登录';
+    }
+
+    const snapshot = new ShareSnapshot("e9602a4774b49bd6b81ce24af59cc0f0");
+
+    // document.getElementById('shareBtn').onclick = () => {
+    //     const target = document.getElementById('share-target-content');
+    //     const url = 'https://example.com/your-share-url';
+    //     snapshot.show(target, url);
+    // };
+
+    function share(url) {
+        const target = document.getElementById('share-target-content');
+        // const map_target = document.getElementById('track_map');
+        // snapshot.show(target, url, window.currFootprints);
+        snapshot.show(target, url);
     }
 
 </script>

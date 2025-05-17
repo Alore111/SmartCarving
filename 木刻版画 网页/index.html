@@ -76,7 +76,7 @@
             <ul class="submenu"> <!-- 子菜单列表 -->
                 <li><a class="nav-link" href="lishi.html">版画艺境</a></li>
                 <li><a class="nav-link" href="24solarterms.html">传统文化拾遗</a></li>
-                <li><a class="nav-link" href="">重庆地名寻踪</a></li>
+                <li><a class="nav-link" href="game.html">重庆地名寻踪</a></li>
             </ul>
         </li>
 
@@ -204,9 +204,7 @@
         </div>
         <div class="chat-body" id="chatContent">
             <div class="message bot-message">
-                <div class="message-content">
-                    您好！我是木刻小助手，有什么可以帮您的吗？
-                </div>
+                <div class="message-content">您好！我是木刻小助手，有什么可以帮您的吗？</div>
             </div>
         </div>
         <div class="chat-input">
@@ -311,6 +309,7 @@
     </div>
 </footer>
 
+<script src="js/marked.min.js"></script>
 
 <script>
     // 导航栏滚动效果
@@ -361,7 +360,18 @@
         {
             role: 'system',
             content: '你是山城智刻·印迹渝州软件中的木刻小助手，擅长讲解中国木刻版画、重庆本地历史文化、非遗技艺，语气亲切、专业、略带一点文艺气息。你会根据用户的提问给出详尽、准确但不啰嗦的回答。你会保留用户最近5轮对话作为上下文，用于理解和延续对话。'
-        }
+        },
+        {
+            role: 'system',
+            content: '洪崖洞最佳拍照时间与地点\n' +
+                '时间 ：\n' +
+                '19:30 - 20:30 ：傍晚华灯初上，余晖与灯光相互映衬，色彩层次丰富，有浪漫氛围。\n' +
+                '20:00 - 22:00 ：晚上灯光全亮，完美勾勒吊脚楼轮廓和细节，如梦如幻。\n' +
+                '22:00 - 22:30 ：可拍到带灯光的千厮门大桥与洪崖洞同框画面。\n' +
+                '地点 ：\n' +
+                '千厮门大桥 ：中段位置能拍全景及江景；引桥位置可俯拍江景与吊脚楼同框，周末及节假日 19:00 - 22:00 大桥会封闭给行人，可随意停留拍摄。\n' +
+                '洪崖洞楼下对面马路 ：拍正面全景的经典位置，能展现建筑细节，配合车流可用长曝光出有动感画面。'
+        },
     ];
 
     async function handleQuestion() {
@@ -373,10 +383,10 @@
 
         // 添加用户消息到界面
         chatContent.innerHTML += `
-        <div class="message user-message">
-            <div class="message-content">${input}</div>
-        </div>
-    `;
+            <div class="message user-message">
+                <div class="message-content">${input}</div>
+            </div>
+        `;
         chatContent.scrollTop = chatContent.scrollHeight;
 
         // 添加“思考中”提示
@@ -422,6 +432,7 @@
         // 清空输入框
         inputElement.value = '';
         chatContent.scrollTop = chatContent.scrollHeight;
+        formatLastMessageAsMarkdown();
     }
 
 
@@ -431,6 +442,48 @@
             handleQuestion();
         }
     });
+
+    function renderMarkdown(el) {
+        const rawText = el.innerText.trim();
+
+        // 先按换行拆分
+        const lines = rawText.split('\n').map(line => line.trim());
+
+        const markdownLines = [];
+
+        for (const line of lines) {
+            if (/^\d+[\.\、]/.test(line)) {
+                // 有序列表，统一处理为 "1. 内容"
+                markdownLines.push(line.replace(/^(\d+)[\.\、]\s*/, (m, num) => `${num}. `));
+            } else if (/^[-•●▪︎]/.test(line)) {
+                // 无序列表（支持多种前缀）
+                markdownLines.push(line.replace(/^[-•●▪︎]\s*/, '- '));
+            } else if (line === '') {
+                // 空行直接跳过，避免过多 <p>
+                markdownLines.push('');
+            } else {
+                // 普通段落，前后补空行保证换段效果
+                markdownLines.push(line);
+            }
+        }
+
+        // 将处理好的 Markdown 字符串渲染为 HTML
+        const markdownText = markdownLines.join('\n\n');
+
+        // 渲染
+        el.innerHTML = marked.parse(markdownText);
+    }
+
+
+    // 替换你原有的 formatMessagesAsMarkdown
+    function formatLastMessageAsMarkdown() {
+        const allMessages = document.querySelectorAll('.message-content');
+        const lastMessage = allMessages[allMessages.length - 1];
+        if (lastMessage) renderMarkdown(lastMessage);
+    }
+
+
+
 </script>
 
 <script src="js/pop.js"></script>

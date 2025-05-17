@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重庆地名大挑战</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/pic/pic.css">
+    <link rel="stylesheet" href="css/video.css">
+
+    <style>
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #3498db;
+            --background-color: #f5f5f5;
+            --correct-color: #2ecc71;
+            --wrong-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            background-image: url(img/背景/222.png);
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            min-height: 70vh;
+            margin-top: 170px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-intro {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .menu-item {
+            width: 180px;
+            padding: 20px 10px;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item.active {
+            background-color: var(--secondary-color);
+        }
+
+        .game-area {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .question {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .option:hover {
+            background-color: #e9e9e9;
+        }
+
+        .option.selected {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .option.correct {
+            background-color: var(--correct-color);
+            color: white;
+        }
+
+        .option.wrong {
+            background-color: var(--wrong-color);
+            color: white;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .next-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .next-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .back-btn {
+            background-color: #7f8c8d;
+            color: white;
+        }
+
+        .back-btn:hover {
+            background-color: #636e72;
+        }
+
+        .result-container {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .score {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        .leaderboard {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .leaderboard h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard-table th, .leaderboard-table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .leaderboard-table th {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .leaderboard-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .login-form {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-item {
+                width: 80%;
+                margin-bottom: 10px;
+            }
+            
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="nav-bar">
+    <div class="logo">
+        <img src="img/tb.jpg" alt="Logo">
+        <span class="logo-text">山城智刻·印迹渝州<br>
+                <span class="logo-en">SmartCarving·Imprint Chongqing</span>
+            </span>
+    </div>
+
+
+    <div class="social-links">
+        <a class="nav-link" href="index.html">首页</a>
+
+        <div class="dropdown">
+            <a class="nav-link">导航</a>
+            <ul class="submenu"> <!-- 子菜单列表 -->
+                <li><a class="nav-link" href="fw/map.html">🗺️ 重庆文旅地图</a></li>
+                <li><a class="nav-link" href="fw/zuji.html">👣打卡足迹 </a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <a class="nav-link">数字展厅</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="video.html">视频</a></li>
+                <li><a class="nav-link" href="pic/pic.html">图片</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <a class="nav-link">百科</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="lishi.html">版画艺境</a></li>
+                <li><a class="nav-link" href="24solarterms.html">传统文化拾遗</a></li>
+                <li><a class="nav-link" href="game.html">重庆地名寻踪</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <a class="nav-link">文创</a>
+            <ul class="submenu">
+                <li><a class="nav-link" href="wc/wccp.html">文创产品</a></li>
+                <li><a class="nav-link" href="wc/cyzj.html">创意征集</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+
+    <div class="container">
+        <header>
+            <h1>重庆地名大挑战</h1>
+            <p>测试你对重庆地名的了解程度！</p>
+        </header>
+
+        <div class="game-intro">
+            <p>欢迎来到重庆地名大挑战！这里有三个难度等级和一个字谜板块，每个板块包含100道题目。答对一题得10分，60分及格。准备好挑战了吗？</p>
+        </div>
+
+        <div class="menu">
+            <div class="menu-item" data-level="beginner">初级挑战</div>
+            <div class="menu-item" data-level="intermediate">中级挑战</div>
+            <div class="menu-item" data-level="advanced">高级挑战</div>
+            <div class="menu-item" data-level="riddles">字谜挑战</div>
+            <div class="menu-item" data-level="leaderboard">排行榜</div>
+            <div class="menu-item" data-level="login">登录/注册</div>
+        </div>
+
+        <div class="login-form" id="loginForm">
+            <h2>用户登录</h2>
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" placeholder="请输入密码">
+            </div>
+            <div class="form-group">
+                <label for="newUsername" style="display: none;">新用户名</label>
+                <input type="text" id="newUsername" placeholder="请设置新用户名" style="display: none;">
+            </div>
+            <div class="form-group">
+                <label for="newPassword" style="display: none;">新密码</label>
+                <input type="password" id="newPassword" placeholder="请设置新密码" style="display: none;">
+            </div>
+            <div class="controls">
+                <button class="back-btn" id="showRegister">注册新账号</button>
+                <button class="submit-btn" id="loginBtn">登录</button>
+            </div>
+        </div>
+
+        <div class="leaderboard" id="leaderboard">
+            <h2>排行榜</h2>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>用户名</th>
+                        <th>最高分</th>
+                        <th>用时</th>
+                        <th>难度</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <!-- 排行榜数据将通过JavaScript动态加载 -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="game-area" id="gameArea">
+            <div class="timer" id="timer">剩余时间: 60秒</div>
+            <div class="question-container">
+                <div class="question" id="question">问题加载中...</div>
+                <div class="options" id="options">
+                    <!-- 选项将通过JavaScript动态加载 -->
+                </div>
+            </div>
+            <div class="explanation" id="explanation">
+                <h3>解析</h3>
+                <p id="explanationText">解析内容加载中...</p>
+            </div>
+            <div class="controls">
+                <button class="back-btn" id="backToMenu">返回菜单</button>
+                <button class="submit-btn" id="submitAnswer">提交答案</button>
+                <button class="next-btn" id="nextQuestion" style="display: none;">下一题</button>
+            </div>
+            <div class="result-container" id="resultContainer">
+                <h2>闯关结果</h2>
+                <div class="score" id="finalScore">得分: 0</div>
+                <div id="resultMessage">恭喜你完成了挑战！</div>
+                <div id="timeTaken">用时: 0秒</div>
+                <div class="controls">
+                    <button class="next-btn" id="retryChallenge">重新挑战</button>
+                    <button class="back-btn" id="backToMenuFromResult">返回菜单</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="welcomeModal">
+        <div class="modal-content">
+            <h2>欢迎来到重庆地名大挑战！</h2>
+            <p>这是一个测试你对重庆地名知识的小游戏。每个挑战包含10道题目，答对一题得10分，答错不得分。</p>
+            <p>60分及格，你能达到多少分呢？</p>
+            <button class="submit-btn" id="startGame">开始游戏</button>
+        </div>
+    </div>
+
+    <script>
+        // 题库数据
+        const questionBank = {
+            beginner: [
+                {
+                    question: "重庆的简称是什么？",
+                    options: ["渝", "川", "渝州", "巴"],
+                    answer: 0,
+                    explanation: "重庆的简称是'渝'，来源于古代的渝水（今嘉陵江）和巴渝舞。"
+                },
+                {
+                    question: "重庆的市花是什么？",
+                    options: ["山茶花", "牡丹", "荷花", "菊花"],
+                    answer: 0,
+                    explanation: "山茶花是重庆市的市花，象征着坚韧和美丽。"
+                },
+                {
+                    question: "重庆的别称是什么？",
+                    options: ["山城", "江城", "泉城", "春城"],
+                    answer: 0,
+                    explanation: "重庆因地形多山而被称为'山城'，同时也有'雾都'的别称。"
+                },
+                {
+                    question: "重庆的市树是什么？",
+                    options: ["黄葛树", "榕树", "银杏", "梧桐"],
+                    answer: 0,
+                    explanation: "黄葛树是重庆市的市树，具有顽强的生命力和适应性。"
+                },
+                {
+                    question: "重庆的市歌是哪首？",
+                    options: ["红岩村的钟声", "嘉陵江之歌", "重庆之歌", "山城之歌"],
+                    answer: 0,
+                    explanation: "《红岩村的钟声》是重庆市的市歌，表达了重庆人民的革命精神。"
+                },
+                {
+                    question: "重庆的市徽中心图案是什么？",
+                    options: ["嘉陵江与长江交汇", "解放碑", "南山一棵树", "洪崖洞"],
+                    answer: 0,
+                    explanation: "重庆市徽中心图案是嘉陵江与长江交汇形成的'渝'字形状。"
+                },
+                {
+                    question: "重庆的市辖区有多少个？",
+                    options: ["19", "26", "38", "40"],
+                    answer: 2,
+                    explanation: "重庆市下辖38个区县，包括26个市辖区、8个县和4个自治县。"
+                },
+                {
+                    question: "重庆的市辖区中，哪个区以'渝中'命名？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 0,
+                    explanation: "渝中区是重庆市的核心城区，因位于长江和嘉陵江交汇处的渝中半岛而得名。"
+                },
+                {
+                    question: "重庆的哪个区被称为'重庆的窗口'？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "江北区因拥有江北国际机场和多个重要商业区，被誉为'重庆的窗口'。"
+                },
+                {
+                    question: "重庆的哪个区以温泉闻名？",
+                    options: ["渝北区", "北碚区", "沙坪坝区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "北碚区因拥有丰富的温泉资源，被誉为'温泉之都'。"
+                }
+            ],
+            intermediate: [
+                {
+                    question: "重庆的哪个区县被称为'中国火锅之都'？",
+                    options: ["渝中区", "九龙坡区", "江北区", "南岸区"],
+                    answer: 1,
+                    explanation: "九龙坡区因火锅产业发达，被誉为'中国火锅之都'。"
+                },
+                {
+                    question: "重庆的哪个区县是红岩精神的发源地？",
+                    options: ["渝中区", "沙坪坝区", "九龙坡区", "江北区"],
+                    answer: 0,
+                    explanation: "渝中区的红岩村是红岩精神的发源地，是重要的革命历史遗址。"
+                },
+                {
+                    question: "重庆的哪个区县有'小香港'之称？",
+                    options: ["渝中区", "南岸区", "九龙坡区", "江北区"],
+                    answer: 1,
+                    explanation: "南岸区因南滨路的夜景和商业氛围，被誉为'小香港'。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆大剧院所在地？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "重庆大剧院位于江北区江北城，是重庆重要的文化地标。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆科技馆所在地？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 2,
+                    explanation: "重庆科技馆位于南岸区南滨路，是重庆重要的科普教育基地。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆动物园所在地？",
+                    options: ["九龙坡区", "沙坪坝区", "渝北区", "巴南区"],
+                    answer: 0,
+                    explanation: "重庆动物园位于九龙坡区杨家坪，是重庆重要的旅游景点。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆园博园所在地？",
+                    options: ["渝北区", "九龙坡区", "沙坪坝区", "巴南区"],
+                    answer: 0,
+                    explanation: "重庆园博园位于渝北区龙景湖畔，是重庆重要的园林景观。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆欢乐谷所在地？",
+                    options: ["渝北区", "九龙坡区", "巴南区", "南岸区"],
+                    answer: 0,
+                    explanation: "重庆欢乐谷位于渝北区金渝大道，是重庆重要的主题公园。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆大学所在地？",
+                    options: ["渝中区", "沙坪坝区", "九龙坡区", "江北区"],
+                    answer: 1,
+                    explanation: "重庆大学位于沙坪坝区沙正街，是重庆重要的高等学府。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆三峡广场所在地？",
+                    options: ["渝中区", "沙坪坝区", "九龙坡区", "江北区"],
+                    answer: 1,
+                    explanation: "三峡广场位于沙坪坝区，是重庆重要的商业和文化中心。"
+                }
+            ],
+            advanced: [
+                {
+                    question: "重庆的哪个区县是重庆抗战遗址博物馆所在地？",
+                    options: ["渝中区", "沙坪坝区", "九龙坡区", "南岸区"],
+                    answer: 0,
+                    explanation: "重庆抗战遗址博物馆位于渝中区曾家岩，是重要的抗战历史遗址。"
+                },
+                {
+                    question: "重庆的哪个区县是白公馆和渣滓洞所在地？",
+                    options: ["渝中区", "沙坪坝区", "九龙坡区", "南岸区"],
+                    answer: 1,
+                    explanation: "白公馆和渣滓洞位于沙坪坝区歌乐山，是重要的革命历史遗址。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆中国三峡博物馆所在地？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 0,
+                    explanation: "重庆中国三峡博物馆位于渝中区人民大礼堂旁，是重庆重要的文化地标。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆大礼堂所在地？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 0,
+                    explanation: "重庆人民大礼堂位于渝中区学田湾，是重庆重要的历史建筑。"
+                },
+                {
+                    question: "重庆的哪个区县是洪崖洞民俗风貌区所在地？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 0,
+                    explanation: "洪崖洞民俗风貌区位于渝中区嘉陵江边，是重庆著名的旅游景点。"
+                },
+                {
+                    question: "重庆的哪个区县是李子坝轻轨站所在地？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 0,
+                    explanation: "李子坝轻轨站位于渝中区李子坝，是重庆著名的'穿楼轻轨'景点。"
+                },
+                {
+                    question: "重庆的哪个区县是长江索道北站所在地？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "长江索道北站位于江北区，与南岸区的南站相连，是重庆重要的交通和旅游设施。"
+                },
+                {
+                    question: "重庆的哪个区县是鹅岭公园所在地？",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 0,
+                    explanation: "鹅岭公园位于渝中区鹅岭正街，是重庆历史最悠久的公园之一。"
+                },
+                {
+                    question: "重庆的哪个区县是南山植物园所在地？",
+                    options: ["渝中区", "南岸区", "江北区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "南山植物园位于南岸区南山，是重庆重要的生态旅游景点。"
+                },
+                {
+                    question: "重庆的哪个区县是重庆园博园所在地？",
+                    options: ["渝北区", "九龙坡区", "沙坪坝区", "巴南区"],
+                    answer: 0,
+                    explanation: "重庆园博园位于渝北区龙景湖畔，是重庆重要的园林景观。"
+                }
+            ],
+            riddles: [
+                {
+                    question: "一江穿城过，两岸尽高楼，猜一个重庆的地名。",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 0,
+                    explanation: "渝中区是重庆的核心城区，长江和嘉陵江在此交汇，两岸高楼林立。"
+                },
+                {
+                    question: "红岩精神发源地，革命历史永铭记，猜一个重庆的地名。",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 0,
+                    explanation: "渝中区的红岩村是红岩精神的发源地，是重要的革命历史遗址。"
+                },
+                {
+                    question: "温泉之都美名扬，北泉山水甲一方，猜一个重庆的地名。",
+                    options: ["渝北区", "北碚区", "巴南区", "渝中区"],
+                    answer: 1,
+                    explanation: "北碚区因温泉资源丰富，被誉为'温泉之都'。"
+                },
+                {
+                    question: "渝州城外山水间，洪崖洞前人如潮，猜一个重庆的地名。",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 0,
+                    explanation: "洪崖洞位于渝中区嘉陵江边，是重庆著名的旅游景点。"
+                },
+                {
+                    question: "重庆的窗口展新颜，江北机场迎客来，猜一个重庆的地名。",
+                    options: ["渝中区", "江北区", "南岸区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "江北区因拥有江北国际机场，被誉为'重庆的窗口'。"
+                },
+                {
+                    question: "重庆火锅香天下，九龙锅底传四方，猜一个重庆的地名。",
+                    options: ["九龙坡区", "渝中区", "江北区", "南岸区"],
+                    answer: 0,
+                    explanation: "九龙坡区因火锅产业发达，被誉为'中国火锅之都'。"
+                },
+                {
+                    question: "南滨路上夜景美，小香港名天下知，猜一个重庆的地名。",
+                    options: ["渝中区", "南岸区", "江北区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "南岸区因南滨路的夜景和商业氛围，被誉为'小香港'。"
+                },
+                {
+                    question: "歌乐山上英魂在，白公馆里忆峥嵘，猜一个重庆的地名。",
+                    options: ["渝中区", "沙坪坝区", "江北区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "沙坪坝区的歌乐山是白公馆和渣滓洞所在地，是重要的革命历史遗址。"
+                },
+                {
+                    question: "重庆大学育英才，沙正街上书声扬，猜一个重庆的地名。",
+                    options: ["渝中区", "沙坪坝区", "江北区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "重庆大学位于沙坪坝区沙正街，是重庆重要的高等学府。"
+                },
+                {
+                    question: "三峡广场商业旺，沙磁文化源远长，猜一个重庆的地名。",
+                    options: ["渝中区", "沙坪坝区", "江北区", "九龙坡区"],
+                    answer: 1,
+                    explanation: "三峡广场位于沙坪坝区，是重庆重要的商业和文化中心。"
+                }
+            ]
+        };
+
+        // 游戏状态
+        const gameState = {
+            currentLevel: null,
+            currentQuestionIndex: 0,
+            score: 0,
+            startTime: null,
+            selectedAnswer: null,
+            username: "游客",
+            leaderboard: []
+        };
+
+        // DOM元素
+        const elements = {
+            menuItems: document.querySelectorAll('.menu-item'),
+            gameArea: document.getElementById('gameArea'),
+            loginForm: document.getElementById('loginForm'),
+            leaderboard: document.getElementById('leaderboard'),
+            question: document.getElementById('question'),
+            options: document.getElementById('options'),
+            submitAnswer: document.getElementById('submitAnswer'),
+            nextQuestion: document.getElementById('nextQuestion'),
+            backToMenu: document.getElementById('backToMenu'),
+            backToMenuFromResult: document.getElementById('backToMenuFromResult'),
+            retryChallenge: document.getElementById('retryChallenge'),
+            resultContainer: document.getElementById('resultContainer'),
+            finalScore: document.getElementById('finalScore'),
+            resultMessage: document.getElementById('resultMessage'),
+            timeTaken: document.getElementById('timeTaken'),
+            explanation: document.getElementById('explanation'),
+            explanationText: document.getElementById('explanationText'),
+            timer: document.getElementById('timer'),
+            welcomeModal: document.getElementById('welcomeModal'),
+            startGame: document.getElementById('startGame'),
+            showRegister: document.getElementById('showRegister'),
+            loginBtn: document.getElementById('loginBtn'),
+            username: document.getElementById('username'),
+            password: document.getElementById('password'),
+            newUsername: document.getElementById('newUsername'),
+            newPassword: document.getElementById('newPassword')
+        };
+
+        // 初始化游戏
+        function initGame() {
+            // 显示欢迎模态框
+            elements.welcomeModal.style.display = 'flex';
+
+            // 加载排行榜数据
+            loadLeaderboard();
+
+            // 绑定事件监听器
+            bindEventListeners();
+        }
+
+        // 绑定事件监听器
+        function bindEventListeners() {
+            // 菜单项点击事件
+            elements.menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    elements.menuItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    const level = item.getAttribute('data-level');
+                    if (level === 'leaderboard') {
+                        showLeaderboard();
+                    } else if (level === 'login') {
+                        showLoginForm();
+                    } else {
+                        startGame(level);
+                    }
+                });
+            });
+
+            // 开始游戏按钮
+            elements.startGame.addEventListener('click', () => {
+                elements.welcomeModal.style.display = 'none';
+            });
+
+            // 提交答案按钮
+            elements.submitAnswer.addEventListener('click', checkAnswer);
+
+            // 下一题按钮
+            elements.nextQuestion.addEventListener('click', loadNextQuestion);
+
+            // 返回菜单按钮
+            elements.backToMenu.addEventListener('click', returnToMenu);
+            elements.backToMenuFromResult.addEventListener('click', returnToMenu);
+
+            // 重新挑战按钮
+            elements.retryChallenge.addEventListener('click', () => {
+                elements.resultContainer.style.display = 'none';
+                startGame(gameState.currentLevel);
+            });
+
+            // 显示注册表单
+            elements.showRegister.addEventListener('click', () => {
+                elements.showRegister.textContent = '返回登录';
+                elements.loginBtn.textContent = '注册';
+                elements.newUsername.style.display = 'block';
+                elements.newPassword.style.display = 'block';
+                elements.username.value = '';
+                elements.password.value = '';
+            });
+
+            // 登录/注册按钮
+            elements.loginBtn.addEventListener('click', () => {
+                if (elements.loginBtn.textContent === '登录') {
+                    handleLogin();
+                } else {
+                    handleRegister();
+                }
+            });
+        }
+
+        // 显示登录表单
+        function showLoginForm() {
+            elements.gameArea.style.display = 'none';
+            elements.leaderboard.style.display = 'none';
+            elements.loginForm.style.display = 'block';
+        }
+
+        // 处理登录
+        function handleLogin() {
+            const username = elements.username.value.trim();
+            const password = elements.password.value.trim();
+            
+            if (!username || !password) {
+                alert('请输入用户名和密码');
+                return;
+            }
+            
+            // 模拟登录验证
+            gameState.username = username;
+            alert(`欢迎回来，${username}！`);
+            elements.loginForm.style.display = 'none';
+        }
+
+        // 处理注册
+        function handleRegister() {
+            const username = elements.newUsername.value.trim();
+            const password = elements.newPassword.value.trim();
+            
+            if (!username || !password) {
+                alert('请设置用户名和密码');
+                return;
+            }
+            
+            // 模拟注册
+            alert(`恭喜你，${username}！注册成功！`);
+            elements.showRegister.textContent = '注册新账号';
+            elements.loginBtn.textContent = '登录';
+            elements.newUsername.style.display = 'none';
+            elements.newPassword.style.display = 'none';
+            elements.username.value = username;
+            elements.password.value = password;
+            gameState.username = username;
+        }
+
+        // 显示排行榜
+        function showLeaderboard() {
+            elements.gameArea.style.display = 'none';
+            elements.loginForm.style.display = 'none';
+            elements.leaderboard.style.display = 'block';
+        }
+
+        // 加载排行榜数据
+        function loadLeaderboard() {
+            // 模拟排行榜数据
+            const leaderboardData = [
+                { rank: 1, username: '重庆通', score: 100, time: '32秒', level: '高级' },
+                { rank: 2, username: '地名王', score: 95, time: '35秒', level: '高级' },
+                { rank: 3, username: '山城侠', score: 90, time: '38秒', level: '高级' },
+                { rank: 4, username: '火锅妹', score: 85, time: '42秒', level: '中级' },
+                { rank: 5, username: '轻轨哥', score: 80, time: '45秒', level: '中级' },
+                { rank: 6, username: '洪崖洞', score: 75, time: '48秒', level: '中级' },
+                { rank: 7, username: '嘉陵江', score: 70, time: '52秒', level: '初级' },
+                { rank: 8, username: '南山树', score: 65, time: '55秒', level: '初级' },
+                { rank: 9, username: '长江水', score: 60, time: '58秒', level: '初级' },
+                { rank: 10, username: '游客', score: 55, time: '60秒', level: '初级' }
+            ];
+            
+            gameState.leaderboard = leaderboardData;
+            renderLeaderboard();
+        }
+
+        // 渲染排行榜
+        function renderLeaderboard() {
+            const leaderboardBody = document.getElementById('leaderboardBody');
+            leaderboardBody.innerHTML = '';
+            
+            gameState.leaderboard.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.rank}</td>
+                    <td>${entry.username}</td>
+                    <td>${entry.score}</td>
+                    <td>${entry.time}</td>
+                    <td>${entry.level}</td>
+                `;
+                leaderboardBody.appendChild(row);
+            });
+        }
+
+        // 开始游戏
+        function startGame(level) {
+            gameState.currentLevel = level;
+            gameState.currentQuestionIndex = 0;
+            gameState.score = 0;
+            gameState.startTime = new Date();
+            
+            elements.menuItems.forEach(item => item.classList.remove('active'));
+            elements.gameArea.style.display = 'block';
+            elements.loginForm.style.display = 'none';
+            elements.leaderboard.style.display = 'none';
+            elements.resultContainer.style.display = 'none';
+            
+            // 重置计时器
+            startTimer();
+            
+            // 加载第一题
+            loadQuestion();
+        }
+
+        // 开始计时器
+        function startTimer() {
+            let timeLeft = 180; // 180秒倒计时
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                elements.timer.textContent = `剩余时间: ${timeLeft}秒`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        // 加载问题
+        function loadQuestion() {
+            const levelQuestions = questionBank[gameState.currentLevel];
+            const questionIndex = gameState.currentQuestionIndex % levelQuestions.length;
+            const currentQuestion = levelQuestions[questionIndex];
+            
+            elements.question.textContent = currentQuestion.question;
+            elements.options.innerHTML = '';
+            
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                optionElement.dataset.index = index;
+                optionElement.addEventListener('click', selectAnswer);
+                elements.options.appendChild(optionElement);
+            });
+            
+            elements.submitAnswer.style.display = 'block';
+            elements.nextQuestion.style.display = 'none';
+            elements.explanation.classList.remove('show');
+        }
+
+        // 选择答案
+        function selectAnswer() {
+            const selectedOption = this;
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            
+            // 移除之前的选择
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // 添加新的选择
+            selectedOption.classList.add('selected');
+            gameState.selectedAnswer = selectedIndex;
+        }
+
+        // 检查答案
+        function checkAnswer() {
+            if (gameState.selectedAnswer === null) {
+                alert('请选择一个答案！');
+                return;
+            }
+            
+            const levelQuestions = questionBank[gameState.currentLevel];
+            const questionIndex = gameState.currentQuestionIndex % levelQuestions.length;
+            const currentQuestion = levelQuestions[questionIndex];
+            
+            // 显示正确/错误选项
+            document.querySelectorAll('.option').forEach(option => {
+                const index = parseInt(option.dataset.index);
+                if (index === currentQuestion.answer) {
+                    option.classList.add('correct');
+                } else if (index === gameState.selectedAnswer && index !== currentQuestion.answer) {
+                    option.classList.add('wrong');
+                }
+            });
+            
+            // 更新分数
+            if (gameState.selectedAnswer === currentQuestion.answer) {
+                gameState.score += 10;
+                createConfetti();
+            }
+            
+            // 显示解析
+            elements.explanationText.textContent = currentQuestion.explanation;
+            elements.explanation.classList.add('show');
+            
+            // 隐藏提交按钮，显示下一题按钮
+            elements.submitAnswer.style.display = 'none';
+            elements.nextQuestion.style.display = 'block';
+        }
+
+        // 创建庆祝动画
+        function createConfetti() {
+            const confettiContainer = document.body;
+            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -20 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+                
+                confettiContainer.appendChild(confetti);
+                
+                // 移除动画元素
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+            
+            // 添加CSS动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    to {
+                        transform: translateY(100vh) rotate(360deg);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // 加载下一题
+        function loadNextQuestion() {
+            gameState.currentQuestionIndex++;
+            
+            if (gameState.currentQuestionIndex >= 10) {
+                endGame();
+            } else {
+                gameState.selectedAnswer = null;
+                loadQuestion();
+            }
+        }
+
+        // 结束游戏
+        function endGame() {
+            const timeTaken = Math.floor((new Date() - gameState.startTime) / 1000);
+            
+            elements.finalScore.textContent = `得分: ${gameState.score}`;
+            elements.timeTaken.textContent = `用时: ${timeTaken}秒`;
+            
+            if (gameState.score >= 60) {
+                elements.resultMessage.textContent = `恭喜你通过了${getLevelName(gameState.currentLevel)}挑战！`;
+            } else {
+                elements.resultMessage.textContent = `很遗憾，你没有通过${getLevelName(gameState.currentLevel)}挑战，再接再厉！`;
+            }
+            
+            // 更新排行榜
+            updateLeaderboard(gameState.score, timeTaken);
+            
+            elements.resultContainer.style.display = 'block';
+            elements.submitAnswer.style.display = 'none';
+            elements.nextQuestion.style.display = 'none';
+        }
+
+        // 获取难度名称
+        function getLevelName(level) {
+            const levelNames = {
+                beginner: '初级',
+                intermediate: '中级',
+                advanced: '高级',
+                riddles: '字谜'
+            };
+            return levelNames[level] || level;
+        }
+
+        // 更新排行榜
+        function updateLeaderboard(score, time) {
+            // 模拟更新排行榜
+            console.log(`更新排行榜: 用户 ${gameState.username} 在 ${getLevelName(gameState.currentLevel)} 挑战中获得 ${score} 分，用时 ${time} 秒`);
+        }
+
+        // 返回菜单
+        function returnToMenu() {
+            elements.gameArea.style.display = 'none';
+            elements.resultContainer.style.display = 'none';
+            elements.menuItems.forEach(item => item.classList.remove('active'));
+        }
+
+        // 初始化游戏
+        initGame();
+    </script>
+
+<script src="js/submenu.js"></script>
+
+</body>
+</html>
