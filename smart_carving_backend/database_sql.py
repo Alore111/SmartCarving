@@ -386,6 +386,10 @@ class DatabaseSql:
     def __del__(self):
         self.close()
 
+    def query(self, sql, params=None):
+        self.cursor.execute(sql, params or ())
+        return self.cursor.fetchall()
+
 
 if __name__ == "__main__":
     db = DatabaseSql()

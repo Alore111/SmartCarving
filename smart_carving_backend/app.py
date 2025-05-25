@@ -142,6 +142,35 @@ def delete_dataset_item(dataset_name, item_code):
         del_data = {item_code:{}}
         sql.delete_spots_by_json(del_data)
     return make_response(200, "删除成功")
+
+@app.route("/api/spots/names", methods=["GET"])
+def get_all_spot_names():
+    sql = DatabaseSql()
+    try:
+        result = sql.query("SELECT name FROM spots")
+        names = [row["name"] for row in result]
+        return make_response(200, "获取成功", names)
+    except Exception as e:
+        return make_response(500, f"获取失败: {str(e)}")
+
+
+@app.route("/api/spots/detail", methods=["GET"])
+def get_spot_by_name():
+    name = request.args.get("name")
+    if not name:
+        return make_response(400, "缺少参数：name")
+
+    sql = DatabaseSql()
+    try:
+        result = sql.query("SELECT * FROM spots WHERE name = %s", (name,))
+        if result:
+            return make_response(200, "获取成功", result[0])
+        else:
+            return make_response(404, "未找到该景点")
+    except Exception as e:
+        return make_response(500, f"查询失败: {str(e)}")
+
+
 # ------------- 足迹相关接口 ----------------
 
 # 添加用户（如果不存在）
