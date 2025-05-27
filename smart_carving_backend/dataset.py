@@ -2,6 +2,8 @@
 import os
 import json
 from datetime import datetime
+from uuid import uuid4
+
 
 class Dataset:
     def __init__(self, name):
@@ -63,7 +65,7 @@ class Dataset:
             if user["userId"] == user_id:
                 if "tracks" not in user:
                     user["tracks"] = []
-                track["routeId"] = f"route_{len(user['tracks']) + 1}"
+                track["routeId"] = f"route_{uuid4()}"
                 user["tracks"].append(track)
                 break
         self._save(data)
