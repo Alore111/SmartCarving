@@ -59,6 +59,9 @@ def get_dataset(dataset_name):
     elif dataset_name == "zuji":
         ds = Dataset(dataset_name)
         data = ds.get_all()
+        # 过滤掉 tracks 为空或不存在的用户
+        if "users" in data:
+            data["users"] = [user for user in data["users"] if user.get("tracks")]
     elif dataset_name == "users":
         user, err = authenticate_request(role="admin")
         if err:

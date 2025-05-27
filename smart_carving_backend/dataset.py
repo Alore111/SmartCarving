@@ -116,7 +116,7 @@ class Dataset:
                             return track
                     # 没找到匹配 routeId，就当新增处理
                 else:
-                    track["routeId"] = f"route_{len(user['tracks']) + 1}"
+                    track["routeId"] = f"route_{uuid4()}"
                     user["tracks"].append(track)
                     self._save(data)
                     return track
